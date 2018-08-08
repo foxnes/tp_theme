@@ -1,0 +1,117 @@
+<?php
+
+function themeConfig($form) {
+    $bgimg = new Typecho_Widget_Helper_Form_Element_Text('bgimg', NULL, NULL, _t('背景图片URL'), _t('您甚至可以插入BING随机壁纸：https://api.dujin.org/bing/1920.php
+'));
+    $form->addInput($bgimg);
+
+    $topimg = new Typecho_Widget_Helper_Form_Element_Text('topimg', NULL, NULL, _t('顶部图片URL'), _t('在这里填入一个图片URL地址'));
+    $form->addInput($topimg);
+
+    $selfidt = new Typecho_Widget_Helper_Form_Element_Textarea('selfidt', NULL, NULL, _t('侧栏个人介绍'), _t('在这里填入HTML代码，每一行用一个&lt;li&gt;标签，支持font-awesome，<b onclick="vblogshowcode0.style.display=\'block\';">点击查看示例。</b><textarea id="vblogshowcode0" style="display:none;"><li><i class="fa fa-home"></i> 老家：火星</li>
+<li><i class="fa fa-info"></i> 爱好：睡觉、敲代码</li>
+<li><i class="fa fa-birthday-cake"></i> 生日：8102年13月52日</li>
+<li><i class="fa fa-edit"></i> 简介：欢迎！我白天是个邮递员，晚上就是个有抱负的演员。这是我的博客。我住在天朝的帝都，有条叫做杰克的狗。--滑稽的简介</li></textarea>'));
+    $form->addInput($selfidt);
+
+    $link = new Typecho_Widget_Helper_Form_Element_Textarea('link', NULL, NULL, _t('友链HTML代码'), _t('如：&lt;a href="http://blog.lljh.bid" target="_blank"&gt;Luuljh的博客&lt;/a&gt;'));
+    $form->addInput($link);
+
+    $footcode = new Typecho_Widget_Helper_Form_Element_Textarea('footcode', NULL, NULL, _t('footer执行代码'), _t('HTML.'));
+    $form->addInput($footcode);
+
+    $sidebarrandomimg = new Typecho_Widget_Helper_Form_Element_Text('sidebarrandomimg', NULL, NULL, _t('侧栏随机图片URL'), _t('输入URL，如：http://edgecats.net/'));
+    $form->addInput($sidebarrandomimg);
+
+    $ewmurl = new Typecho_Widget_Helper_Form_Element_Text('ewmurl', NULL, NULL, _t('二维码URL'), _t('图片URL'));
+    $form->addInput($ewmurl);
+
+    $beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('备案信息'), _t('如：京ICP证x号&lt;img src="xxx.jpg" /&gt;京公网备案x号'));
+    $form->addInput($beian);
+}
+
+
+function getFriendWall(){
+//来源于 https://itlu.org/articles/1954.html
+$period = time() - 5184000; // 单位: 秒
+$db = Typecho_Db::get();
+$sql = $db->select('COUNT(author) AS cnt', 'author', 'url', 'mail')
+->from('table.comments')
+->where('created > ?', $period )
+->where('status = ?', 'approved')
+->where('type = ?', 'comment')  
+->where('authorId = ?', '0')
+->group('author')
+->order('cnt', Typecho_Db::SORT_DESC)
+->limit('12');
+$result = $db->fetchAll($sql);
+$mostactive = "";
+$my_array=array('www','0','1','2','cn');
+if (count($result) > 0) {
+foreach ($result as $value) {
+$mostactive .= '<span title="' . $value['author'] . ' : ' . $value['cnt'] . '次重要讲话" >';
+$mostactive .= '<img class="avatar" data-original="//'.$my_array[rand(0,4)].'.gravatar.com/avatar/'.md5(strtolower($value['mail'])).'?s=24&d=&r=G" /></span>';
+}
+echo $mostactive;
+}
+}
+function showThumb($obj,$size=null,$link=false,$pattern='<div class="post-thumb"><img alt="{title}" data-original="{thumb}" /></div>'){
+//来源于绛木子的简书主题
+    preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches );
+    $thumb = '';
+    $options = Typecho_Widget::widget('Widget_Options');
+    if(isset($matches[1][0])){
+        $thumb = $matches[1][0];;
+        if(!empty($options->src_add) && !empty($options->cdn_add)){
+            $thumb = str_ireplace($options->src_add,$options->cdn_add,$thumb);
+        }
+        if($size!='full'){
+            $thumb_width = $options->thumb_width;
+            $thumb_height = $options->thumb_height;
+    
+            if($size!=null){
+                $size = explode('x', $size);
+                if(!empty($size[0]) && !empty($size[1])){
+                    list($thumb_width,$thumb_height) = $size;
+                }
+            }
+        }
+    }
+
+    if(empty($thumb)){
+        return '';
+    }
+    if($link){
+        return $thumb;
+    }
+    echo str_replace(
+        array('{title}','{thumb}','{permalink}'),
+        array($obj->title,$thumb,$obj->permalink),
+        $pattern);
+}
+function getRandomPosts($limit = 10){//原作者不明..
+    $db = Typecho_Db::get();
+    $result = $db->fetchAll($db->select()->from('table.contents')
+        ->where('status = ?','publish')
+        ->where('type = ?', 'post')
+        ->where('created <= unix_timestamp(now())', 'post')
+        ->limit($limit)
+        ->order('RAND()')
+    );
+    if($result){
+        foreach($result as $val){
+            $obj = Typecho_Widget::widget('Widget_Abstract_Contents');
+            $val = $obj->push($val);
+            $post_title = htmlspecialchars($val['title']);
+            $permalink = $val['permalink'];
+            echo '<li><div class="post-info-i">
+                <h3><a href="'.$permalink.'">'.$post_title.'</a></h3>
+                <small>';
+            $obj->date("Y年m月d日");
+            echo '</small><span>';
+            $obj->excerpt(200,'...');
+            showThumb($obj);
+            echo '</span></div></li>';
+        }
+    }
+}
