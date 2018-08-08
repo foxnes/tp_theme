@@ -15,6 +15,7 @@ a:hover{color: #ee6583;border-bottom-color: #f44336;}
 	margin-left: 20px;
 }
 img,audio,video,embed,iframe{max-width: 100%;}
+video{background-color: #f2f2f5;max-height: 80vh}
 img{border: none;vertical-align: middle;}
 hr{
 	border: none;

@@ -35,7 +35,11 @@ window.onload=function(){
 		})
 	}
 	$('pre code').attr("contenteditable","true");
-	var qrcode = new QRCode(pageewm, {width : 200,height : 200});
+	$(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.4});
+	$("img").each(function(){
+		$(this).lazyload({effect: "fadeIn",placeholder: "<?php $this->options->themeUrl('s/load.png'); ?>"});
+	});
+	var qrcode = new QRCode(pageewm, {width : 220,height : 220});
 	qrcode.makeCode(window.location.href);
 }
 </script>
