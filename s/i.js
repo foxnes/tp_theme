@@ -24,6 +24,7 @@ $(window).scroll(function(){
 		$("#randomarticleP").css({"position":"fixed","top":0,"width":$(".box").width()});
 	}else{
 		$("#randomarticleP").css("position","static");
+		randomarticleP_top = $("#randomarticleP").offset().top;
 	}
 	if ($(window).width()>630 && comment_form_top!=="ud" && typeof comment_form_top!=="undefined") {
 		if (TscrollTop>=comment_form_top && $(document).height()-comment_form_top > ($("#comment_form").height()+38)*2 
