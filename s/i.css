@@ -24,7 +24,7 @@ hr{
 }
 blockquote{
 	background-color: #f2f2f5;
-	margin: 10px -25px -4px -75px;
+	margin: 10px -25px 15px -75px;
 	padding: 9px 25px 1px 75px;
 	color: #464646;
 	display: block;
@@ -473,7 +473,7 @@ form .tbbq{
 	.c-min{max-width: 800px;}
 	.article-list{width: 580px;}
 	.sidebar{width: 200px;}
-	blockquote{margin: 10px -15px -4px -75px}
+	blockquote{margin-right: -15px}
 }
 
 @media screen and (max-width: 830px){
@@ -483,10 +483,11 @@ form .tbbq{
 	.post-article{margin-left: 40px;}
 	.post-head{width: 40px;height: 40px;left: 10px;top: 10px;}
 	.post-info-i h2{margin-top: 0;}
-	blockquote{margin: 10px -15px -4px -55px;padding-left: 55px;}
+	blockquote{margin-left: -55px;padding-left: 55px;}
 }
 
 @media screen and (max-width: 630px){
+	.post-content{max-width: none;}
 	.c-min{max-width: 97%;}
 	.sidebar{width: 100%;margin-right: 0;}
 	.article-list{width: 100%;margin-top: 20px;}
