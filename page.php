@@ -7,7 +7,7 @@ $this->need('head.php');
 	<div class="post-article">
 		<div class="post-info-i">
 			<h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
-			<small><?php $this->date('Y年m月d日'); ?><?php if($this->user->hasLogin()): ?> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a><?php endif; ?></small>
+			<small><?php $this->date('Y年m月d日'); ?><?php if($this->user->hasLogin()): ?> <a href="<?php $this->options->adminUrl("write-page.php?cid=".$this->cid); ?>">编辑</a><?php endif; ?></small>
 		</div>
 		<div class="post-content">
 	    	<?php echo img_lazy_load($this->content); ?>
