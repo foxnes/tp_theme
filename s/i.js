@@ -1,6 +1,6 @@
 $(function(){
 
-if (window.applicationCache) {
+if (typeof(WebSocket) == "function") {
 	$.getScript("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js",function(){
 		$('pre code').each(function(i, block) {hljs.highlightBlock(block)});
 	});
@@ -116,7 +116,7 @@ function zooming(url){
 }
 
 function insertText(obj,str){
-	if (window.applicationCache) {
+	if (typeof(WebSocket) == "function") {
     if (document.selection){
         var sel = document.selection.createRange();
         sel.text = str;
