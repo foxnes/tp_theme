@@ -29,18 +29,6 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMin
 window.onload=function(){
 	myrandomimg = "<?php if ($this->options->sidebarrandomimg): ?><?php $this->options->sidebarrandomimg(); ?><?php else: ?>https://picsum.photos/276/300/?random<?php endif; ?>";
 	randomimg.src=myrandomimg;
-	if (window.applicationCache) {
-		$.getScript("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js",function(){
-			$('pre code').each(function(i, block) {hljs.highlightBlock(block)});
-		})
-	}
-	$('pre code').attr("contenteditable","true");
-	$(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.4});
-	$("img").each(function(){
-		$(this).lazyload({effect: "fadeIn",placeholder: "<?php $this->options->themeUrl('s/load.png'); ?>"});
-	});
-	var qrcode = new QRCode(pageewm, {width : 220,height : 220});
-	qrcode.makeCode(window.location.href);
 }
 </script>
 

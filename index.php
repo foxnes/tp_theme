@@ -5,7 +5,7 @@
  * 
  * @package Vblog
  * @author Luuljh
- * @version 0.0.7
+ * @version 0.1.0
  * @link http://blog.lljh.bid
  */
 
@@ -13,7 +13,7 @@ $this->need('head.php');
 if ($this->have()){
 while($this->next()): ?>
 <div class="post">
-	<?php $this->author->gravatar('60','','','post-head') ?>
+	<img class="post-head" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "http://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=64&d=&r=X";endif; ?>" />
 	<div class="post-article">
 		<div class="post-info-i">
 			<h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>

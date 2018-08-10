@@ -1,5 +1,12 @@
 $(function(){
 
+if (window.applicationCache) {
+	$.getScript("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js",function(){
+		$('pre code').each(function(i, block) {hljs.highlightBlock(block)});
+	});
+}
+$('pre code').attr("contenteditable","true");
+
 $(".top-bar-body li").each(function(){
 	$(".top-bar-body li a").click(function(){
 		$(".top-bar-body li").css("border-bottom","0px");
@@ -66,7 +73,7 @@ while(tmp_html_reg.test(bodyhtml)){
 }
 $(".article-list").html(bodyhtml);
 $("form .tbbq").click(function(){
-	$("textarea[name=text]")[0].value+=facenamereplace[$(this).attr("alt")];
+	insertText($("textarea[name=text]")[0], facenamereplace[$(this).attr("alt")]);
 });
 //--------------简化标签
 //--------------打赏233
@@ -88,6 +95,12 @@ $(".hover-show").hover(function(){
 	$(this).children(".show-this").slideUp(250);
 });
 //--------------
+$(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.4});
+$("img").each(function(){
+	$(this).lazyload({effect: "fadeIn"});
+});
+var qrcode = new QRCode(pageewm, {width : 220,height : 220});
+qrcode.makeCode(window.location.href);
 });
 
 function zooming(url){
@@ -100,4 +113,26 @@ function zooming(url){
 			$("#zooming img").css("margin-top","0px");
 		}
 	});
+}
+
+function insertText(obj,str){
+	if (window.applicationCache) {
+    if (document.selection){
+        var sel = document.selection.createRange();
+        sel.text = str;
+        setcopy(0);
+    }else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number'){
+        var startPos = obj.selectionStart;
+        var    endPos = obj.selectionEnd;
+        var    cursorPos = startPos;
+        var    tmpStr = obj.value;
+        obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+        cursorPos += str.length;
+        obj.selectionStart = obj.selectionEnd = cursorPos;
+    }else{
+        obj.value += str;
+    }
+	}else{
+		obj.innerHTML+=str;
+	}
 }

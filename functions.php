@@ -1,14 +1,17 @@
 <?php
 
 function themeConfig($form) {
-    $bgimg = new Typecho_Widget_Helper_Form_Element_Text('bgimg', NULL, NULL, _t('背景图片URL'), _t('您甚至可以插入BING随机壁纸：https://api.dujin.org/bing/1920.php
-'));
+    $face = new Typecho_Widget_Helper_Form_Element_Text('face', NULL, NULL, _t('作者头像'), _t('在这里填入一个图片URL'));
+    $form->addInput($face);
+
+    $bgimg = new Typecho_Widget_Helper_Form_Element_Text('bgimg', NULL, NULL, _t('背景图片URL'), _t('您甚至可以插入BING随机壁纸：https://api.dujin.org/bing/1920.php'));
     $form->addInput($bgimg);
 
-    $topimg = new Typecho_Widget_Helper_Form_Element_Text('topimg', NULL, NULL, _t('顶部图片URL'), _t('在这里填入一个图片URL地址'));
+    $topimg = new Typecho_Widget_Helper_Form_Element_Text('topimg', NULL, NULL, _t('顶部图片URL'), _t('在这里填入一个图片URL'));
     $form->addInput($topimg);
 
-    $selfidt = new Typecho_Widget_Helper_Form_Element_Textarea('selfidt', NULL, NULL, _t('侧栏个人介绍'), _t('在这里填入HTML代码，每一行用一个&lt;li&gt;标签，支持font-awesome，<b onclick="vblogshowcode0.style.display=\'block\';">点击查看示例。</b><textarea id="vblogshowcode0" style="display:none;"><li><i class="fa fa-home"></i> 老家：火星</li>
+    $selfidt = new Typecho_Widget_Helper_Form_Element_Textarea('selfidt', NULL, NULL, _t('侧栏个人介绍'), _t('在这里填入HTML代码，每一行用一个&lt;li&gt;标签，支持font-awesome，<b onclick=\'$("#vblogshowcode0").slideToggle(500)\'>点我查看示例。</b><textarea id="vblogshowcode0" style="display:none;"><li><i class="fa fa-thumbs-up"></i> 咯咯哒咯咯哒~ (๑•̀ㅂ•́)و✧</li>
+<li><i class="fa fa-home"></i> 老家：火星</li>
 <li><i class="fa fa-info"></i> 爱好：睡觉、敲代码</li>
 <li><i class="fa fa-birthday-cake"></i> 生日：8102年13月52日</li>
 <li><i class="fa fa-edit"></i> 简介：欢迎！我白天是个邮递员，晚上就是个有抱负的演员。这是我的博客。我住在天朝的帝都，有条叫做杰克的狗。--滑稽的简介</li></textarea>'));
@@ -17,19 +20,18 @@ function themeConfig($form) {
     $link = new Typecho_Widget_Helper_Form_Element_Textarea('link', NULL, NULL, _t('友链HTML代码'), _t('如：&lt;a href="http://blog.lljh.bid" target="_blank"&gt;Luuljh的博客&lt;/a&gt;'));
     $form->addInput($link);
 
-    $footcode = new Typecho_Widget_Helper_Form_Element_Textarea('footcode', NULL, NULL, _t('footer执行代码'), _t('HTML.'));
+    $footcode = new Typecho_Widget_Helper_Form_Element_Textarea('footcode', NULL, NULL, _t('footer执行代码'), _t('HTML 一般都是插入统计代码之类的'));
     $form->addInput($footcode);
 
-    $sidebarrandomimg = new Typecho_Widget_Helper_Form_Element_Text('sidebarrandomimg', NULL, NULL, _t('侧栏随机图片URL'), _t('输入URL，如：http://edgecats.net/'));
+    $sidebarrandomimg = new Typecho_Widget_Helper_Form_Element_Text('sidebarrandomimg', NULL, NULL, _t('侧栏随机图片URL'), _t('图片URL，如：http://edgecats.net/'));
     $form->addInput($sidebarrandomimg);
 
-    $ewmurl = new Typecho_Widget_Helper_Form_Element_Text('ewmurl', NULL, NULL, _t('二维码URL'), _t('图片URL'));
+    $ewmurl = new Typecho_Widget_Helper_Form_Element_Text('ewmurl', NULL, NULL, _t('打赏二维码URL'), _t('图片URL（不填写本项则表示不开启打赏功能）'));
     $form->addInput($ewmurl);
 
     $beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('备案信息'), _t('如：京ICP证x号&lt;img src="xxx.jpg" /&gt;京公网备案x号'));
     $form->addInput($beian);
 }
-
 
 function getFriendWall(){
 //来源于 https://itlu.org/articles/1954.html
@@ -55,7 +57,7 @@ $mostactive .= '<img class="avatar" data-original="//'.$my_array[rand(0,4)].'.gr
 echo $mostactive;
 }
 }
-function showThumb($obj,$size=null,$link=false,$pattern='<div class="post-thumb"><img alt="{title}" data-original="{thumb}" /></div>'){
+function showThumb($obj,$size=null,$link=false,$pattern='<div class="post-thumb"><img src="https://i.loli.net/2018/08/10/5b6cff039a9fa.png" alt="{title}" data-original="{thumb}" /></div>'){
 //来源于绛木子的简书主题
     preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches );
     $thumb = '';
@@ -77,7 +79,6 @@ function showThumb($obj,$size=null,$link=false,$pattern='<div class="post-thumb"
             }
         }
     }
-
     if(empty($thumb)){
         return '';
     }
@@ -109,9 +110,12 @@ function getRandomPosts($limit = 10){//原作者不明..
                 <small>';
             $obj->date("Y年m月d日");
             echo '</small><span>';
-            $obj->excerpt(200,'...');
+            $obj->excerpt(50,'...');
             showThumb($obj);
             echo '</span></div></li>';
         }
     }
+}
+function img_lazy_load($ct){
+    return preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i","<img src='https://i.loli.net/2018/08/10/5b6cff039a9fa.png'$1data-original='$2'$3>",$ct);
 }

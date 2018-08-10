@@ -21,7 +21,7 @@ if (!$this->have()){
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
     <link rel="stylesheet" href="<?php $this->options->themeUrl('s/i.css'); ?>">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" type="image/jpeg" href="<?php echo "http://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=64&d=&r=G"; ?>" media="screen" />
+    <link rel="shortcut icon" type="image/jpeg" href="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "http://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=32&d=&r=G";endif; ?>" media="screen" />
     <?php $this->header(); ?>
     <!--[if lte IE 8]>
     <style>
@@ -36,7 +36,7 @@ if (!$this->have()){
 
 <div class="body c-min">
 	<div class="body-top-bg shadow" style="background-image: url(<?php if ($this->options->topimg): ?><?php $this->options->topimg(); ?><?php else: ?>http://wx1.sinaimg.cn/large/005uBItOgy1fu132mvw2qj30r808c41d.jpg<?php endif; ?>);">
-        <?php $this->author->gravatar('100','','','body-gravatar') ?>
+        <img class="body-gravatar" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "http://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=100&d=&r=X";endif; ?>" />
 		<h2><?php $this->options->title() ?></h2>
 		<small><i><?php $this->options->description() ?></i></small>
 	</div>

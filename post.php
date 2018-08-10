@@ -2,20 +2,20 @@
 $this->need('head.php');
 ?>
 <div class="post">
-	<?php $this->author->gravatar('60','','','post-head') ?>
+	<img class="post-head" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "http://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=64&d=&r=X";endif; ?>" />
 	<div class="post-article">
 		<div class="post-info-i">
 			<h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
 			<small><?php $this->date('Y年m月d日'); ?><?php if($this->user->hasLogin()): ?> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a><?php endif; ?></small>
 		</div>
 		<div class="post-content">
-			<?php echo preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i",
-			"<img$1data-original='$2'$3>",
-			$this->content); ?>
+			<?php echo img_lazy_load($this->content); ?>
+			<?php if ($this->options->ewmurl): ?>
 			<br />
 			<div class="pay">
-				<span>￥打赏这个不要脸的博主</span><img style="display: none;" src="<?php if ($this->options->ewmurl): ?><?php $this->options->ewmurl(); ?><?php else:?>https://i.loli.net/2018/08/08/5b6a6e13031b1.jpg<?php endif; ?>">
+				<span>￥打赏这个不要脸的博主</span><img style="display: none;" src="<?php $this->options->ewmurl(); ?>">
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	<div class="clear"></div>

@@ -10,8 +10,8 @@
 	<div class="clear"></div>
 	<hr />
 	<ul class="li-haf-border">
-	<li><i class="fa fa-thumbs-up"></i> 咯咯哒咯咯哒~ (๑•̀ㅂ•́)و✧</li>
 	<?php if ($this->options->selfidt): ?><?php $this->options->selfidt();else: ?>
+	<li><i class="fa fa-thumbs-up"></i> 咯咯哒咯咯哒~ (๑•̀ㅂ•́)و✧</li>
 	<li><i class="fa fa-home"></i> 老家：火星</li>
 	<li><i class="fa fa-info"></i> 爱好：睡觉、敲代码</li>
 	<li><i class="fa fa-birthday-cake"></i> 生日：8102年13月52日</li>
@@ -63,7 +63,7 @@
 	<b><i class="fa fa-commenting-o"></i> 最新评论</b>
 	<div class="box-body">
 		<ul class="li-el sidebar-reply-li">
-		<?php $this->widget('Widget_Comments_Recent','pageSize=6')->to($comments); ?>
+		<?php $this->widget('Widget_Comments_Recent','pageSize=8')->to($comments); ?>
   	    <?php while($comments->next()): ?>
      	    <li><?php $comments->gravatar(40); ?>
      	    <p>
