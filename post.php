@@ -2,7 +2,7 @@
 $this->need('head.php');
 ?>
 <div class="post">
-	<img class="post-head" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "http://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=64&d=&r=X";endif; ?>" />
+	<img class="post-head" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "https://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=64&d=&r=X";endif; ?>" />
 	<div class="post-article">
 		<div class="post-info-i">
 			<h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>

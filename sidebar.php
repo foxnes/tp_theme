@@ -22,29 +22,30 @@
 </div>
 <div class="sidebar-mb-show">
 	<div class="box sidebar-readmore" onclick="$('.sidebar-pc-show').slideToggle(400);">
-		<div class="box-body"><stonrg>- 查看更多 -</stonrg></div>
+		<div class="box-body"><stonrg>- 更多 -</stonrg></div>
 	</div>
 </div>
 <div class="sidebar-pc-show">
-	<div class="box" style="margin-top: 20px;">
+<div class="box"></div>
+<?php if (!empty($this->options->sidebarBlock) && in_array('my_reader', $this->options->sidebarBlock)): ?>
+	<div class="box">
 	<b><i class="fa fa-user-o"></i> 我的读者</b>
 	<div class="box-body">
 		<?php echo getFriendWall();?>
-		<span title="凑数机器人"><img class="avatar" src="http://1.gravatar.com/avatar/5dd75e92f802b1ac87b2132542b32e1b?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="http://1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="http://1.gravatar.com/avatar/800db8558398890a3232e4ffbdbdda52?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="http://1.gravatar.com/avatar/144fbd313b60fdf0ba3136855b054ba4?s=24&amp;d=&amp;r=G"></span>
+		<span title="凑数机器人"><img class="avatar" src="https://1.gravatar.com/avatar/5dd75e92f802b1ac87b2132542b32e1b?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="https://1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="https://1.gravatar.com/avatar/800db8558398890a3232e4ffbdbdda52?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="https://1.gravatar.com/avatar/144fbd313b60fdf0ba3136855b054ba4?s=24&amp;d=&amp;r=G"></span>
 	    <div class="clear"></div>
 	</div>
 	</div>
+<?php endif;
+if (!empty($this->options->sidebarBlock) && in_array('random_img', $this->options->sidebarBlock)): ?>
 	<div class="box">
 	<b><i class="fa fa-file-image-o"></i> 随机图片</b>
 	<div class="box-body box-loading">
 		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=" onclick="this.src='';this.src=myrandomimg+'&ccac='+Math.random()*999;" title="点击图片换图" id="randomimg" alt="图片加载失败了..." onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=';">
 	</div>
 	</div>
-<?php if ($this->is('post')) {
-	$ispostpage = true;
-}else{
-	$ispostpage = false;
-} ?>
+<?php
+endif; if ($this->is('post')) {$ispostpage = true;}else{$ispostpage = false;} ?>
 	<div class="box">
 	<b><i class="fa fa-tags"></i><?php if ($ispostpage): echo " 文章标签";else: echo " 我的标签";endif; ?></b>
 	<div class="box-body">
@@ -58,7 +59,7 @@
 		<?php endif; ?>
 	</div>
 	</div>
-<?php  ?>
+<?php if (!empty($this->options->sidebarBlock) && in_array('all_comments', $this->options->sidebarBlock)): ?>
 	<div class="box">
 	<b><i class="fa fa-commenting-o"></i> 最新评论</b>
 	<div class="box-body">
@@ -76,6 +77,7 @@
 		</ul>
 	</div>
 	</div>
+<?php endif; ?>
 	<div class="box">
 	<b><i class="fa fa-link"></i> 友情链接</b>
 	<div class="box-body tagsshow">
@@ -85,10 +87,12 @@
 		<div class="clear"></div>
 	</div>
 	</div>
+<?php if (!empty($this->options->sidebarBlock) && in_array('random_article', $this->options->sidebarBlock)): ?>
 	<div class="box" id="randomarticleP" style="padding-bottom: 10px">
 	<b><i class="fa fa-file-o"></i> 随机文章</b>
 	<div class="box-body" id="randomarticle" style="padding-bottom: 0;">
 		<ul><?php getRandomPosts(10);?></ul>
 	</div>
 	</div>
+<?php endif; ?>
 </div>

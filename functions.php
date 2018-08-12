@@ -17,6 +17,15 @@ function themeConfig($form) {
 <li><i class="fa fa-edit"></i> 简介：欢迎！我白天是个邮递员，晚上就是个有抱负的演员。这是我的博客。我住在天朝的帝都，有条叫做杰克的狗。--滑稽的简介</li></textarea>'));
     $form->addInput($selfidt);
 
+    $sidebarBlock = new Typecho_Widget_Helper_Form_Element_Checkbox('sidebarBlock', 
+    array('my_reader' => _t('显示我的读者'),
+    'random_img' => _t('显示随机图片'),
+    'random_article' => _t('显示随机文章'),
+    'all_comments' => _t('显示最新评论')
+    ),
+    array('my_reader', 'random_img', 'random_article', 'all_comments'), _t('侧边栏显示'));
+    $form->addInput($sidebarBlock->multiMode());
+
     $link = new Typecho_Widget_Helper_Form_Element_Textarea('link', NULL, NULL, _t('友链HTML代码'), _t('如：&lt;a href="http://blog.lljh.bid" target="_blank"&gt;Luuljh的博客&lt;/a&gt;'));
     $form->addInput($link);
 
@@ -32,7 +41,6 @@ function themeConfig($form) {
     $beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('备案信息'), _t('如：京ICP证x号&lt;img src="xxx.jpg" /&gt;京公网备案x号'));
     $form->addInput($beian);
 }
-
 function getFriendWall(){
 //来源于 https://itlu.org/articles/1954.html
 $period = time() - 5184000; // 单位: 秒
@@ -57,8 +65,11 @@ $mostactive .= '<img class="avatar" data-original="//'.$my_array[rand(0,4)].'.gr
 echo $mostactive;
 }
 }
-function showThumb($obj,$size=null,$link=false,$pattern='<div class="post-thumb"><img src="https://i.loli.net/2018/08/10/5b6cff039a9fa.png" alt="{title}" data-original="{thumb}" /></div>'){
+function showThumb($obj){
 //来源于绛木子的简书主题
+	$size=null;$link=false;
+    $imgplaceholder=Helper::options()->themeUrl."/s/none.png";
+	$pattern='<div class="post-thumb"><img src="'.$imgplaceholder.'" alt="{title}" data-original="{thumb}" /></div>';
     preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches );
     $thumb = '';
     $options = Typecho_Widget::widget('Widget_Options');
@@ -117,5 +128,6 @@ function getRandomPosts($limit = 10){//原作者不明..
     }
 }
 function img_lazy_load($ct){
-    return preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i","<img src='https://i.loli.net/2018/08/10/5b6cff039a9fa.png'$1data-original='$2'$3>",$ct);
+    $imgplaceholder = Helper::options()->themeUrl."/s/none.png";
+    return preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i","<img src='".$imgplaceholder."'$1data-original='$2'$3>",$ct);
 }

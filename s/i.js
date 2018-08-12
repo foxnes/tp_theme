@@ -15,8 +15,12 @@ $(".top-bar-body li").each(function(){
 });
 
 var tmp_rmt_h = $(window).height()-76-$(".foot").height()-34;
-$("#randomarticle").slimScroll({height:tmp_rmt_h+'px',size:"5px",wheelStep:18,color:"#ee6583"});
-randomarticleP_top = $("#randomarticleP").offset().top;//全局变量！否则BUG
+try{
+	$("#randomarticle").slimScroll({height:tmp_rmt_h+'px',size:"5px",wheelStep:18,color:"#ee6583"});
+	randomarticleP_top = $("#randomarticleP").offset().top;//全局变量！否则BUG
+}catch(err){
+	randomarticleP_top = false;
+}
 try{comment_form_top = $("#comment_form").offset().top}
 catch(err){comment_form_top = "ud"}
 $(window).scroll(function(){
@@ -27,11 +31,13 @@ $(window).scroll(function(){
 	}else{
 		$("#gotop").css("display","none");
 	}
+	if (randomarticleP_top) {
 	if ($(window).width()>630 && TscrollTop>=randomarticleP_top && $(document).height()-randomarticleP_top > ($("#randomarticleP").height()+30)*2) {
 		$("#randomarticleP").css({"position":"fixed","top":0,"width":$(".box").width()});
 	}else{
 		$("#randomarticleP").css("position","static");
 		randomarticleP_top = $("#randomarticleP").offset().top;
+	}
 	}
 	if ($(window).width()>630 && comment_form_top!=="ud" && typeof comment_form_top!=="undefined") {
 		if (TscrollTop>=comment_form_top && $(document).height()-comment_form_top > ($("#comment_form").height()+38)*2 
@@ -46,15 +52,30 @@ $(window).scroll(function(){
 });
 
 //-------------表情
-facenamereplace = ["：滑稽：","：喷：","：彩虹：","：阴险：","：怒：","：笑眼：","：黑线：","：玫瑰："];
-facereplace = ["https://wx3.sinaimg.cn/large/005uBItOgy1fu10b8koukj300u00uq2s.jpg",
-"https://wx3.sinaimg.cn/large/005uBItOgy1fu10b8zm3rj300u00uwec.jpg",
-"https://wx3.sinaimg.cn/large/005uBItOgy1fu10b9m17tj300u00u744.jpg",
-"https://wx2.sinaimg.cn/large/005uBItOgy1fu10b7rcuxj300u00uq2s.jpg",
-"https://wx2.sinaimg.cn/large/005uBItOgy1fu10b74x02j300u00ut8k.jpg",
-"https://wx3.sinaimg.cn/large/005uBItOgy1fu10b82w9vj300u00uwec.jpg",
-"https://wx3.sinaimg.cn/large/005uBItOgy1fu10b7e9bcj300u00uq2s.jpg",
-"https://wx4.sinaimg.cn/large/005uBItOgy1fu10b9a74cj300u00uglg.jpg"];
+facenamereplace = ["：滑稽：","：喷：","：彩虹：","：阴险：","：怒：","：笑眼：",
+"：黑线：","：玫瑰：","：乖：","：汗：","：惊哭：","：酷：","：狂汗：","：冷：",
+"：真棒："];
+/*
+facereplace = [];
+for (var i = 0; i < facenamereplace.length; i++) {
+	facereplace[i] = theme_path+"/s/img/"+facenamereplace[i].replace(/：/g,"")+".png";
+}
+*/
+facereplace = ["https://wx1.sinaimg.cn/mw690/005ShQFIgy1fu6s184o24j300u00uq2s.jpg",
+"https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s1ablbbj300u00uwec.jpg",
+"https://wx3.sinaimg.cn/mw690/005ShQFIgy1fu6s16m089j300u00u744.jpg",
+"https://wx1.sinaimg.cn/mw690/005ShQFIgy1fu6s1ax3a1j300u00uq2s.jpg",
+"https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s1a045uj300u00ut8k.jpg",
+"https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s1amokjj300u00uwec.jpg",
+"https://wx4.sinaimg.cn/mw690/005ShQFIgy1fu6s17syp4j300u00uq2s.jpg",
+"https://wx1.sinaimg.cn/mw690/005ShQFIgy1fu6s19lh8sj300u00uglg.jpg",
+"https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s172vs1j300u00ut8k.jpg",
+"https://wx1.sinaimg.cn/mw690/005ShQFIgy1fu6s17jbtaj300u00uq2s.jpg",
+"https://wx1.sinaimg.cn/mw690/005ShQFIgy1fu6s18dxs3j300u00ut8k.jpg",
+"https://wx4.sinaimg.cn/mw690/005ShQFIgy1fu6s18o1ehj300u00u0sl.jpg",
+"https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s18z1tcj300u00uwec.jpg",
+"https://wx4.sinaimg.cn/mw690/005ShQFIgy1fu6s199skzj300u00uq2s.jpg",
+"https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s1b931zj300u00uwec.jpg"];
 try{
 	if (showfacenamereplace) {
 		for (var i = 0; i < facenamereplace.length; i++) {
@@ -90,17 +111,15 @@ $(".post-content img").click(function(){
 $(".post-content .tbbq").unbind("click");
 //--------------
 $(".hover-show").hover(function(){
-	$(this).children(".show-this").slideDown(250);
+	$(this).children(".show-this").slideDown(150);
 },function(){
-	$(this).children(".show-this").slideUp(250);
+	$(this).children(".show-this").slideUp(150);
 });
 //--------------
 $(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.4});
 $("img").each(function(){
 	$(this).lazyload({effect: "fadeIn"});
 });
-var qrcode = new QRCode(pageewm, {width : 220,height : 220});
-qrcode.makeCode(window.location.href);
 });
 
 function zooming(url){
@@ -116,23 +135,12 @@ function zooming(url){
 }
 
 function insertText(obj,str){
-	if (typeof(WebSocket) == "function") {
-    if (document.selection){
-        var sel = document.selection.createRange();
-        sel.text = str;
-        setcopy(0);
-    }else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number'){
-        var startPos = obj.selectionStart;
-        var    endPos = obj.selectionEnd;
-        var    cursorPos = startPos;
-        var    tmpStr = obj.value;
-        obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
-        cursorPos += str.length;
-        obj.selectionStart = obj.selectionEnd = cursorPos;
-    }else{
-        obj.value += str;
-    }
-	}else{
-		obj.innerHTML+=str;
+	var m = obj.value.match(/：.*?：/g);
+	if (m) {
+		if (m.length > 9) {
+			alert("最多添加10个表情！");
+			return false;
+		}
 	}
+	obj.value += str;
 }

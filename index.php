@@ -13,10 +13,10 @@ $this->need('head.php');
 if ($this->have()){
 while($this->next()): ?>
 <div class="post">
-	<img class="post-head" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "http://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=64&d=&r=X";endif; ?>" />
+	<img class="post-head" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "https://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=64&d=&r=X";endif; ?>" />
 	<div class="post-article">
 		<div class="post-info-i">
-			<h2><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
+			<h2><a title="<?php $this->title() ?>" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
 			<small><?php $this->date('Y年m月d日'); ?><?php if($this->user->hasLogin()): ?> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a><?php endif; ?></small>
 		</div>
 		<div class="post-content">
@@ -36,7 +36,7 @@ while($this->next()): ?>
 }else{
 ?>
 <div class="post">
-	<?php $this->author->gravatar('60','','','post-head') ?>
+	<img class="post-head" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "https://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=64&d=&r=X";endif; ?>" />
 	<div class="post-article">
 		<div class="post-info-i">
 			<h2><a href="#">404 啥也没找到</a></h2>

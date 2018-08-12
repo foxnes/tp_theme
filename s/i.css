@@ -37,8 +37,8 @@ pre{
 	border: 2px solid #f5f5f5;
 	background-color: #fafafa;
 }
-pre code{width: 100%;outline: none;}
-p code{color: #2196F3}
+pre code{width: 100%;outline: none;font-size: 12px;}
+p code{color: #fa7d3c}
 input,button,textarea{
 	border: none;
 	padding: 9px 12px;
@@ -263,21 +263,15 @@ p.more{
 }
 .a-l-fc{
 	margin-bottom: -5px;background-color: #f2f2f5;padding: 0;
-}
-.a-l-fc .hover-show{
-	display: block;border-right: 1px solid #d9d9d9;border-bottom: 2px solid transparent;
-	height: 28px;padding: 10px 20px 26px 20px;cursor: pointer;
-}
-.a-l-fc .hover-show:hover, .a-l-fc .current{
-	background: #fff;
-	border-bottom-color: #fa7d3c;
+	background: repeat url(https://wx4.sinaimg.cn/large/005ShQFIgy1fu6ti0rn8dj303k03kwee.jpg);
 }
 .a-l-fc form button{display: none;}
 .a-l-fc form input{
 	border-color: #cccccc;border-radius: 1px;height: 28px;max-width: none;
-	float: right;width: 160px;box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.15) inset;
-	font-size: 14px;padding: 5px 29px 5px 10px;position: relative;
+	width: 160px;box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.15) inset;
+	font-size: 14px;padding: 5px 29px 5px 10px;
 }
+.a-l-fc form{float: right;position: relative;}
 .a-l-fc form .is{
 	position: absolute;right: 0;top: 0;padding: 11px 15px;cursor: pointer;
 }
@@ -294,7 +288,7 @@ p.more{
 .post-article img{
 	border-radius: 2px;
 	margin: 5px 0;
-	border: 1px solid #f2f2f5;
+	border: 1px solid #d6d6d6;
 	cursor: zoom-in;
 }
 .post-article h1,.post-article h2,.post-article h3,.post-article h4,.post-article h5,.post-article h6{
@@ -313,6 +307,8 @@ p.more{
 .post-content{
 	max-width: 520px;
 	line-height: 1.6;
+	letter-spacing: 1px;
+	font-size: 15px;
 }
 .post-content a{
 	color: #ee6583;
@@ -468,7 +464,6 @@ form .tbbq{
 	display: inline-block;
 	padding: 2px 5px;
 }
-.pay img{height: 10px;}
 @media screen and (max-width: 1000px){
 	.c-min{max-width: 800px;}
 	.article-list{width: 580px;}
@@ -499,9 +494,8 @@ form .tbbq{
 	.body{margin-top: 10px;}
 	blockquote{margin: 0;padding-left: 17px;padding-right: 17px}
 }
-
 .box-loading{
-	background-image: url(https://i.loli.net/2018/07/21/5b5284322145e.gif);
+	background-image: url(https://wx4.sinaimg.cn/mw690/005ShQFIgy1fu6s15xb1ig30au0aemz2.gif);
 	background-position: center;
 	min-height: 160px;
 	background-repeat: no-repeat;
