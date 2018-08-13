@@ -32,7 +32,7 @@ function themeConfig($form) {
     $footcode = new Typecho_Widget_Helper_Form_Element_Textarea('footcode', NULL, NULL, _t('footer执行代码'), _t('HTML 一般都是插入统计代码之类的'));
     $form->addInput($footcode);
 
-    $sidebarrandomimg = new Typecho_Widget_Helper_Form_Element_Text('sidebarrandomimg', NULL, NULL, _t('侧栏随机图片URL'), _t('图片URL，如：http://edgecats.net/'));
+    $sidebarrandomimg = new Typecho_Widget_Helper_Form_Element_Text('sidebarrandomimg', NULL, NULL, _t('侧栏随机图片URL'), _t('图片URL，用于展示在侧栏'));
     $form->addInput($sidebarrandomimg);
 
     $ewmurl = new Typecho_Widget_Helper_Form_Element_Text('ewmurl', NULL, NULL, _t('打赏二维码URL'), _t('图片URL（不填写本项则表示不开启打赏功能）'));
