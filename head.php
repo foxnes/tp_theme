@@ -53,6 +53,7 @@ if (!$this->have()){
 	</div>
 	<div class="article-list">
         <div class="post a-l-fc">
+        	<a href="javascript:alert('嘤嘤嘤')">QAQ</a>
             <form method="post" action="" class="fr">
                 <input type="text" name="s" size="32" placeholder="搜索文章" />
                 <button type="submit" id="searchsubmit"></button>
