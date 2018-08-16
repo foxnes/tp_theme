@@ -32,7 +32,7 @@
 	<b><i class="fa fa-user-o"></i> 我的读者</b>
 	<div class="box-body">
 		<?php echo getFriendWall();?>
-		<span title="凑数机器人"><img class="avatar" src="https://1.gravatar.com/avatar/5dd75e92f802b1ac87b2132542b32e1b?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="https://1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="https://1.gravatar.com/avatar/800db8558398890a3232e4ffbdbdda52?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" src="https://1.gravatar.com/avatar/144fbd313b60fdf0ba3136855b054ba4?s=24&amp;d=&amp;r=G"></span>
+		<span title="凑数机器人"><img class="avatar" data-original="//1.gravatar.com/avatar/5dd75e92f802b1ac87b2132542b32e1b?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" data-original="//1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" data-original="//1.gravatar.com/avatar/800db8558398890a3232e4ffbdbdda52?s=24&amp;d=&amp;r=G"></span><span title="凑数机器人"><img class="avatar" data-original="//1.gravatar.com/avatar/144fbd313b60fdf0ba3136855b054ba4?s=24&amp;d=&amp;r=G"></span>
 	    <div class="clear"></div>
 	</div>
 	</div>
@@ -41,7 +41,7 @@ if (!empty($this->options->sidebarBlock) && in_array('random_img', $this->option
 	<div class="box">
 	<b><i class="fa fa-file-image-o"></i> 随机图片</b>
 	<div class="box-body box-loading">
-		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=" onclick="this.src='';this.src=myrandomimg+'&ccac='+Math.random()*999;" title="点击图片换图" id="randomimg" alt="图片加载失败了..." onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=';">
+		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=" id="randomimg" alt="随机图片" onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQYV2NgAAIAAAUAAarVyFEAAAAASUVORK5CYII=';">
 	</div>
 	</div>
 <?php

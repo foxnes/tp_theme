@@ -17,10 +17,14 @@ if (!$this->have()){
             'tag'     =>  _t('标签 %s 下的文章'),
             'author'    =>  _t('%s 发布的文章')
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
+    <?php $this->header(); ?>
     <link rel="stylesheet" href="<?php $this->options->themeUrl('s/i.css'); ?>">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" type="image/jpeg" href="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "https://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=32&d=&r=G";endif; ?>" media="screen" />
-    <?php $this->header(); ?>
+    <link rel="shortcut icon" type="image/jpeg" href="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "//cn.gravatar.com/avatar/".md5($this->author->mail)."?s=32&d=&r=G";endif; ?>" media="screen" />
+    <script src="//code.jquery.com/jquery-1.8.3.min.js" crossorigin="anonymous"></script>
+    <script src="<?php $this->options->themeUrl('s/jquery.slimscroll.js'); ?>"></script>
+    <script type="text/javascript" src="//apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+    <script charset="UTF-8" src="<?php $this->options->themeUrl('s/i.js'); ?>"></script>
     <!--[if lte IE 8]>
     <style>
         html{background-image: none !important}
@@ -31,11 +35,9 @@ if (!$this->have()){
 </head>
 <body>
 
-<div class="head"></div>
-
 <div class="body c-min">
-	<div class="body-top-bg shadow" style="background-image: url(<?php if ($this->options->topimg): ?><?php $this->options->topimg(); ?><?php else: ?>https://wx1.sinaimg.cn/large/005uBItOgy1fu132mvw2qj30r808c41d.jpg<?php endif; ?>);">
-        <img class="body-gravatar" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "https://cn.gravatar.com/avatar/".md5($this->author->mail)."?s=100&d=&r=X";endif; ?>" />
+	<div class="body-top-bg shadow" style="background-image: url(<?php if ($this->options->topimg): ?><?php $this->options->topimg(); ?><?php else: ?>//wx1.sinaimg.cn/large/005uBItOgy1fu132mvw2qj30r808c41d.jpg<?php endif; ?>);">
+        <img class="body-gravatar" src="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "//cn.gravatar.com/avatar/".md5($this->author->mail)."?s=100&d=&r=X";endif; ?>" />
 		<h2><?php $this->options->title() ?></h2>
 		<small><i><?php $this->options->description() ?></i></small>
 	</div>

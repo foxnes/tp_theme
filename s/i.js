@@ -104,6 +104,9 @@ $(".pay span").click(function(){
 //--------------图片放大
 $("#zooming").click(function(){
 	$(this).fadeOut(200);
+	setTimeout(function(){
+		$("body").css("overflow-y","scroll");
+	},200);
 });
 $(".post-content img").click(function(){
 	zooming($(this).attr("src"));
@@ -116,7 +119,7 @@ $(".hover-show").hover(function(){
 	$(this).children(".show-this").slideUp(150);
 });
 //--------------
-$(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.4});
+$(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.5});
 $("img").each(function(){
 	$(this).lazyload({effect: "fadeIn"});
 });
@@ -126,10 +129,18 @@ function zooming(url){
 	$("#zooming img").attr("src",url);
 	$("#zooming img").on("load",function(){
 		$("#zooming").fadeIn(200);
-		if ($("#zooming img").height()<$(window).height()) {
+		$("body").css("overflow-y","hidden");
+		if ($("#zooming img").height()<=$(window).height()) {
+			$("#zooming").css("overflow-y","hidden");
 			$("#zooming img").css("margin-top",($(window).height()-$("#zooming img").height())/2.3);
 		}else{
+			$("#zooming").css("overflow-y","scroll");
 			$("#zooming img").css("margin-top","0px");
+		}
+		if ($("#zooming img").width()<=$(window).width()) {
+			$("#zooming").css("overflow-x","hidden");
+		}else{
+			$("#zooming").css("overflow-x","scroll");
 		}
 	});
 }

@@ -29,7 +29,15 @@ function themeConfig($form) {
     $link = new Typecho_Widget_Helper_Form_Element_Textarea('link', NULL, NULL, _t('友链HTML代码'), _t('如：&lt;a href="http://blog.lljh.bid" target="_blank"&gt;Luuljh的博客&lt;/a&gt;'));
     $form->addInput($link);
 
-    $footcode = new Typecho_Widget_Helper_Form_Element_Textarea('footcode', NULL, NULL, _t('footer执行代码'), _t('HTML 一般都是插入统计代码之类的'));
+    $footcode = new Typecho_Widget_Helper_Form_Element_Textarea('footcode', NULL, NULL, _t('footer执行代码'), _t('HTML。一般都是插入统计代码之类的，若要引用额外的JS文件，建议写成如下格式：<b onclick=\'$("#vblogshowcode1").slideToggle(500)\'>点我查看示例。</b><textarea id="vblogshowcode1" style="display:none;"><script type="text/javascript">
+(function(){
+    var s = document.createElement(\'script\');
+    s.type = \'text/javascript\';
+    s.src = "https://example.com/xxx.js";  //左边写URL
+    var tmp = document.getElementsByTagName(\'script\')[0];
+    tmp.parentNode.insertBefore(s, tmp);
+})();
+</script></textarea>'));
     $form->addInput($footcode);
 
     $sidebarrandomimg = new Typecho_Widget_Helper_Form_Element_Text('sidebarrandomimg', NULL, NULL, _t('侧栏随机图片URL'), _t('图片URL，用于展示在侧栏'));
@@ -68,7 +76,7 @@ echo $mostactive;
 function showThumb($obj){
 //来源于绛木子的简书主题
 	$size=null;$link=false;
-    $imgplaceholder=Helper::options()->themeUrl."/s/none.png";
+    $imgplaceholder=Helper::options()->themeUrl."/s/none.gif";
 	$pattern='<div class="post-thumb"><img src="'.$imgplaceholder.'" alt="{title}" data-original="{thumb}" /></div>';
     preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches );
     $thumb = '';
@@ -128,6 +136,6 @@ function getRandomPosts($limit = 10){//原作者不明..
     }
 }
 function img_lazy_load($ct){
-    $imgplaceholder = Helper::options()->themeUrl."/s/none.png";
+    $imgplaceholder = Helper::options()->themeUrl."/s/none.gif";
     return preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i","<img src='".$imgplaceholder."'$1data-original='$2'$3>",$ct);
 }
