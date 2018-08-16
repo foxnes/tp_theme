@@ -15,14 +15,13 @@ $(".top-bar-body li").each(function(){
 });
 
 var tmp_rmt_h = $(window).height()-76-$(".foot").height()-34;
-try{
-	$("#randomarticle").slimScroll({height:tmp_rmt_h+'px',size:"5px",wheelStep:18,color:"#ee6583"});
-	randomarticleP_top = $("#randomarticleP").offset().top;//全局变量！否则BUG
-}catch(err){
-	randomarticleP_top = false;
-}
+
+try{randomarticle_b_t = $(".sidebar").offset().top + $(".sidebar").height()}
+catch(err){randomarticle_b_t = "ud"}
+
 try{comment_form_top = $("#comment_form").offset().top}
 catch(err){comment_form_top = "ud"}
+
 $(window).scroll(function(){
 	var document_height = $(document).height();
 	var TscrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
@@ -31,17 +30,11 @@ $(window).scroll(function(){
 	}else{
 		$("#gotop").css("display","none");
 	}
-	if (randomarticleP_top) {
-	if ($(window).width()>630 && TscrollTop>=randomarticleP_top && $(document).height()-randomarticleP_top > ($("#randomarticleP").height()+30)*2) {
-		$("#randomarticleP").css({"position":"fixed","top":0,"width":$(".box").width()});
-	}else{
-		$("#randomarticleP").css("position","static");
-		randomarticleP_top = $("#randomarticleP").offset().top;
-	}
-	}
-	if ($(window).width()>630 && comment_form_top!=="ud" && typeof comment_form_top!=="undefined") {
+	//gototop
+	if ($(window).width()<630) {return false}
+	if (comment_form_top!=="ud" && typeof comment_form_top!=="undefined") {
 		if (TscrollTop>=comment_form_top && $(document).height()-comment_form_top > ($("#comment_form").height()+38)*2 
-			&& $(window).height()>$("#comment_form").height()+48 && comment_form_top < randomarticleP_top) {
+			&& $(window).height()>$("#comment_form").height()+48 && $(".article-list").height()+$("#comment_form").height() < $(".sidebar").height()) {
 			$("#comment_form").css({"position":"fixed","top":0,"width":$(".a-l-fc").width(),"left":$(".a-l-fc").offset().left});
 		}else{
 			$("#comment_form").css({"position":"relative","left":0});
@@ -49,6 +42,17 @@ $(window).scroll(function(){
 			catch(err){comment_form_top = "ud"}
 		}
 	}
+	//comment form
+	if (randomarticle_b_t !== "ud" && $(".article-list").height()>$(".sidebar").height()) {
+		var tmp_f_h = $(document).height() - $(".foot").offset().top;
+		if (TscrollTop+$(window).height()>=randomarticle_b_t+20+tmp_f_h) {
+			$(".sidebar").css({"position":"fixed","bottom":20+tmp_f_h,"top":"auto"});
+		}else{
+			$(".sidebar").css("position","static");
+			randomarticle_b_t = $(".sidebar").offset().top + $(".sidebar").height();
+		}
+	}
+	//random article
 });
 
 //-------------表情
@@ -113,10 +117,9 @@ $(".post-content img").click(function(){
 });
 $(".post-content .tbbq").unbind("click");
 //--------------
-$(".hover-show").hover(function(){
-	$(this).children(".show-this").slideDown(150);
-},function(){
-	$(this).children(".show-this").slideUp(150);
+$(".click-show").click(function(){
+	$(this).children(".show-this").slideToggle(150);
+	$(this).children(".show-this").css("top",$(this).height()+5);
 });
 //--------------
 $(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.5});

@@ -109,13 +109,13 @@ function showThumb($obj){
         array($obj->title,$thumb,$obj->permalink),
         $pattern);
 }
-function getRandomPosts($limit = 10){//原作者不明..
+function getRandomPosts(){//原作者不明..
     $db = Typecho_Db::get();
     $result = $db->fetchAll($db->select()->from('table.contents')
         ->where('status = ?','publish')
         ->where('type = ?', 'post')
         ->where('created <= unix_timestamp(now())', 'post')
-        ->limit($limit)
+        ->limit(5)
         ->order('RAND()')
     );
     if($result){
@@ -124,14 +124,8 @@ function getRandomPosts($limit = 10){//原作者不明..
             $val = $obj->push($val);
             $post_title = htmlspecialchars($val['title']);
             $permalink = $val['permalink'];
-            echo '<li><div class="post-info-i">
-                <h3><a href="'.$permalink.'">'.$post_title.'</a></h3>
-                <small>';
-            $obj->date("Y年m月d日");
-            echo '</small><span>';
-            $obj->excerpt(50,'...');
-            showThumb($obj);
-            echo '</span></div></li>';
+            echo '<li><i class="fa fa-book"></i>
+                <a href="'.$permalink.'">'.$post_title.'</a></li>';
         }
     }
 }

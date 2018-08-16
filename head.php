@@ -22,7 +22,6 @@ if (!$this->have()){
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" type="image/jpeg" href="<?php if ($this->options->face): ?><?php $this->options->face();else:echo "//cn.gravatar.com/avatar/".md5($this->author->mail)."?s=32&d=&r=G";endif; ?>" media="screen" />
     <script src="//code.jquery.com/jquery-1.8.3.min.js" crossorigin="anonymous"></script>
-    <script src="<?php $this->options->themeUrl('s/jquery.slimscroll.js'); ?>"></script>
     <script type="text/javascript" src="//apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
     <script charset="UTF-8" src="<?php $this->options->themeUrl('s/i.js'); ?>"></script>
     <!--[if lte IE 8]>

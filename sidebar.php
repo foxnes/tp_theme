@@ -88,10 +88,10 @@ endif; if ($this->is('post')) {$ispostpage = true;}else{$ispostpage = false;} ?>
 	</div>
 	</div>
 <?php if (!empty($this->options->sidebarBlock) && in_array('random_article', $this->options->sidebarBlock)): ?>
-	<div class="box" id="randomarticleP" style="padding-bottom: 10px">
+	<div class="box" id="randomarticle_b">
 	<b><i class="fa fa-file-o"></i> 随机文章</b>
-	<div class="box-body" id="randomarticle" style="padding-bottom: 0;">
-		<ul><?php getRandomPosts(10);?></ul>
+	<div class="box-body">
+		<ul class="li-el"><?php getRandomPosts(10);?></ul>
 	</div>
 	</div>
 <?php endif; ?>

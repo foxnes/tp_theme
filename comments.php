@@ -5,22 +5,23 @@
 <?php endif; ?>
 
 <?php if($this->allow('comment')): ?>
-<div id="<?php $this->respondId(); ?>" class="respond">
+<div id="<?php $this->respondId(); ?>">
 <form method="post" class="post" action="<?php $this->commentUrl() ?>" id="comment_form">
     <h4> - 评论 -</h4>
-    <small>
-        <?php $comments->cancelReply(); ?>
-    </small>
-    <hr />
+    <small><?php $comments->cancelReply(); ?></small>
+    	<textarea resize='no' placeholder="´・ω・)ノ还不快点说点什么呀 Mua~" rows="7" name="text"><?php $this->remember('text'); ?></textarea>
+    	<div class="click-show">
+        	<button type="button" class="sm">QAQ 小表情</button>
+       		<p id="showfacenamereplace" class="show-this"></p>
+    	</div>
+    	<br />
         <?php if($this->user->hasLogin()): ?>
             <p>您已登录：<a href="<?php $this->options->adminUrl(); ?>"><?php $this->user->screenName(); ?></a>.</p>
         <?php else: ?>
-	   <p><label>昵称：</label><input type="text" placeholder="君の名は" name="author" class="text" size="35" value="<?php $this->remember('author'); ?>" /></p>
-	   <p><label>邮箱：</label><input type="email" name="mail" <?php if ($this->options->commentsRequireMail): ?>required placeholder="必须填写邮箱"<?php endif; ?> class="text" size="35" value="<?php $this->remember('mail'); ?>" /></p>
-	   <p><label>网站：</label><input type="url" <?php if ($this->options->commentsRequireURL): ?>required placeholder="必须填写网站" <?php endif; ?> name="url" class="text" size="35" value="<?php $this->remember('url'); ?>" /></p>
+	   <p class="input-g"><label><i class="fa fa-user"></i></label><input type="text" placeholder="昵称" name="author" class="text" size="25" value="<?php $this->remember('author'); ?>" /></p>
+	   <p class="input-g"><label><i class="fa fa-envelope-o"></i></label><input type="email" name="mail" <?php if ($this->options->commentsRequireMail): ?>placeholder="邮箱 *" required <?php else: ?>placeholder="邮箱"<?php endif; ?>class="text" size="45" value="<?php $this->remember('mail'); ?>" /></p>
+	   <p class="input-g"><label><i class="fa fa-link"></i></label><input type="url" <?php if ($this->options->commentsRequireURL): ?>required placeholder="网站 *"<?php else: ?>placeholder="网站"<?php endif; ?> name="url" class="text" size="45" value="<?php $this->remember('url'); ?>" /></p>
         <?php endif; ?>
-        <p id="showfacenamereplace"></p>
-	 	<p><textarea resize='no' placeholder="轻点儿 QAQ" rows="10" cols="50" name="text"><?php $this->remember('text'); ?></textarea></p>
 	 	<p><input type="submit" value="准备发射~" class="form_submit" /></p>
 </form>
 </div>
