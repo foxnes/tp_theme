@@ -16,9 +16,6 @@ $(".top-bar-body li").each(function(){
 
 var tmp_rmt_h = $(window).height()-76-$(".foot").height()-34;
 
-try{randomarticle_b_t = $(".sidebar").offset().top + $(".sidebar").height()}
-catch(err){randomarticle_b_t = "ud"}
-
 try{comment_form_top = $("#comment_form").offset().top}
 catch(err){comment_form_top = "ud"}
 
@@ -43,16 +40,6 @@ $(window).scroll(function(){
 		}
 	}
 	//comment form
-	if (randomarticle_b_t !== "ud" && $(".article-list").height()>$(".sidebar").height()) {
-		var tmp_f_h = $(document).height() - $(".foot").offset().top;
-		if (TscrollTop+$(window).height()>=randomarticle_b_t+20+tmp_f_h) {
-			$(".sidebar").css({"position":"fixed","bottom":20+tmp_f_h,"top":"auto"});
-		}else{
-			$(".sidebar").css("position","static");
-			randomarticle_b_t = $(".sidebar").offset().top + $(".sidebar").height();
-		}
-	}
-	//random article
 });
 
 //-------------表情
@@ -119,7 +106,8 @@ $(".post-content .tbbq").unbind("click");
 //--------------
 $(".click-show").click(function(){
 	$(this).children(".show-this").slideToggle(150);
-	$(this).children(".show-this").css("top",$(this).height()+5);
+	$(this).children(".slideB").css("bottom",$(this).height()+5);
+	$(this).children(".slideT").css("top",$(this).height()+5);
 });
 //--------------
 $(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.5});

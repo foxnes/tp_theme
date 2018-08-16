@@ -21,9 +21,11 @@ function themeConfig($form) {
     array('my_reader' => _t('显示我的读者'),
     'random_img' => _t('显示随机图片'),
     'random_article' => _t('显示随机文章'),
-    'all_comments' => _t('显示最新评论')
+    'all_comments' => _t('显示最新评论'),
+    'df_views' => _t('使用主题自带的浏览数目统计'),
+    'show_Thumb' => _t('首页显示文章图片')
     ),
-    array('my_reader', 'random_img', 'random_article', 'all_comments'), _t('侧边栏显示'));
+    array('my_reader', 'random_img', 'random_article', 'all_comments', 'df_views'), _t('配置'));
     $form->addInput($sidebarBlock->multiMode());
 
     $link = new Typecho_Widget_Helper_Form_Element_Textarea('link', NULL, NULL, _t('友链HTML代码'), _t('如：&lt;a href="http://blog.lljh.bid" target="_blank"&gt;Luuljh的博客&lt;/a&gt;'));
@@ -132,4 +134,28 @@ function getRandomPosts(){//原作者不明..
 function img_lazy_load($ct){
     $imgplaceholder = Helper::options()->themeUrl."/s/none.gif";
     return preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i","<img src='".$imgplaceholder."'$1data-original='$2'$3>",$ct);
+}
+function getViewsStr($widget) {
+    //来源不明
+    $fields = unserialize($widget->fields);
+    if (array_key_exists('views', $fields))
+        $views = (!empty($fields['views'])) ? intval($fields['views']) : 0;
+    else
+        $views = 0;
+    //增加浏览次数
+    if ($widget->is('single')) {
+        $vieweds = Typecho_Cookie::get('contents_viewed');
+        if (empty($vieweds))
+            $vieweds = array();
+        else
+            $vieweds = explode(',', $vieweds);
+        if (!in_array($widget->cid, $vieweds)) {
+            $views = $views + 1;
+            $widget->setField('views', 'str', strval($views), $widget->cid);
+            $vieweds[] = $widget->cid;
+            $vieweds = implode(',', $vieweds);
+            Typecho_Cookie::set("contents_viewed",$vieweds);
+        }
+    }
+    return $views." 次浏览";
 }

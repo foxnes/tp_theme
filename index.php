@@ -17,10 +17,12 @@ while($this->next()): ?>
 	<div class="post-article">
 		<div class="post-info-i">
 			<h2><a title="<?php $this->title() ?>" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h2>
-			<small><i class="fa fa-calendar"></i><?php $this->date('Y年m月d日'); ?><?php if($this->user->hasLogin()): ?> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>"><i class="fa fa-pencil-square-o"></i>编辑</a><?php endif; ?></small>
+			<small><i class="fa fa-clock-o"></i><?php $this->date('Y年m月d日'); ?>
+			<?php if (!empty($this->options->sidebarBlock) && in_array('df_views', $this->options->sidebarBlock)): ?><i class="fa fa-eye"></i><?php _e(getViewsStr($this));endif ?>
+			<?php if($this->user->hasLogin()): ?> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>"><i class="fa fa-pencil-square-o"></i>编辑</a><?php endif; ?></small>
 		</div>
 		<div class="post-content">
-		<?php $this->excerpt(200,"...");showThumb($this); ?>
+		<?php $this->excerpt(200,"...");if (!empty($this->options->sidebarBlock) && in_array('show_Thumb', $this->options->sidebarBlock)) showThumb($this); ?>
 		<p class="more"><a href="<?php $this->permalink(); ?>" title="<?php $this->title(); ?>">继续阅读</a></p>
 		</div>
 	</div>

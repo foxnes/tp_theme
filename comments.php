@@ -8,11 +8,11 @@
 <div id="<?php $this->respondId(); ?>">
 <form method="post" class="post" action="<?php $this->commentUrl() ?>" id="comment_form">
     <h4> - 评论 -</h4>
-    <small><?php $comments->cancelReply(); ?></small>
+        <small><?php $comments->cancelReply(); ?></small>
     	<textarea resize='no' placeholder="´・ω・)ノ还不快点说点什么呀 Mua~" rows="7" name="text"><?php $this->remember('text'); ?></textarea>
     	<div class="click-show">
         	<button type="button" class="sm">QAQ 小表情</button>
-       		<p id="showfacenamereplace" class="show-this"></p>
+       		<p id="showfacenamereplace" class="show-this slideB"></p>
     	</div>
     	<br />
         <?php if($this->user->hasLogin()): ?>

@@ -5,7 +5,7 @@ if (!$this->have()){
 }
 ?>
 <!DOCTYPE HTML>
-<html style="background-image: url(<?php if ($this->options->bgimg): ?><?php $this->options->bgimg(); ?><?php else:?>https://i.loli.net/2018/07/24/5b569431e16aa.jpg<?php endif; ?>);">
+<html style="background-image: url(<?php if ($this->options->bgimg): ?><?php $this->options->bgimg();else: ?>https://i.loli.net/2018/07/24/5b569431e16aa.jpg<?php endif; ?>);">
 <head>
     <meta charset="<?php $this->options->charset(); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
