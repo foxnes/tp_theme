@@ -45,7 +45,7 @@ $(window).scroll(function(){
 //-------------表情
 facenamereplace = ["：滑稽：","：喷：","：彩虹：","：阴险：","：怒：","：笑眼：",
 "：黑线：","：玫瑰：","：乖：","：汗：","：惊哭：","：酷：","：狂汗：","：冷：",
-"：真棒："];
+"：真棒：","：不高兴：","：大哭：","：咖啡：","：yeah：","：ojbk："];
 /*
 facereplace = [];
 for (var i = 0; i < facenamereplace.length; i++) {
@@ -66,7 +66,12 @@ facereplace = ["https://wx1.sinaimg.cn/mw690/005ShQFIgy1fu6s184o24j300u00uq2s.jp
 "https://wx4.sinaimg.cn/mw690/005ShQFIgy1fu6s18o1ehj300u00u0sl.jpg",
 "https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s18z1tcj300u00uwec.jpg",
 "https://wx4.sinaimg.cn/mw690/005ShQFIgy1fu6s199skzj300u00uq2s.jpg",
-"https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s1b931zj300u00uwec.jpg"];
+"https://wx2.sinaimg.cn/mw690/005ShQFIgy1fu6s1b931zj300u00uwec.jpg",
+"https://wx3.sinaimg.cn/large/005ShQFIgy1fuqisjlduhj300u00uq2s.jpg",
+"https://wx2.sinaimg.cn/large/005ShQFIgy1fuqisjy9vmj300u00ut8k.jpg",
+"https://wx2.sinaimg.cn/large/005ShQFIgy1fuqisk65elj300u00udfo.jpg",
+"https://wx2.sinaimg.cn/large/005ShQFIgy1fuqiskmyuqj300u00u3yc.jpg",
+"https://wx1.sinaimg.cn/large/005ShQFIgy1fuqis19uo9j300u00u744.jpg"];
 try{
 	if (showfacenamereplace) {
 		for (var i = 0; i < facenamereplace.length; i++) {
@@ -78,7 +83,8 @@ var bodyhtml = $(".article-list").html();
 for (var i = 0; i < facereplace.length; i++) {
 	bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<img class='tbbq' alt='"+i+"' src='"+facereplace[i]+"' />");
 }
-bodyhtml = bodyhtml.replace(/【script(.*?)script】/ig,"")
+bodyhtml = bodyhtml.replace(/【script(.*?)script】/ig,"");
+bodyhtml = bodyhtml.replace(/【style(.*?)style】/ig,"");
 var tmp_html_reg = /【([\w]{1,10})(.*?)\1】/ig;
 while(tmp_html_reg.test(bodyhtml)){
 	bodyhtml = bodyhtml.replace(tmp_html_reg,"<$1>$2</$1>");
@@ -104,10 +110,15 @@ $(".post-content img").click(function(){
 });
 $(".post-content .tbbq").unbind("click");
 //--------------
-$(".click-show").click(function(){
-	$(this).children(".show-this").slideToggle(150);
-	$(this).children(".slideB").css("bottom",$(this).height()+5);
-	$(this).children(".slideT").css("top",$(this).height()+5);
+$(".click-show .show").click(function(){
+	$(this).parent().children(".slideB").css("bottom",$(this).height()+5);
+	$(this).parent().children(".slideT").css("top",$(this).height()+5);
+	$(this).parent().children(".show-this").slideToggle(150);
+});
+$(document).bind("click", function (e) {
+    if($(e.target).closest(".click-show").length <= 0){
+        $(".click-show .show-this").parent().children(".show-this").slideUp(150);
+    }
 });
 //--------------
 $(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.5});
