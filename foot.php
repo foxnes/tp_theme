@@ -20,7 +20,9 @@ $this->footer();
 <script type="text/javascript">
 $(function(){
 	var rdimgurl = "<?php if ($this->options->sidebarrandomimg): ?><?php $this->options->sidebarrandomimg(); ?><?php else: ?>https://picsum.photos/276/300/?random<?php endif; ?>";
-	randomimg.src = rdimgurl;
+	try{
+		randomimg.src = rdimgurl;
+	}catch(e){}
 });
 </script>
 

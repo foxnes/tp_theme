@@ -11,7 +11,7 @@ hr{border:none;border-top:1px solid #f2f2f5;margin:1em 0}
 blockquote{background-color:#f2f2f5;margin:10px -25px 15px -75px;padding:9px 25px 1px 75px;color:#464646;display:block}
 pre{white-space:pre-wrap;margin:5px 0;padding:.5em;border:2px solid #f5f5f5;background-color:#fafafa}
 code{color:#c7254e;background-color: #f9f2f4;padding: 2px 4px;font-size: .9em}
-pre code{width:100%;outline:0;line-height: 1.4em;background-color: #fafafa;color: #383a42}
+pre code{width:100%;outline:0;background-color: #fafafa;color: #383a42}
 button,input,textarea{border:none;padding:9px 12px;font-size:inherit;outline:0}
 input,textarea{border:1px solid #bfbfbf;margin:5px;max-width:100%}
 button,input[type=button],input[type=submit]{background:#ff8140;box-shadow:0 1px 2px rgba(0,0,0,.25);cursor:pointer;border:0;border-bottom:2px solid #FF5722;color:#fff;padding: 6px 12px}
@@ -77,7 +77,7 @@ p.more{margin:5px 0 0 0;padding: 0;float:right}
 .a-l-fc form .is{position:absolute;right:0;top:0;padding:11px 15px;cursor:pointer}
 .post-head{width:50px;height:50px;border-radius:50%;position:absolute;left:15px;top:15px}
 .post-article{margin-left:60px}
-.post-article img{margin:5px 0;border:1px solid #d6d6d6;cursor:zoom-in}
+.post-article img{margin:5px 0;border:1px solid #f2f2f5;cursor:zoom-in}
 .post-article img.tbbq, .comment-list .tbbq{border:none;cursor:default;vertical-align:bottom;margin: 0 2px}
 .post-article h1,.post-article h2,.post-article h3,.post-article h4,.post-article h5,.post-article h6{color:#444}
 .post-article h1:before,.post-article h2:before,.post-article h3:before,.post-article h4:before,.post-article h5:before,.post-article h6:before{content:"# ";font-weight:800;font-style:italic;color:#ee6583}

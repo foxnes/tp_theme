@@ -5,7 +5,6 @@ if (typeof(WebSocket) == "function") {
 		$('pre code').each(function(i, block) {hljs.highlightBlock(block)});
 	});
 }
-$('pre code').attr("contenteditable","true");
 
 $(".top-bar-body li").each(function(){
 	$(".top-bar-body li a").click(function(){
@@ -124,6 +123,10 @@ $(document).bind("click", function (e) {
 $(".box-body img").lazyload({effect:"fadeIn",threshold:$(window).height()*1.5});
 $("img").each(function(){
 	$(this).lazyload({effect: "fadeIn"});
+});
+//--------------
+$('pre code').click(function(){
+	$(this).attr("contenteditable","true");
 });
 });
 
