@@ -27,18 +27,6 @@ $(window).scroll(function(){
 		$("#gotop").css("display","none");
 	}
 	//gototop
-	if ($(window).width()<630) {return false}
-	if (comment_form_top!=="ud" && typeof comment_form_top!=="undefined") {
-		if (TscrollTop>=comment_form_top && $(document).height()-comment_form_top > ($("#comment_form").height()+38)*2 
-			&& $(window).height()>$("#comment_form").height()+48 && $(".article-list").height()+$("#comment_form").height() < $(".sidebar").height()) {
-			$("#comment_form").css({"position":"fixed","top":0,"width":$(".a-l-fc").width(),"left":$(".a-l-fc").offset().left});
-		}else{
-			$("#comment_form").css({"position":"relative","left":0});
-			try{comment_form_top = $("#comment_form").offset().top}
-			catch(err){comment_form_top = "ud"}
-		}
-	}
-	//comment form
 });
 
 //-------------表情
