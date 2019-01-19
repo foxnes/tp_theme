@@ -17,7 +17,7 @@ input,textarea{border:1px solid #bfbfbf;margin:5px;max-width:100%}
 button,input[type=button],input[type=submit]{background:#ff8140;box-shadow:0 1px 2px rgba(0,0,0,.25);cursor:pointer;border:0;border-bottom:2px solid #FF5722;color:#fff;padding: 6px 12px}
 textarea{width:100%;position:relative;left:-5px}
 h1{font-size:1.8em}
-h2{font-size:1.6em}
+h2{font-size:1.6em;/* line-height: 2.0; *//* margin-top: 1.5em; */}
 h3{font-size:1.4em}
 h4{font-size:1.2em}
 h5{font-size:1em}
@@ -85,6 +85,7 @@ p.more{margin:5px 0 0 0;padding: 0;float:right}
 .post-content{max-width:520px;line-height: 2em}
 .post-content a{color:#ee6583;border-bottom:1px solid #f2f2f5}
 .post-content a:hover{border-bottom:1px solid #ee6583}
+.post-content h1,.post-content h2,.post-content h3,.post-content h4,.post-content h5,.post-content h6{margin: 15px 0 10px 0;}
 .post-info-i{white-space:normal;word-wrap:break-word;word-break:break-all}
 .post-thumb{margin-top:10px}
 #randomarticle{max-height:750px;overflow:hidden}
