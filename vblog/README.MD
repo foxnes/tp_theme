@@ -2,9 +2,11 @@ Vblog
 ---
 
 截图：
+
 ![IMG](screenshot.png)
 
-演示：http://blog.lljh.bid/
+
+演示：<del>http://blog.lljh.bid/ 已更换为hufman</del>
 
 **启用主题后无法正常评论，请在[后台]->[设置]->[评论]里关闭```开启反垃圾保护```这一选项☑**
 **由于造成原因尚不明确，强烈建议用评论过滤插件代替！！**
