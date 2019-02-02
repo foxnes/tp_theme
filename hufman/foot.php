@@ -48,11 +48,10 @@
     <div class="foot">
         <a href="#"><div class="backtotop"><i class="fa fa-angle-up"></i></div></a>
         &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>版权所有.<br />
-        驱动<a href="http://www.typecho.org">Typecho</a> - Hufman主题
+        驱动<a href="http://www.typecho.org">Typecho</a> - <a href="https://github.com/1443691826/tp_theme/tree/master/hufman">Hufman主题<a>
     </div>
     <script src="//code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="<?php $this->options->themeUrl('s/zooming.min.js'); ?>"></script>
-    <script src="<?php $this->options->themeUrl('s/tagball.js'); ?>"></script>
     <script src="<?php $this->options->themeUrl('s/i.js'); ?>"></script>
 <?php $this->footer(); ?>
 </body>
