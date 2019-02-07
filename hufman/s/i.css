@@ -399,6 +399,7 @@ input[type="submit"], button{
 .avatar{float:left;margin:0 5px 5px 0;padding:2px;border-radius: 5px;}
 .comment-body{padding:15px;list-style:none}
 .comment-body p{clear:both}
+.comment-body p.half{clear: none !important}
 .comment-body+.comment-body{margin-top:15px}
 .comment-author{font-size: 14px}
 .cancel-comment-reply{margin: 5px 0;}
