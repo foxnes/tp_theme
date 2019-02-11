@@ -2,21 +2,14 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('head.php');
 if ($this->have()):?>
-<script>headtext.innerHTML = '<i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;&nbsp;<?php $this->archiveTitle(array(
-            'category'  =>  _t('分类 %s'),
-            'search'    =>  _t('搜索 %s'),
-            'tag'       =>  _t('标签 %s'),
-            'author'    =>  _t('作者 %s')
-        ), '', ''); ?>';</script>
 <?php while($this->next()): ?>
     <div class="post">
-        <?php showThumb($this) ?>
+        <a href="<?php $this->permalink() ?>">
+            <?php showThumb($this) ?>
+        </a>
 	    <span class="a-color"><?php $this->category(' / '); ?></span>
     	&nbsp;
     	<i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
-	    <?php $this->commentsNum('', '&nbsp;<i class="fa fa-comment-o" aria-hidden="true"></i> 1', '&nbsp;<i class="fa fa-comment-o" aria-hidden="true"></i> %d'); ?>
-	    &nbsp;
-	    <i class="fa fa-eye"></i> <?php echo getViewsStr($this); ?>
 	    <?php if($this->user->hasLogin()): ?>
 	    &nbsp;
     	<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>

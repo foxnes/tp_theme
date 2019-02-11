@@ -4,7 +4,7 @@
  * 
  * @package Hufman
  * @author Luuljh
- * @version 0.2
+ * @version 0.3
  * @link http://he-he.gq
  */
 
@@ -13,13 +13,12 @@ $this->need('head.php');
 ?>
 <?php while($this->next()): ?>
     <div class="post">
-        <?php showThumb($this) ?>
+        <a href="<?php $this->permalink() ?>">
+            <?php showThumb($this) ?>
+        </a>
 	    <span class="a-color"><?php $this->category(' / '); ?></span>
     	&nbsp;
     	<i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
-	    <?php $this->commentsNum('', '&nbsp;<i class="fa fa-comment-o" aria-hidden="true"></i> 1', '&nbsp;<i class="fa fa-comment-o" aria-hidden="true"></i> %d'); ?>
-	    &nbsp;
-	    <i class="fa fa-eye"></i> <?php echo getViewsStr($this); ?>
 	    <?php if($this->user->hasLogin()): ?>
 	    &nbsp;
     	<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>

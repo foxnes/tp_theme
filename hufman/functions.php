@@ -7,7 +7,11 @@ function themeConfig($form) {
 function showThumb($obj){
 //来源于绛木子的简书主题
 	$size=null;$link=false;
-	$pattern='<div class="post-thumb"><img alt="{title}" src="{thumb}" /></div>';
+	$pattern='<div class="post-thumb">
+	            <img alt="{title}" src="{thumb}" />
+	            <div class="view inner"><i class="fa fa-eye"></i> ' . getViewsStr($obj) .'</div>
+	            <div class="cmmt inner"><i class="fa fa-comments"></i> ' . $obj->commentsNum . '</div>
+	        </div>';
     preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches);
     $thumb = '';
     $options = Typecho_Widget::widget('Widget_Options');

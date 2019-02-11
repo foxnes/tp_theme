@@ -25,6 +25,13 @@
     </div>
     <div class="body">
         <div class="atcs">
-            <div class="sb-holder" id="headtext">
-                Welcome to my blog.
+            <div class="sb-holder">
+                <a href="<?php $this->options->siteUrl(); ?>">Home</a> &raquo;
+                <?php if ($this->is('index')): ?>
+                Latest Post
+                <?php elseif ($this->is('post')): ?>
+                <?php $this->category(); ?> &raquo; Article
+                <?php else: ?>
+                <?php $this->archiveTitle(' &raquo; ','',''); ?>
+                <?php endif; ?>
             </div>

@@ -3,10 +3,9 @@ $this->need('head.php');
 ?>
 <div class="post">
     <h1 class="post-title"><?php $this->title() ?></h1>
-	<span class="a-color"><?php $this->category(' / '); ?></span>
-	&nbsp;
 	<i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
-	<?php $this->commentsNum('', '&nbsp;<i class="fa fa-comment-o" aria-hidden="true"></i> 1', '&nbsp;<i class="fa fa-comment-o" aria-hidden="true"></i> %d'); ?>
+	&nbsp;
+	<i class="fa fa-comment-o" aria-hidden="true"></i> <?php echo $this->commentsNum; ?>
 	&nbsp;
 	<i class="fa fa-eye"></i> <?php echo getViewsStr($this); ?>
 	<?php if($this->user->hasLogin()): ?>
@@ -18,7 +17,7 @@ $this->need('head.php');
 		<?php $this->content(); ?>
 		<br />
 		<div class="post-meta">
-		    <img unzoomable class="author" src="<?php echo "//cn.gravatar.com/avatar/".md5($this->author->mail)."?s=50&d=&r=X"; ?>" />
+		    <img unzoomable class="author" draggable="false" src="<?php echo "//cn.gravatar.com/avatar/".md5($this->author->mail)."?s=50&d=&r=X"; ?>" />
 		    <p>该本文由 <a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a> 创作或转载<br />采用 <a href="http://creativecommons.org/licenses/by/3.0/cn" rel="nofollow">知识共享署名 3.0</a>，可自由转载、引用，但需署名作者且注明文章出处。</p>
 		</div>
 		<ul class="page-navigator post nav">

@@ -1,6 +1,8 @@
-        </div>
+</div>
         <div class="sb-left">
-            <div class="sb-holder"></div>
+            <div class="sb-holder">
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;Life is fantastic
+            </div>
 			<ul class="sb-widget">
 			    <p class="tinytext">近期文章</p>
 			    <?php $this->widget('Widget_Contents_Post_Recent')->parse('<li><a href="{permalink}"><i class="fa fa-clock-o" aria-hidden="true"></i> {title}</a></li>'); ?>
@@ -46,9 +48,9 @@
         </div>
     </div>
     <div class="foot">
-        <a href="#"><div class="backtotop"><i class="fa fa-angle-up"></i></div></a>
+        <div class="backtotop"><a href="javascript:void 0"><i class="fa fa-angle-up"></i></a></div>
         &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>版权所有.<br />
-        驱动<a href="http://www.typecho.org">Typecho</a> - <a href="https://github.com/1443691826/tp_theme/tree/master/hufman">Hufman主题<a>
+        驱动<a href="http://www.typecho.org">Typecho</a> - <a href="https://github.com/1443691826/tp_theme/tree/master/hufman">Hufman主题</a>
     </div>
     <script src="//code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="<?php $this->options->themeUrl('s/zooming.min.js'); ?>"></script>

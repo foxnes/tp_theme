@@ -4,7 +4,8 @@ $this->need('head.php');
 <div class="post">
     <h1 class="post-title"><?php $this->title() ?></h1>
 	<i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
-	<?php $this->commentsNum('', '&nbsp;<i class="fa fa-comment-o" aria-hidden="true"></i> 1', '&nbsp;<i class="fa fa-comment-o" aria-hidden="true"></i> %d'); ?>
+	&nbsp;
+	<i class="fa fa-comment-o" aria-hidden="true"></i> <?php echo $this->commentsNum; ?>
 	&nbsp;
 	<i class="fa fa-eye"></i> <?php echo getViewsStr($this); ?>
 	<?php if($this->user->hasLogin()): ?>
