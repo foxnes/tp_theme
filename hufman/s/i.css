@@ -305,7 +305,8 @@ hr{
 .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6{
     color: #6d6d6d;
     line-height: 1.2;
-    margin-top: 1.5em
+    margin-top: 1.5em;
+    margin-bottom: 0.7em;
 }
 .post-content blockquote{
     color: #444;
