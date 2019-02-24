@@ -14,7 +14,7 @@ $this->need('head.php');
 	<?php endif; ?>
 	<hr />
     <div class="post-content">
-		<?php $this->content(); ?>
+		<?php echo img_lazy_load($this->content); ?>
     </div>
 </div>
 

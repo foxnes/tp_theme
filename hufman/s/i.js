@@ -4,6 +4,9 @@ if ($(window).width() >800 && $(".atcs").height() < $(".sb-left").height()) {
 
 var zooming = new Zooming();
 zooming.listen('.post-content img:not([unzoomable])');
+$(".post-thumb img").lazyload({effect: "fadeIn"});
+$(".post-content img").lazyload({effect: "fadeIn"});
+
 
 facenamereplace = ["：滑稽：","：喷：","：彩虹：","：阴险：","：怒：","：笑眼：",
 "：黑线：","：玫瑰：","：乖：","：汗：","：惊哭：","：酷：","：狂汗：","：冷：",
@@ -44,18 +47,27 @@ try{
 var bodyhtml = $("#comments").html();
 if (bodyhtml){
     for (var i = 0; i < facereplace.length; i++) {
-	    bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<img class='tbbq' draggable='false' alt='"+i+"' src='"+facereplace[i]+"' />");
+	    bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<img class='tbbq' draggable='false' alt='' num='"+i+"' src='"+facereplace[i]+"' />");
     }
     $("#comments").html(bodyhtml);
     $("form .tbbq").click(function(){
-	    insertText($("textarea[name=text]")[0], facenamereplace[$(this).attr("alt")]);
+	    insertText($("textarea[name=text]")[0], facenamereplace[$(this).attr("num")]);
     });
 }
+bodyhtml = $("#rctrly").html();
+if (bodyhtml){
+    for (var i = 0; i < facereplace.length; i++) {
+	    bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<img class='tbbq tiny' draggable='false' alt='' src='"+facereplace[i]+"' />");
+    }
+    $("#rctrly").html(bodyhtml);
+}
+
+
 $(".backtotop").click(function () {
         var speed = 200;
         $('body,html').animate({ scrollTop: 0 }, speed);
         return false;
- });
+});
 
 function insertText(obj,str){
 	var m = obj.value.match(/：.*?：/g);
@@ -83,3 +95,6 @@ $('.post-thumb img').each(function(){
         this.style = "display: none"
     }
 })
+window.onload = function(){
+    $("#pagecover").fadeOut()
+}

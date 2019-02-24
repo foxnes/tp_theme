@@ -1,4 +1,5 @@
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin 0;}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:800;color:#656565}code,kbd,samp{font-family:monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}
+@charset "utf-8";
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin 0;}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace;font-size:1em}a{background-color:transparent;outline: none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:800}code,kbd,samp{font-family:monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}
 /*! CSS | hufman */
 @charset "UTF-8";
 *{
@@ -8,11 +9,11 @@
 html{
     font-size: 15px;
     line-height: 1.7;
-    font-weight: 200;
+    font-weight: 300;
     background-color: #eaeaea;
     color: #333;
     word-break: break-all;
-    font-family: Microsoft YaHei,WenQuanYi Micro Hei,Arial,sans-serif;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
 }
 a{
@@ -183,14 +184,17 @@ p.tinytext{
     border-radius: 2px;
     margin-bottom: 10px;
     position: relative;
+    box-shadow: 0 0 10px #8f8f8f;
 }
 .post-thumb img{
     width: 100%;
-    transition: all 0.5s;
     border-radius: 2px;
+    min-height: 100px;
+    transition: all 0.8s;
+    display: block;
 }
 .post-thumb img:hover{
-    opacity: 0.76;
+    filter: brightness(85%);
 }
 .post-thumb .inner{
     position: absolute;
@@ -200,7 +204,7 @@ p.tinytext{
     color: white;
     background: #83bc63;
     font-size: 12px;
-    box-shadow: 0 0 2px #3a3a3a9c;
+    box-shadow: 1px 0 2px #3a3a3a99;
     transition: all 0.35s;
 }
 .post-thumb .inner:before{
@@ -293,6 +297,7 @@ hr{
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
+    border-radius: 2px
 }
 .post-content pre code{
     display: block;
@@ -480,6 +485,10 @@ img.tbbq{
     -khtml-user-select:none;
     user-select:none;
 }
+.tbbq.tiny{
+    width: 15px;
+    border-radius: 50%
+}
 #showfacenamereplace .tbbq{
     border-radius: 25px;
     cursor: pointer;
@@ -517,6 +526,26 @@ img.tbbq{
     }
 }
 
+#pagecover{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	background-image: url(img/loadingi.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #fff;
+}
+#pagecover:after{
+	content: "[双击停止 / Double Click]";
+	position: absolute;
+	bottom: 0;
+	display: block;
+	text-align: center;
+	width: 100%;
+	color: gray
+}
 
 /* Hight light */
 .hl-fh{

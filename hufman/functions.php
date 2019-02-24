@@ -8,10 +8,14 @@ function showThumb($obj){
 //来源于绛木子的简书主题
 	$size=null;$link=false;
 	$pattern='<div class="post-thumb">
-	            <img alt="{title}" src="{thumb}" />
+	            <img alt="{title}" src="'.Helper::options()->themeUrl.'/s/img/loading.gif" data-original="{thumb}" />
 	            <div class="view inner"><i class="fa fa-eye"></i> ' . getViewsStr($obj) .'</div>
 	            <div class="cmmt inner"><i class="fa fa-comments"></i> ' . $obj->commentsNum . '</div>
 	        </div>';
+        $fields = unserialize($obj->fields);
+        if (array_key_exists('thumb', $fields)):
+          $thumb = (!empty($fields['thumb'])) ? $fields['thumb'] : 0;
+        else:
     preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches);
     $thumb = '';
     $options = Typecho_Widget::widget('Widget_Options');
@@ -32,8 +36,9 @@ function showThumb($obj){
             }
         }
     }
+        endif;
     if(empty($thumb)){
-        $thumb = $options->themeUrl."/s/img/".rand(0,14).".jpg";
+        $thumb = Helper::options()->themeUrl."/s/img/".rand(0,14).".jpg";
     }
     echo str_replace(
         array('{title}','{thumb}','{permalink}'),
@@ -63,4 +68,8 @@ function getViewsStr($widget) {
         }
     }
     return $views;
+}
+function img_lazy_load($ct){
+    $imgplaceholder = Helper::options()->themeUrl."/s/img/loadingi.gif";
+    return preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i","<img src='".$imgplaceholder."'$1data-original='$2'$3>",$ct);
 }

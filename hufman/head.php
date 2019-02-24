@@ -17,6 +17,7 @@
     <?php $this->header(); ?>
 </head>
 <body>
+    <div id="pagecover" ondblclick="this.style.display='none';"></div>
     <div class="head">
         <div class="ct">
             <h1><a href='<?php $this->options->siteUrl() ?>'><?php $this->options->title() ?></a></h1>
