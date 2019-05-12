@@ -4,7 +4,7 @@
     <?php if ($comments->have()): ?>
 	<h3 class="thin"><?php $this->commentsNum(_t('暂无评论'), _t('一条评论'), _t('%d 条评论')); ?></h3>
     <?php $comments->listComments(); ?>
-    <?php $comments->pageNav('&laquo; 前一页', '后一页 &raquo;'); ?>
+    <?php $comments->pageNav('&laquo;', '&raquo;'); ?>
     <?php endif; ?>
 
     <?php if($this->allow('comment')): ?>

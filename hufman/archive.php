@@ -1,25 +1,39 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('head.php');
+$randgiven = true;
 if ($this->have()):?>
 <?php while($this->next()): ?>
     <div class="post">
-        <a href="<?php $this->permalink() ?>">
-            <?php showThumb($this) ?>
-        </a>
-	    <span class="a-color"><?php $this->category(' / '); ?></span>
-    	&nbsp;
-    	<i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
-	    <?php if($this->user->hasLogin()): ?>
-	    &nbsp;
-    	<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
-	    <?php endif; ?>
+        <?php
+        if (!empty($this->options->ThemeOptions) && in_array('content', $this->options->ThemeOptions)):
+            $temp_show_content = true;
+            ?><h3><a class="post-title piece" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h3><?php endif; ?>
+		<?php if (!$temp_show_content): ?>
 		<h3 class="post-title i"><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h3>
-        <div class="post-content i">
-    		<?php $this->excerpt(200,"..."); ?>
+		<?php endif; ?>
+        <div class="post-content<?php if (!$temp_show_content) echo " i" ?>">
+            <?php
+    		if ($temp_show_content):
+    		    $this->content("继续阅读 / Read_more");
+    		else:
+    		    showThumb($this, $randgiven);
+    		    $randgiven = !$randgiven;
+    		    $this->excerpt(210," [...]");
+    		endif;
+    		?>
         </div>
+        <div class="post-meta-i">
+            <span class="a-color"><?php $this->category(' / '); ?></span>
+    	    &nbsp;
+    	    <i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
+	        <?php if($this->user->hasLogin()): ?>
+	        &nbsp;
+    	    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
+	        <?php endif; ?>
+	    </div>
     </div>
-<?php endwhile;else:?>
+<?php endwhile;else: ?>
 
 <div class="post">
         <script>headtext.innerHTML = "QAQ 啥也没找到";</script>

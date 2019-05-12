@@ -4,32 +4,20 @@
  * 
  * @package Hufman
  * @author Luuljh
- * @version 0.3
- * @link http://he-he.gq
+ * @version 0.5
+ * @link https://github.com/1443691826
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('head.php');
+$randgiven = true;
 ?>
 <?php while($this->next()): ?>
     <div class="post">
         <?php
         if (!empty($this->options->ThemeOptions) && in_array('content', $this->options->ThemeOptions)):
             $temp_show_content = true;
-            ?><h3><a class="post-title piece" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h3><?php
-        else:
-            echo '<a href="' . $this->permalink . '">';
-            showThumb($this);
-            echo "</a>";
-        endif;
-        ?>
-	    <span class="a-color"><?php $this->category(' / '); ?></span>
-    	&nbsp;
-    	<i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
-	    <?php if($this->user->hasLogin()): ?>
-	    &nbsp;
-    	<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
-	    <?php endif; ?>
+            ?><h3><a class="post-title piece" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h3><?php endif; ?>
 		<?php if (!$temp_show_content): ?>
 		<h3 class="post-title i"><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h3>
 		<?php endif; ?>
@@ -38,10 +26,21 @@ $this->need('head.php');
     		if ($temp_show_content):
     		    $this->content("继续阅读 / Read_more");
     		else:
-    		    $this->excerpt(250,"...");
+    		    showThumb($this, $randgiven);
+    		    $randgiven = !$randgiven;
+    		    $this->excerpt(210," [...]");
     		endif;
     		?>
         </div>
+        <div class="post-meta-i">
+            <span class="a-color"><?php $this->category(' / '); ?></span>
+    	    &nbsp;
+    	    <i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
+	        <?php if($this->user->hasLogin()): ?>
+	        &nbsp;
+    	    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
+	        <?php endif; ?>
+	    </div>
     </div>
 <?php endwhile; ?>
 

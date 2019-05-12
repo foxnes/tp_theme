@@ -9,13 +9,15 @@ function themeConfig($form) {
     $form->addInput($ThemeOptions->multiMode());
 }
 
-function showThumb($obj){
+function showThumb($obj, $randgiven){
 //来源于绛木子的简书主题
 	$size=null;$link=false;
 	$pattern='<div class="post-thumb">
-	            <img alt="{title}" src="'.Helper::options()->themeUrl.'/s/img/loading.gif" data-original="{thumb}" />
+	            <a href="' . $obj->permalink . '">
+	            <img alt="{title}" unzoomable src="'.Helper::options()->themeUrl.'/s/img/loading.gif" data-original="{thumb}" />
 	            <div class="view inner"><i class="fa fa-eye"></i> ' . getViewsStr($obj) .'</div>
 	            <div class="cmmt inner"><i class="fa fa-comments"></i> ' . $obj->commentsNum . '</div>
+	            </a>
 	        </div>';
         $fields = unserialize($obj->fields);
         if (array_key_exists('thumb', $fields)):
@@ -43,7 +45,10 @@ function showThumb($obj){
     }
         endif;
     if(empty($thumb)){
-        $thumb = Helper::options()->themeUrl."/s/img/".rand(0,14).".jpg";
+        if ($randgiven)
+            $thumb = Helper::options()->themeUrl."/s/img/".rand(0,14).".jpg";
+        else
+            return false;
     }
     echo str_replace(
         array('{title}','{thumb}','{permalink}'),
