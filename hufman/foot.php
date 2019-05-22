@@ -46,7 +46,7 @@
     <div class="foot">
         <div class="backtotop"><a href="javascript:void 0"><i class="fa fa-angle-up"></i></a></div>
         &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>版权所有.<br />
-        驱动<a href="javascript:location='http://www.typecho.org';">Typecho</a> - <a href="https://github.com/1443691826/tp_theme">Hufman主题</a>
+        驱动<a href="javascript:location='http://www.typecho.org';">Typecho</a> - <a href="https://github.com/foxnes/tp_theme">Hufman主题</a>
     </div>
     <script src="//code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="<?php $this->options->themeUrl('s/postbird-img-glass.js'); ?>"></script>

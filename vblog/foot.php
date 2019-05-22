@@ -5,7 +5,7 @@
 <div class="foot">
 	&copy; <?php echo date("Y"); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a>.
 	<?php if ($this->options->beian){$this->options->beian();echo ". ";} ?>
-	Powered By <a onclick="window.open('http://typecho.org/');" href="javascript:void 0">Typecho</a> &amp; Theme <a href="https://github.com/1443691826/vblog/" target="_blank">Vblog</a>.
+	Powered By <a onclick="window.open('http://typecho.org/');" href="javascript:void 0">Typecho</a> &amp; Theme <a href="https://github.com/foxnes/tp_theme" target="_blank">Vblog</a>.
 	<?php if ($this->options->footcode): ?><?php $this->options->footcode(); ?><?php endif; ?>
 </div>
 
