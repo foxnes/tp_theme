@@ -34,13 +34,18 @@
             <ul class="sb-widget">
                 <p class="tinytext">其它</p>
                 <?php if($this->user->hasLogin()): ?>
-			    	<li class="last"><a href="<?php $this->options->adminUrl(); ?>"><?php _e('后台'); ?> (<?php $this->user->screenName(); ?>)</a></li>
+			    	<li class="last"><a href="<?php $this->options->adminUrl(); ?>"><?php _e('后台'); ?></a></li>
                 <li><a href="<?php $this->options->logoutUrl(); ?>"><?php _e('退出'); ?></a></li>
                 <?php else: ?>
                     <li class="last"><a href="<?php $this->options->adminUrl('login.php'); ?>"><?php _e('登录'); ?></a></li>
                 <?php endif; ?>
                 <li><a href="<?php $this->options->feedUrl(); ?>">RSS</a></li>
             </ul>
+            <?php if ($this->options->sb_right_html): ?>
+            <ul class="sb-widget">
+                <?php $this->options->sb_right_html(); ?>
+            </ul>
+            <?php endif; ?>
         </div>
     </div>
     <div class="foot">
@@ -48,7 +53,6 @@
         &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>版权所有.<br />
         驱动<a href="javascript:location='http://www.typecho.org';">Typecho</a> - <a href="https://github.com/foxnes/tp_theme">Hufman主题</a>
     </div>
-    <script src="//code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="<?php $this->options->themeUrl('s/postbird-img-glass.js'); ?>"></script>
     <script src="<?php $this->options->themeUrl('s/lazyload.js'); ?>"></script>
     <script src="<?php $this->options->themeUrl('s/i.js'); ?>"></script>

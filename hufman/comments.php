@@ -2,16 +2,14 @@
 <div id="comments">
     <?php $this->comments()->to($comments); ?>
     <?php if ($comments->have()): ?>
-	<h3 class="thin"><?php $this->commentsNum(_t('暂无评论'), _t('一条评论'), _t('%d 条评论')); ?></h3>
+	<h3 class="thin ct"><?php $this->commentsNum(_t('暂无评论'), _t('一条评论'), _t('%d 条评论')); ?></h3>
     <?php $comments->listComments(); ?>
     <?php $comments->pageNav('&laquo;', '&raquo;'); ?>
     <?php endif; ?>
 
     <?php if($this->allow('comment')): ?>
     <div id="<?php $this->respondId(); ?>" class="respond">
-        <div class="cancel-comment-reply">
-        <?php $comments->cancelReply(); ?>
-        </div>
+        <div class="cancel-comment-reply"><?php $comments->cancelReply("取消回复"); ?></div>
 
     	<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
     	    <p>
@@ -71,14 +69,11 @@ $comments->alt(' comment-odd', ' comment-even');
 echo $commentClass;
 ?>">
     <div id="<?php $comments->theId(); ?>">
-        <div class="comment-author">
-            <?php $comments->gravatar('45', ''); ?>
-            <div class="comment-meta">
-            <span class="a-color"><?php $comments->author(); ?></span> <span class="comment-reply"><?php $comments->reply("回复"); ?></span><br />
-            <i class="fa fa-clock-o tiny"></i> <?php $comments->date('Y-m-d H:i'); ?>
-        	</div>
+        <?php $comments->gravatar('55', ''); ?>
+        <div class="comment-right">
+            <span class="a-color bold"><?php $comments->author(); ?></span> <span class="comment-reply"><?php $comments->reply("回复"); ?></span>
+            <div class="comment-content"><?php $comments->content(); ?></div>
         </div>
-        <?php $comments->content(); ?>
     </div>
 <?php if ($comments->children) { ?>
     <div class="comment-children">

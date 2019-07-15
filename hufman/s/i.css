@@ -11,7 +11,7 @@ html{
     background-color: #eaeaea;
     color: #333;
     word-break: break-all;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif,"微软雅黑";
     -webkit-font-smoothing:antialiased;
 }
 a{
@@ -68,6 +68,9 @@ img{
 .ct{
     padding: 15px;
     max-width: 1440px;
+}
+.bold{
+    font-weight: 800;
 }
 .head{
     background-color: #333639;
@@ -139,6 +142,7 @@ img{
     width: 80%;
     margin: 30px auto;
     font-size: 12px;
+    color: #777;
 }
 .sb-widget + .sb-widget{
     margin-top: 30px;
@@ -391,7 +395,7 @@ code{
     background-color: #f9f2f4;
     border-radius: 4px;
     margin: 2px;
-    font-family: Georgia,Monospace;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
 .page-navigator{
@@ -499,6 +503,15 @@ input[type="submit"], button{
 #comment-form p.half.w{
     width: 49%;
 }
+.comment-right{
+    margin-left: 4.5em;
+    font-family: "Times New Roman", Georgia, "微软雅黑";
+}
+.comment-right:after{
+    content: "";
+    display: block;
+    clear: both;
+}
 #comment-form p.half.w + p.half.w{
     float: right;
 }
@@ -512,14 +525,16 @@ input[type="submit"], button{
 }
 
 .comment-list{position:relative;word-break:break-all;word-wrap:break-word;white-space:normal;margin-top:20px}
-.avatar{float:left;margin:0 5px 5px 0;padding:2px;border-radius: 5px;}
+.avatar{float:left;margin:0 5px 5px 0;padding:2px;border-radius: 50%;}
 .comment-body{padding:15px;list-style:none}
-.comment-body p{clear:both}
 .comment-body p.half{clear: none !important}
 .comment-body+.comment-body{margin-top:15px}
-.comment-author{font-size: 14px}
-.cancel-comment-reply{margin: 5px 0;}
-
+#cancel-comment-reply-link{color: #6c6c6c;font-size: 12px;margin: 5px 0;font-weight: 800;}
+.comment-reply{color: #6c6c6c;font-size: 12px;font-weight: 800;}
+.comment-content{
+    line-height: 2em;
+    color: #686868;
+}
 .comment-children{
     border-radius: 5px;
     box-shadow: 0 0 10px #f3f3f3;
@@ -583,6 +598,23 @@ img.tbbq{
     .tags.fr{
         float: none;
     }
+    .avatar{
+        max-width: 48px;
+        max-height: 48px;
+    }
+    .comment-right{
+        margin-left: 3.5em;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .comment-right{
+        margin-left: 0;
+    }
+    .avatar{
+        max-width: 35px;
+        max-height: 35px;
+    }
 }
 
 #pagecover{
@@ -627,4 +659,10 @@ img.tbbq{
 }
 .hl-kf{
     color: #398cbd;
+}
+.hl-warn{
+    color: #c63372;
+}
+.hl-var{
+    color: #ff9300;
 }

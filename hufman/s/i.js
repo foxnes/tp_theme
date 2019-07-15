@@ -1,5 +1,17 @@
-if ($(window).width() >800 && $(".atcs").height() < $(".sb-left").height()) {
+//if jq error: auto load a new one
+try{jQuery()}catch(e){
+    let s = document.createElement('script');
+    s.src='//libs.baidu.com/jquery/1.8.3/jquery.min.js';
+    s.charset='UTF-8';
+    document.body.append(s);
+}
+
+if ($(window).width() > 800 && $(".atcs").height() < $(".sb-left").height()) {
     $(".atcs").css("min-height", $(".sb-left").height());
+}
+
+if ($(window).width() < 500){
+    $('#comments').parent('.post').css('padding', 0);
 }
 
 PostbirdImgGlass.init({
@@ -70,7 +82,7 @@ function insertText(obj,str){
 
 
 $("pre code").each(function(){
-    this.innerHTML = this.innerHTML.replace(/(\\[\s\S])/ig,"<span>$1</span>").replace(/(("|'|`)[^\2]*?\2)/ig,"<span class='hl-str'>$1</span>").replace(/(\/\*[\s\S]+\*\/)/g,"<span class='hl-note'>$1</span>").replace(/(~\/| -{1,2}[a-z&;]{1,}[ :\n\r]|!|\+|\*|%|\||&amp;|===|==|-&gt;|&gt;|&lt;)/ig,"<span class='hl-fh'>$1</span>").replace(/([^a-z0-9]|^)([\d\.]+)([^a-z0-9]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(/([^a-z0-9]|^)([\d\.]+)([^a-z0-9]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(/([^a-z]|^)(RegExp|return|if|fi|then|else|break|continue|for|endif|in|not|die|exit|switch|case|throw|void|typeof|endwhile|elseif|import|array|while|foreach|important|new|and|or|xor|with|desc|limit|order|try|as|catch)([^a-z]|$)/ig, "$1<span class='hl-kw'>$2</span>$3").replace(/([^:]|^)((#|\/\/).*)/g,"$1<span class='hl-note'>$2</span>").replace(/(\/\*[\s\S]*?\*\/)/g,"<span class='hl-note'>$1</span>").replace(/([^a-z\.]|^)(echo|alert|print|substr|str_replace|preg_match|query|print_r|printf|include|default|final|eval|exec|shell|list|function|static|const|var|unset|unlink|undefined|null|true|bind|false|empty|del|is|def|this|margin|padding|color|background|display|float|font|line|letter|word|cursor|border|vertical|width|height|position|clear|screen|max|min|rgba|rgb|box|inherit|left|right|top|bottom|wrap|wget|ls|chmod|grep|cat|test|match|yum|apt|mv|cp|rm|sudo|sh|source|bash|find|more|touch|awk|curl|tee|tree|read|vim|diff|unzip|tar|ftp|cd|mount|stat|rmdir|git|dd|df|du|restart|stop|start|sfdisk|fdisk|kill|top|free|who|clear|reset|alias|gzip|rpm|pacman|dump|bzip2|dpkg|count|document|window|install|remove|floor|make)([^a-z])/ig,"$1<span class='hl-kf'>$2</span>$3");
+    this.innerHTML = this.innerHTML.replace(/((["'])(?:\\.|[^\\\n])*?\2)/ig,"<span class='hl-str'>$1</span>").replace(/(\\[\s\S])/ig,"<span class='hl-warn'>$1</span>").replace(/(\/\*[\s\S]+\*\/)/g,"<span class='hl-note'>$1</span>").replace(/(~\/| -{1,2}[a-z&;]{1,}[ :\n\r]|!|\^|\+|\*|%|\||&amp;|===|==|-&gt;|=&gt;|=&lt;|&lt;=|&gt;=|&gt;|&lt;)/ig,"<span class='hl-fh'>$1</span>").replace(/([^a-z0-9]|^)([\d\.]+)([^a-z0-9]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(/([^a-z0-9]|^)([\d\.]+)([^a-z0-9]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(/\b(RegExp|return|if|fi|then|else|break|continue|for|endif|in|not|die|exit|switch|case|throw|void|typeof|endwhile|elseif|import|array|while|foreach|important|new|and|or|xor|with|desc|limit|order|try|as|catch)\b/ig, "<span class='hl-kw'>$1</span>").replace(/((?=^|\n|\r| )\s*(\/\/|#).*(?=\r|\n|$))/g,"<span class='hl-note'>$1</span>").replace(/\b(echo|print|substr|replace|query|include|default|final|eval|exec|shell|list|function|static|const|var|let|unset|unlink|undefined|null|true|bind|false|empty|del|is|def|this|clear|screen|max|min|rgba|rgb|box|inherit|left|right|top|bottom|wrap|wget|ls|chmod|grep|cat|test|match|yum|apt|mv|cp|rm|sudo|sh|source|bash|find|more|touch|awk|curl|tee|tree|read|vim|diff|unzip|public|static|tar|ftp|cd|mount|stat|rmdir|git|dd|df|du|restart|stop|start|sfdisk|fdisk|kill|top|free|who|clear|reset|alias|gzip|rpm|pacman|dump|bzip2|dpkg|count|goto|document|window|Date|Math|install|remove|floor|make|isNaN|NaN)\b/ig,"<span class='hl-kf'>$1</span>").replace(/\b((?![0-9])[\w0-9]+(?=\())/ig,"<span class='hl-kf'>$1</span>").replace(/(\$(?![0-9])[\w0-9]+\b)/ig, "<span class='hl-var'>$1</span>");
 });
 
 if ($(".post-meta")){
