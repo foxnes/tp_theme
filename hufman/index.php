@@ -5,12 +5,11 @@
  * @package Hufman
  * @author Luuljh
  * @version 0.3.5
- * @link https://github.com/foxnes
+ * @link https://gitee.com/foxnes
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('head.php');
-$randgiven = true;
 ?>
 <?php while($this->next()): ?>
     <div class="post">
@@ -26,9 +25,8 @@ $randgiven = true;
     		if ($temp_show_content):
     		    $this->content("继续阅读 / Read_more");
     		else:
-    		    showThumb($this, $randgiven);
-    		    $randgiven = !$randgiven;
-    		    $this->excerpt(210," [...]");
+    		    showThumb($this, true);
+    		    $this->excerpt(215," ...");
     		endif;
     		?>
         </div>

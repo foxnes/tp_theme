@@ -27,7 +27,7 @@ img{
 }
 .post-content{
     word-wrap: break-word;
-    word-break: normal;
+    word-break: break-all;
     text-align: justify;
     text-justify: inter-character;
 }
@@ -187,8 +187,8 @@ p.tinytext{
     padding: 2px;
 }
 .post-title{
-    color: #444;
-    font-weight: 800;
+    color: #1e1e1e;
+    font-weight: bold;
     letter-spacing: -0.7px;
     font-size: 2em;
     font-family: "Times New Roman", Georgia;
@@ -207,7 +207,7 @@ p.tinytext{
 .post-title.i{
     font-size: 1.5em;
     font-family: inherit;
-    font-weight: 400;
+    font-weight: normal;
 }
 .post-thumb{
     max-width: 180px;
@@ -333,7 +333,7 @@ hr{
     margin-left: 0;
 }
 .post-content.i{
-    color: #636363;
+    color: #808080;
     line-height: 2.1em;
 }
 .post-meta-i{
@@ -368,10 +368,11 @@ hr{
     margin-bottom: 0.7em;
 }
 .post-content blockquote{
-    color: #444;
+    color: #686868;
     margin: 40px 0 40px 50px;
     font-style: italic;
     position: relative;
+    padding-top: 20px;
 }
 .post-content blockquote:before{
     font: normal normal normal 32px/1 FontAwesome;
@@ -384,6 +385,7 @@ hr{
     text-align: center;
     position: absolute;
     left: -50px;
+    top: -10px;
 }
 .post-content ol, .post-content ul{
     margin: 15px 0 10px 0;

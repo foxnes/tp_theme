@@ -47,7 +47,7 @@ function showThumb($obj, $randgiven){
         endif;
     if(empty($thumb)){
         if ($randgiven)
-            $thumb = Helper::options()->themeUrl."/s/img/".rand(0,14).".jpg";
+            $thumb = Helper::options()->themeUrl."/s/img/".mt_rand(0,14).".jpg";
         else
             return false;
     }
