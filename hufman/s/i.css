@@ -250,12 +250,12 @@ p.tinytext{
 .post-thumb .inner:before{
     content: '';
     display: inline-block;
-    border-left: 4px solid transparent;
-    border-right: 4px solid #83bc63;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid #83bc63;
+    border-top: 0.5em solid transparent;
+    border-bottom: 0.5em solid transparent;
     position: absolute;
-    left: -8px;
+    left: -0.95em;
     top: 0;
 }
 .post-thumb .view{
@@ -620,24 +620,24 @@ img.tbbq{
 }
 
 #pagecover{
-	position: fixed;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 999;
-	background-image: url(img/loadingi.gif);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-image: url(img/loadingi.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fff;
 }
 #pagecover:after{
-	content: "[单击停止 / Click]";
-	position: absolute;
-	bottom: 0;
-	display: block;
-	text-align: center;
-	width: 100%;
-	color: gray
+  content: "[单击停止 / Click]";
+  position: absolute;
+  bottom: 0;
+  display: block;
+  text-align: center;
+  width: 100%;
+  color: gray
 }
 
 /* Hight light */

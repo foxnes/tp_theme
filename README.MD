@@ -1,9 +1,6 @@
 Typecho 主题
 
 (国内)下载：
-1. [hufman 0.3.5](https://gitee.com/foxnes/tp_theme/attach_files/331949/download)
-2. [vblog](https://gitee.com/foxnes/tp_theme/attach_files/331951/download)
-
 国内仓库：[gitee.com](https://gitee.com/foxnes/tp_theme)
 
 (Github)下载：
