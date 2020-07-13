@@ -9,8 +9,6 @@
 
     <?php if($this->allow('comment')): ?>
     <div id="<?php $this->respondId(); ?>" class="respond">
-        <div class="cancel-comment-reply"><?php $comments->cancelReply("取消回复"); ?></div>
-
     	<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
     	    <p>
                 <label for="textarea" class="required">内容</label>
@@ -35,7 +33,8 @@
     		</p>
             <?php endif; ?>
     		<p>
-                <button type="submit" class="submit">提交评论</button>
+                <?php $comments->cancelReply("取消回复"); ?>
+                <button type="submit">提交评论</button>
             </p>
     	</form>
     </div>

@@ -34,7 +34,7 @@ for (var i = 0; i < facenamereplace.length; i++) {
 */
 facereplace = [];
 for (var i=0; i<facenamereplace.length;i++){
-    facereplace[i] = themeUrl+"/s/img/face_"+i+".jpg";
+    facereplace[i] = "bg-face_"+i;
 }
 try{
 	if (showfacenamereplace) {
@@ -46,7 +46,7 @@ try{
 var bodyhtml = $("#comments").html();
 if (bodyhtml){
     for (var i = 0; i < facereplace.length; i++) {
-	    bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<img class='tbbq' draggable='false' alt='😀' num='"+i+"' src='"+facereplace[i]+"' />");
+	    bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<i class='tbbq "+facereplace[i]+"' draggable='false' alt='😀' num='"+i+"'></i>");
     }
     $("#comments").html(bodyhtml);
     $("form .tbbq").click(function(){
@@ -56,7 +56,7 @@ if (bodyhtml){
 bodyhtml = $("#rctrly").html();
 if (bodyhtml){
     for (var i = 0; i < facereplace.length; i++) {
-	    bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<img class='tbbq tiny' draggable='false' alt='😀' src='"+facereplace[i]+"' />");
+	    bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<i class='tbbq tiny "+facereplace[i]+"' draggable='false' alt='😀' num='"+i+"'></i>");
     }
     $("#rctrly").html(bodyhtml);
 }
@@ -86,7 +86,7 @@ $("pre code").each(function(){
 });
 
 if ($(".post-meta")){
-	$(".post-meta").css("width",$(".atcs").width()-15);
+	$(".post-meta").css("width",$(".atcs").width());
 }
 
 $('.post-thumb img').each(function(){

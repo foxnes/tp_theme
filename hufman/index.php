@@ -4,7 +4,7 @@
  * 
  * @package Hufman
  * @author Luuljh
- * @version 0.3.5
+ * @version 0.3.6
  * @link https://gitee.com/foxnes
  */
 
@@ -14,6 +14,7 @@ $this->need('head.php');
 <?php while($this->next()): ?>
     <div class="post">
         <?php
+        $temp_show_content = false;
         if (!empty($this->options->ThemeOptions) && in_array('content', $this->options->ThemeOptions)):
             $temp_show_content = true;
             ?><h3><a class="post-title piece" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h3><?php endif; ?>

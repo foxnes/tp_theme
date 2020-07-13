@@ -34,7 +34,7 @@ img{
 .post-content a:hover{
     text-decoration: underline;
 }
-.post-meta-i, img.tbbq, .post-thumb, .sb-holder{
+.post-meta-i, i.tbbq, .post-thumb, .sb-holder{
     -moz-user-select:none;
     -webkit-user-select:none;
     -ms-user-select:none;
@@ -250,10 +250,10 @@ p.tinytext{
 .post-thumb .inner:before{
     content: '';
     display: inline-block;
-    border-left: 0.5em solid transparent;
-    border-right: 0.5em solid #83bc63;
+    border-left: 0.6em solid transparent;
+    border-right: 0.7em solid #83bc63;
     border-top: 0.5em solid transparent;
-    border-bottom: 0.5em solid transparent;
+    border-bottom: 0.8em solid transparent;
     position: absolute;
     left: -0.95em;
     top: 0;
@@ -472,7 +472,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, inp
     -webkit-box-shadow: 0 0 3px rgba(0,0,0,.1);
     box-shadow: 0 0 3px rgba(0,0,0,.1);
 }
-input[type="submit"], button{
+input[type="submit"], button, #cancel-comment-reply-link{
     background-color: #398cbd;
     color: #fff;
     padding: 8px 14px;
@@ -483,9 +483,18 @@ input[type="submit"], button{
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
+#cancel-comment-reply-link{
+    font-size:100%;
+    line-height:1.15;
+    background-color: #5f5f5f;
+}
+input[type="submit"] a:hover, button a:hover{
+    color: inherit;
+}
 #comment-form{
     background: #f1f1f1;
-    padding: 15px;
+    margin: 15px 0;
+    padding: 10px 15px 15px 15px;
 }
 #comment-form input, #comment-form button, #comment-form textarea{
     width: 100%;
@@ -531,8 +540,7 @@ input[type="submit"], button{
 .comment-body{padding:15px;list-style:none}
 .comment-body p.half{clear: none !important}
 .comment-body+.comment-body{margin-top:15px}
-#cancel-comment-reply-link{color: #6c6c6c;font-size: 12px;margin: 5px 0;font-weight: 800;}
-.comment-reply{color: #6c6c6c;font-size: 12px;font-weight: 800;}
+.comment-reply{color: #adadad;font-size: 12px;font-weight: 800;float: right;}
 .comment-content{
     line-height: 2em;
     color: #686868;
@@ -562,14 +570,20 @@ input[type="submit"], button{
 .post-meta p{
     margin: 0;
 }
-img.tbbq{
-    vertical-align: middle;
+i.tbbq{
+    display: inline-block;
     margin: 2px;
-    width: 25px;
+    width: 30px;
+    height: 30px;
+    transform: scale(0.8333333);
     border-radius: 50%;
+    font-style: normal;
+    vertical-align: middle;
+    background-image: url(img/css_faces.gif);
+    background-repeat: no-repeat;
 }
-.tbbq.tiny{
-    width: 15px;
+i.tbbq.tiny{
+    transform: scale(0.5);
 }
 #showfacenamereplace .tbbq{
     cursor: pointer;
@@ -611,7 +625,7 @@ img.tbbq{
 
 @media screen and (max-width: 500px){
     .comment-right{
-        margin-left: 0;
+        margin-left: 40px;
     }
     .avatar{
         max-width: 35px;
@@ -668,3 +682,24 @@ img.tbbq{
 .hl-var{
     color: #ff9300;
 }
+/* faces */
+.bg-face_0{background-position: 0 0;}
+.bg-face_1{background-position: 0 -35px;}
+.bg-face_2{background-position: 0 -70px;}
+.bg-face_3{background-position: 0 -105px;}
+.bg-face_4{background-position: 0 -140px;}
+.bg-face_5{background-position: 0 -175px;}
+.bg-face_6{background-position: 0 -210px;}
+.bg-face_7{background-position: 0 -245px;}
+.bg-face_8{background-position: 0 -280px;}
+.bg-face_9{background-position: 0 -315px;}
+.bg-face_10{background-position: 0 -350px;}
+.bg-face_11{background-position: 0 -385px;}
+.bg-face_12{background-position: 0 -420px;}
+.bg-face_13{background-position: 0 -455px;}
+.bg-face_14{background-position: 0 -490px;}
+.bg-face_15{background-position: 0 -525px;}
+.bg-face_16{background-position: 0 -560px;}
+.bg-face_17{background-position: 0 -595px;}
+.bg-face_18{background-position: 0 -630px;}
+.bg-face_19{background-position: 0 -665px;}
