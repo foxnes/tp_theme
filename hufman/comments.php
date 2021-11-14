@@ -11,7 +11,7 @@
     <div id="<?php $this->respondId(); ?>" class="respond">
     	<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
     	    <p>
-                <label for="textarea" class="required">🗨️ 评论内容</label>
+                <label for="textarea" class="required"><i class="icon icon-comment-empty"></i> 评论内容</label>
                 <?php if($this->user->hasLogin()): ?>
     		        <p>🆔 登录身份: <a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>.
                     <span class='btn'><a href="<?php $this->options->logoutUrl(); ?>" title="Logout">退出 &raquo;</span></a></p>
@@ -21,16 +21,16 @@
 
             <?php if(!$this->user->hasLogin()): ?>
     		<p class="half w">
-                <label for="author" class="required">🐴 称呼 <b class="warning-blue">*</b></label>
+                <label for="author" class="required"><i class="icon icon-child"></i> 称呼 <b class="warning-blue">*</b></label>
     			<input type="text" name="author" class="text" value="<?php $this->remember('author'); ?>" required />
     		</p>
     		<p class="half w">
-                <label for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>>✉️ Email <?php if ($this->options->commentsRequireMail): ?> <b class="warning-blue">*</b><?php endif; ?></label>
+                <label for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>><i class="icon icon-mail"></i> Email <?php if ($this->options->commentsRequireMail): ?> <b class="warning-blue">*</b><?php endif; ?></label>
     			<input type="email" name="mail" class="text" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
     		</p>
     		<div class="clear"></div>
     		<p>
-                <label for="url"<?php if ($this->options->commentsRequireURL): ?> class="required"<?php endif; ?>>🔗 网站<?php if ($this->options->commentsRequireURL): ?> <b class="warning-blue">*</b><?php endif; ?></label>
+                <label for="url"<?php if ($this->options->commentsRequireURL): ?> class="required"<?php endif; ?>><i class="icon icon-link"></i> 网站<?php if ($this->options->commentsRequireURL): ?> <b class="warning-blue">*</b><?php endif; ?></label>
     			<input type="url" name="url" id="url" class="text" placeholder="<?php _e('http://'); ?>" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
     		</p>
             <?php endif; ?>

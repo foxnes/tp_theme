@@ -13,6 +13,7 @@
             'author'    =>  _t('%s 发布的文章')
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
     <link rel="stylesheet" href="<?php $this->options->themeUrl('s/i.css'); ?>">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('s/icon/css/animation.css'); ?>">
     <!-- 已经弃用fontawesome 转用emoji
     <link rel="stylesheet" href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.css">
     -->

@@ -1,22 +1,22 @@
 </div>
         <div class="sb-left">
             <div class="sb-holder">
-            👍 Life is fantastic
+            <i class="icon icon-thumbs-up"></i> Life is fantastic
             </div>
 			<ul class="sb-widget">
 			    <p class="tinytext">近期文章</p>
-			    <?php $this->widget('Widget_Contents_Post_Recent')->parse('<li><a href="{permalink}">🕔 {title}</a></li>'); ?>
+			    <?php $this->widget('Widget_Contents_Post_Recent')->parse('<li><a href="{permalink}"><i class="icon icon-clock"></i> {title}</a></li>'); ?>
 			</ul>
 			<ul class="sb-widget" id="rctrly">
 			    <p class="tinytext">近期评论</p>
 			    <?php $this->widget('Widget_Comments_Recent')->to($comments); ?>
                 <?php while($comments->next()): ?>
-                    <li><a href="<?php $comments->permalink(); ?>">💬 <?php $comments->author(false); ?>: <?php $comments->excerpt(35, '...'); ?></a></li>
+                    <li><a href="<?php $comments->permalink(); ?>"><i class="icon icon-comment-empty"></i> <?php $comments->author(false); ?>: <?php $comments->excerpt(35, '...'); ?></a></li>
                 <?php endwhile; ?>
 			</ul>
 			<ul class="sb-widget">
 			    <p class="tinytext">分类目录</p>
-			    <?php $this->widget('Widget_Metas_Category_List')->parse('<li><a href="{permalink}">🗁 {name}</a></li>'); ?>
+			    <?php $this->widget('Widget_Metas_Category_List')->parse('<li><a href="{permalink}"><i class="icon icon-folder"></i> {name}</a></li>'); ?>
 			</ul>
         </div>
         <div class="sb-right">
@@ -47,9 +47,9 @@
         </div>
     </div>
     <div class="foot">
-        <div class="backtotop"><a href="javascript:void 0">⮸</a></div>
+        <div class="backtotop"><a href="javascript:void 0"><i class="icon icon-angle-double-up"></i></a></div>
         &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>版权所有.<br />
-        驱动<a href="javascript:location='http://www.typecho.org';">Typecho</a> - <a href="https://gitee.com/foxnes/tp_theme/releases">Hufman主题</a>
+        驱动<a href="javascript:location='http://www.typecho.org';">Typecho</a> - <a href="https://gitee.com/foxnes/tp_theme/releases">Hufman主题 <i class="icon icon-spin6 animate-spin"></i></a>
     </div>
     <script src="<?php $this->options->themeUrl('s/postbird-img-glass.js'); ?>"></script>
     <script src="<?php $this->options->themeUrl('s/lazyload.js'); ?>"></script>

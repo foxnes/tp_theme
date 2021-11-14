@@ -7,7 +7,7 @@ try{jQuery()}catch(e){
 }
 
 if ($(window).width() > 800) {
-    var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height());
+    var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height()) + 60;
     $(".atcs").css("min-height", sb_height);
 }
 

@@ -17,8 +17,8 @@ function showThumb($obj, $randgiven){
 	$pattern='<div class="post-thumb">
 	            <a href="' . $obj->permalink . '">
 	            <img alt="{title}" unzoomable src="'.Helper::options()->themeUrl.'/s/img/loading.gif" data-original="{thumb}" />
-	            <div class="view inner">👁 ' . getViewsStr($obj) .'</div>
-	            <div class="cmmt inner">🗨 ' . $obj->commentsNum . '</div>
+	            <div class="view inner"><i class="icon icon-eye"></i> ' . getViewsStr($obj) .'</div>
+	            <div class="cmmt inner"><i class="icon icon-comment-empty"></i> ' . $obj->commentsNum . '</div>
 	            </a>
 	        </div>';
         $fields = unserialize($obj->fields);

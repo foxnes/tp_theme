@@ -31,12 +31,12 @@ img{
     text-align: justify;
     text-justify: inter-character;
     font-size: 17px;
-    font-weight: 100;
+    font-weight: 400;
 }
 .post-content a:hover{
     text-decoration: underline;
 }
-.post-meta-i, i.tbbq, .post-thumb, .sb-holder, .btn, .backtotop{
+.post-meta-i, i.tbbq, .post-thumb, .sb-holder, .btn, .backtotop, .icon{
     -moz-user-select:none;
     -webkit-user-select:none;
     -ms-user-select:none;
@@ -65,7 +65,7 @@ img{
 }
 .post-content h6{
     font-size: 0.8em;
-    font-weight: 300;
+    font-weight: 400;
 }
 .ct{
     padding: 15px;
@@ -151,14 +151,8 @@ img{
 }
 .search{
     width: 100%;
-    line-height: 20px;
-    background: #fff;
-    border: 2px solid #ddd;
-    color: #777;
-    display: block;
-    max-width: 100%;
-    outline: 0;
-    padding: 7px 8px;
+    line-height: 0.8rem;
+    font-size: 0.8rem;
     font-family: inherit;
 }
 
@@ -580,7 +574,7 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 .comment-reply{
     color: #2c2c2c;
     font-size: 12px;
-    font-weight: 100;
+    font-weight: 300;
     float: right;
     background-color: #f3f3f3;
     border-radius: 3px;
@@ -632,6 +626,7 @@ i.tbbq{
     background-repeat: no-repeat;
     border-radius: 50%;
     transition: 0.2s;
+    outline: 0;
 }
 i.tbbq:hover{
     transform: scale(0.95) rotate(45deg);
@@ -785,3 +780,32 @@ i.tbbq.tiny{
 .bg-face_17{background-position: 0 -595px;}
 .bg-face_18{background-position: 0 -630px;}
 .bg-face_19{background-position: 0 -665px;}
+
+
+/*icons*/
+@font-face {
+    font-family: 'fontello';
+    src: url('./icon/font/fontello.eot?61392011');
+    src: url('./icon/font/fontello.eot?61392011#iefix') format('embedded-opentype'),
+         url('./icon/font/fontello.woff?61392011') format('woff'),
+         url('./icon/font/fontello.ttf?61392011') format('truetype'),
+         url('./icon/font/fontello.svg?61392011#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.icon{
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    outline: 0;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: never;
+}

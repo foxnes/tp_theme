@@ -4,7 +4,7 @@
  * 
  * @package Hufman
  * @author Luuljh
- * @version 0.3.6
+ * @version 0.3.7
  * @link https://gitee.com/foxnes
  */
 
@@ -34,10 +34,10 @@ $this->need('head.php');
         <div class="post-meta-i">
             <span class="a-color"><?php $this->category(' / '); ?></span>
     	    &nbsp;
-    	    🕔 <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
+    	    <i class="icon icon-clock"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
 	        <?php if($this->user->hasLogin()): ?>
 	        &nbsp;
-    	    ✎  <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
+    	    <i class="icon icon-edit"></i>  <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
 	        <?php endif; ?>
 	    </div>
     </div>
@@ -45,10 +45,10 @@ $this->need('head.php');
 
 <div class="post">
     <div class="fr">
-        <?php $this->pageLink('下一页 ➮','next'); ?>
+        <?php $this->pageLink('下一页 <i class="icon icon-angle-double-right"></i>','next'); ?>
     </div>
     <div class="fl">
-        <?php $this->pageLink('🢠 上一页'); ?>
+        <?php $this->pageLink('<i class="icon icon-angle-double-left"></i> 上一页'); ?>
     </div>
         <div class="clear"></div>
 </div>

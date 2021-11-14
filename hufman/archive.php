@@ -26,10 +26,10 @@ if ($this->have()):?>
         <div class="post-meta-i">
             <span class="a-color"><?php $this->category(' / '); ?></span>
     	    &nbsp;
-    	    🕔 <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
+    	    <i class="icon icon-clock"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
 	        <?php if($this->user->hasLogin()): ?>
 	        &nbsp;
-    	    ✎ <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
+    	    <i class="icon icon-edit"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
 	        <?php endif; ?>
 	    </div>
     </div>
@@ -37,7 +37,7 @@ if ($this->have()):?>
 
 <div class="post">
         <div class="post-thumb"><img src="<?php $this->options->themeUrl('s/img/0.jpg'); ?>"></div>
-    	🕔 <time><?php echo date("Y-m-d") ?></time>
+    	<i class="icon icon-clock"></i> <time><?php echo date("Y-m-d") ?></time>
 	    	    &nbsp;
 	    <h2>404 Error:<br />page/content not found</h2>
         <div class="post-content">
@@ -53,10 +53,10 @@ if ($this->have()):?>
 
 <div class="post">
     <div class="fr">
-        <?php $this->pageLink('下一页 ➮','next'); ?>
+        <?php $this->pageLink('下一页 <i class="icon icon-angle-double-right"></i>','next'); ?>
     </div>
     <div class="fl">
-        <?php $this->pageLink('🢠 上一页'); ?>
+        <?php $this->pageLink('<i class="icon icon-angle-double-left"></i> 上一页'); ?>
     </div>
         <div class="clear"></div>
 </div>
