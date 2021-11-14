@@ -1,26 +1,26 @@
 </div>
         <div class="sb-left">
             <div class="sb-holder">
-                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;&nbsp;Life is fantastic
+            👍 Life is fantastic
             </div>
 			<ul class="sb-widget">
 			    <p class="tinytext">近期文章</p>
-			    <?php $this->widget('Widget_Contents_Post_Recent')->parse('<li><a href="{permalink}"><i class="fa fa-clock-o" aria-hidden="true"></i> {title}</a></li>'); ?>
+			    <?php $this->widget('Widget_Contents_Post_Recent')->parse('<li><a href="{permalink}">🕔 {title}</a></li>'); ?>
 			</ul>
 			<ul class="sb-widget" id="rctrly">
 			    <p class="tinytext">近期评论</p>
 			    <?php $this->widget('Widget_Comments_Recent')->to($comments); ?>
                 <?php while($comments->next()): ?>
-                    <li><a href="<?php $comments->permalink(); ?>"><i class="fa fa-comment-o" aria-hidden="true"></i> <?php $comments->author(false); ?>: <?php $comments->excerpt(35, '...'); ?></a></li>
+                    <li><a href="<?php $comments->permalink(); ?>">💬 <?php $comments->author(false); ?>: <?php $comments->excerpt(35, '...'); ?></a></li>
                 <?php endwhile; ?>
 			</ul>
 			<ul class="sb-widget">
 			    <p class="tinytext">分类目录</p>
-			    <?php $this->widget('Widget_Metas_Category_List')->parse('<li><a href="{permalink}"><i class="fa fa-folder-open-o" aria-hidden="true"></i> {name}</a></li>'); ?>
+			    <?php $this->widget('Widget_Metas_Category_List')->parse('<li><a href="{permalink}">🗁 {name}</a></li>'); ?>
 			</ul>
         </div>
         <div class="sb-right">
-            <div class="sb-holder">More</div>
+            <div class="sb-holder">🥕 More</div>
             <form method="get" class="sb-widget" action="<?php $this->options->siteUrl(); ?>">
 		        <input type="text" class="search" name="s" onblur="if(this.value=='')this.value='在此输入并搜索';" onfocus="if(this.value=='在此输入并搜索')this.value='';" value="在此输入并搜索">
             </form>
@@ -42,14 +42,12 @@
                 <li><a href="<?php $this->options->feedUrl(); ?>">RSS</a></li>
             </ul>
             <?php if ($this->options->sb_right_html): ?>
-            <ul class="sb-widget">
-                <?php $this->options->sb_right_html(); ?>
-            </ul>
+            <?php $this->options->sb_right_html(); ?>
             <?php endif; ?>
         </div>
     </div>
     <div class="foot">
-        <div class="backtotop"><a href="javascript:void 0"><i class="fa fa-angle-up"></i></a></div>
+        <div class="backtotop"><a href="javascript:void 0">⮸</a></div>
         &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>版权所有.<br />
         驱动<a href="javascript:location='http://www.typecho.org';">Typecho</a> - <a href="https://gitee.com/foxnes/tp_theme/releases">Hufman主题</a>
     </div>

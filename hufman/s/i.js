@@ -6,8 +6,9 @@ try{jQuery()}catch(e){
     document.body.append(s);
 }
 
-if ($(window).width() > 800 && $(".atcs").height() < $(".sb-left").height()) {
-    $(".atcs").css("min-height", $(".sb-left").height());
+if ($(window).width() > 800) {
+    var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height());
+    $(".atcs").css("min-height", sb_height);
 }
 
 if ($(window).width() < 500){
@@ -49,7 +50,7 @@ if (bodyhtml){
 	    bodyhtml = bodyhtml.replace(new RegExp(facenamereplace[i],"ig"),"<i class='tbbq "+facereplace[i]+"' draggable='false' alt='😀' num='"+i+"'></i>");
     }
     $("#comments").html(bodyhtml);
-    $("form .tbbq").click(function(){
+    $("#showfacenamereplace .tbbq").click(function(){
 	    insertText($("textarea[name=text]")[0], facenamereplace[$(this).attr("num")]);
     });
 }
@@ -93,7 +94,21 @@ $('.post-thumb img').each(function(){
     this.onerror = function(){
         $(this).attr("src", themeUrl+"/s/img/error.jpg");
     }
-})
+});
+
+// 点击打开表情
+$('.click_to_show').each(function(){
+    $(this).children('.click_board').each(function(){
+        var dom = $('#'+$(this).attr('for'));
+        dom.click(function(){
+            $(this).fadeOut(100);
+        });
+        $(this).click(function(){
+            dom.fadeIn(100);
+        });
+    });
+});
+
 window.onload = function(){
     $("#pagecover").fadeOut()
 }

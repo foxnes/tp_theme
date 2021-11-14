@@ -27,17 +27,17 @@ $this->need('head.php');
     		    $this->content("继续阅读 / Read_more");
     		else:
     		    showThumb($this, true);
-    		    $this->excerpt(215," ...");
+    		    $this->excerpt(210," ...");
     		endif;
     		?>
         </div>
         <div class="post-meta-i">
             <span class="a-color"><?php $this->category(' / '); ?></span>
     	    &nbsp;
-    	    <i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
+    	    🕔 <time datetime="<?php $this->date('c'); ?>"><?php $this->date(); ?></time>
 	        <?php if($this->user->hasLogin()): ?>
 	        &nbsp;
-    	    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
+    	    ✎  <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
 	        <?php endif; ?>
 	    </div>
     </div>
@@ -45,10 +45,10 @@ $this->need('head.php');
 
 <div class="post">
     <div class="fr">
-        <?php $this->pageLink('下一页 <i class="fa fa-angle-double-right" aria-hidden="true"></i>','next'); ?>
+        <?php $this->pageLink('下一页 ➮','next'); ?>
     </div>
     <div class="fl">
-        <?php $this->pageLink('<i class="fa fa-angle-double-left" aria-hidden="true"></i> 上一页'); ?>
+        <?php $this->pageLink('🢠 上一页'); ?>
     </div>
         <div class="clear"></div>
 </div>

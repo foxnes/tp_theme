@@ -30,11 +30,13 @@ img{
     word-break: break-all;
     text-align: justify;
     text-justify: inter-character;
+    font-size: 17px;
+    font-weight: 100;
 }
 .post-content a:hover{
     text-decoration: underline;
 }
-.post-meta-i, i.tbbq, .post-thumb, .sb-holder{
+.post-meta-i, i.tbbq, .post-thumb, .sb-holder, .btn, .backtotop{
     -moz-user-select:none;
     -webkit-user-select:none;
     -ms-user-select:none;
@@ -176,6 +178,7 @@ p.tinytext{
 .post{
     padding: 20px;
     color: #444;
+    position: relative;
 }
 .post + .post{
     border-top: 1px solid #eee;
@@ -189,9 +192,12 @@ p.tinytext{
 .post-title{
     color: #1e1e1e;
     font-weight: bold;
-    letter-spacing: -0.7px;
+    letter-spacing: -1.2px;
     font-size: 2em;
-    font-family: "Times New Roman", Georgia;
+    padding-bottom: 0.5em;
+    line-height: 1.1em;
+    white-space: normal;
+    word-break: break-word;
 }
 .post-title.piece:before{
     content: "✡";
@@ -208,17 +214,22 @@ p.tinytext{
     font-size: 1.5em;
     font-family: inherit;
     font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%;
+    white-space: nowrap;
 }
 .post-thumb{
     max-width: 180px;
     max-height: 128px;
     overflow: hidden;
     border-radius: 2px;
-    margin-left: 10px;
+    margin-left: 15px;
     position: relative;
     transition: all 0.8s;
     float: right;
     background: #33363b;
+    box-shadow: 0 0 14px #e6e6e6
 }
 .post-thumb img{
     width: 100%;
@@ -230,7 +241,7 @@ p.tinytext{
     margin: 0 !important;
 }
 .post-thumb:hover{
-    box-shadow: 0 0 4px #9b9b9b
+    box-shadow: 0 0 14px #8b8b8b;
 }
 .post-thumb img:hover{
     filter: brightness(115%);
@@ -279,12 +290,12 @@ p.tinytext{
     color: #777;
     overflow: hidden;
     text-align: center;
-    font-size: 30px;
-    width: 60px;
-    line-height: 20px;
-    height: 30px;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    height: 2rem;
+    width: 5rem;
     display: block;
-    margin: 0 auto -30px;
+    margin: 0 auto;
     -webkit-border-radius: 0 0 3px 3px;
     border-radius: 0 0 3px 3px;
     -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.05);
@@ -318,7 +329,7 @@ hr{
     margin: 15px 0;
 }
 .post-content p{
-    margin: 15px 0 10px 0;
+    margin: 25px 0;
 }
 .post:after{
     content: "";
@@ -327,7 +338,18 @@ hr{
     clear: both;
 }
 .post-content li{
-    margin-left: 20px;
+    margin-left: 2em;
+    position: relative;
+}
+.post-content ol li::before{
+    content: '';
+    position: absolute;
+    top: 0.65em;
+    left: -2em;
+    height: 8px;
+    width: 8px;
+    border-radius: 20px;
+    background-color: #327da9;
 }
 .post-content .nav li{
     margin-left: 0;
@@ -335,11 +357,16 @@ hr{
 .post-content.i{
     color: #808080;
     line-height: 2.1em;
+    min-height: 3em;
+    padding-bottom: 1em;
+    font-size: 1rem;
 }
 .post-meta-i{
     color: #aaa;
     font-size: 0.8em;
-    margin-top: 15px;
+    /* margin-top: 15px; 设置成absolute margin无效了 在.post-content.i中加入padding-bottom */
+    position: absolute;
+    bottom: 1em;
 }
 .post-content img{
     margin: 0.67em 0;
@@ -365,7 +392,11 @@ hr{
     color: #444;
     line-height: 1.2;
     margin-top: 1.5em;
-    margin-bottom: 0.7em;
+}
+.post-content h1, .post-content h2, .post-content h3{
+    border-left: 4px solid #398CBD;
+    background: #398cbd21;
+    padding: 4px 2px 4px 0.5em;
 }
 .post-content blockquote{
     color: #686868;
@@ -460,6 +491,7 @@ code{
 input[type=text], input[type=password], input[type=email], input[type=url], select, textarea{
     background: #fff;
     border: 2px solid #ddd;
+    border-radius: 0px; /* 表单输入框全部圆角哦 */
     color: #777;
     display: block;
     max-width: 100%;
@@ -482,10 +514,11 @@ input[type="submit"], button, #cancel-comment-reply-link{
     cursor: pointer;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+    transition: 0.2s;
 }
 #cancel-comment-reply-link{
-    font-size:100%;
-    line-height:1.15;
+    font-size: 100%;
+    line-height: 1.15;
     background-color: #5f5f5f;
 }
 input[type="submit"] a:hover, button a:hover{
@@ -501,6 +534,9 @@ input[type="submit"] a:hover, button a:hover{
     margin: 5px 0;
 }
 #comment-form button{width: auto;}
+button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
+    transform: scale(0.9);
+}
 .warning-blue{
     color: #398cbd;
     font-size: 0.8;
@@ -516,7 +552,7 @@ input[type="submit"] a:hover, button a:hover{
 }
 .comment-right{
     margin-left: 4.5em;
-    font-family: "Times New Roman", Georgia, "微软雅黑";
+    font-family: "微软雅黑";
 }
 .comment-right:after{
     content: "";
@@ -533,14 +569,27 @@ input[type="submit"] a:hover, button a:hover{
 #comment-form label{
     color: #444;
     font-weight: bold;
+    font-size: 1.3rem;
 }
 
 .comment-list{position:relative;word-break:break-all;word-wrap:break-word;white-space:normal;margin-top:20px}
-.avatar{float:left;margin:0 5px 5px 0;padding:2px;border-radius: 50%;}
+.avatar{float:left;margin:0 5px 5px 0;padding:2px;border-radius: 50%;width: 55px;height: 55px;border: 1px solid #e7e7e7;}
 .comment-body{padding:15px;list-style:none}
 .comment-body p.half{clear: none !important}
 .comment-body+.comment-body{margin-top:15px}
-.comment-reply{color: #adadad;font-size: 12px;font-weight: 800;float: right;}
+.comment-reply{
+    color: #2c2c2c;
+    font-size: 12px;
+    font-weight: 100;
+    float: right;
+    background-color: #f3f3f3;
+    border-radius: 3px;
+    padding: 4px 7px;
+    opacity: 0;
+}
+.comment-right:hover .comment-reply{
+    opacity: 1;
+}
 .comment-content{
     line-height: 2em;
     color: #686868;
@@ -558,6 +607,7 @@ input[type="submit"] a:hover, button a:hover{
     border-left: 10px solid #009688;
     color: white;
     margin-bottom: 20px;
+    font-size: 1rem;
 }
 .post-meta a{
     color: #335f5b
@@ -575,12 +625,16 @@ i.tbbq{
     margin: 2px;
     width: 30px;
     height: 30px;
-    transform: scale(0.8333333);
-    border-radius: 50%;
+    transform: scale(0.8) rotate(0);
     font-style: normal;
     vertical-align: middle;
     background-image: url(img/css_faces.gif);
     background-repeat: no-repeat;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+i.tbbq:hover{
+    transform: scale(0.95) rotate(45deg);
 }
 i.tbbq.tiny{
     transform: scale(0.5);
@@ -682,7 +736,35 @@ i.tbbq.tiny{
 .hl-var{
     color: #ff9300;
 }
-/* faces */
+/* 表情 */
+
+.click_to_show{
+    position: relative;
+}
+.click_to_show .hidden{
+    display: none;
+    position: absolute;
+    bottom: 2em;
+    width: 204px; /* 6*34px content-box */
+    padding: 5px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 50px #636363;
+    box-sizing: content-box;
+    cursor: auto;
+}
+.btn{
+    background-color: white;
+    padding: 4px 5px;
+    display: inline-block;
+    line-height: 1em;
+    border-radius: 5px;
+    font-weight: 800;
+    cursor: pointer;
+    border: 2px solid #dadada;
+    font-size: 0.8em;
+}
+
 .bg-face_0{background-position: 0 0;}
 .bg-face_1{background-position: 0 -35px;}
 .bg-face_2{background-position: 0 -70px;}

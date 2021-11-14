@@ -13,7 +13,9 @@
             'author'    =>  _t('%s 发布的文章')
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
     <link rel="stylesheet" href="<?php $this->options->themeUrl('s/i.css'); ?>">
+    <!-- 已经弃用fontawesome 转用emoji
     <link rel="stylesheet" href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.css">
+    -->
     <?php $this->header(); ?>
     <script src="<?php $this->options->themeUrl('s/jquery-1.8.3.min.js'); ?>"></script>
     <script>themeUrl = "<?php echo $this->options->themeUrl ?>";</script>
