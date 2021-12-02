@@ -6,16 +6,7 @@ try{jQuery()}catch(e){
     document.body.append(s);
 }
 
-if ($(window).width() > 800) {
-    var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height()) + 60;
-    $(".atcs").css("min-height", sb_height);
-}
-
-if ($(window).width() < 500){
-    $('#comments').parent('.post').css('padding', 0);
-}
-
-PostbirdImgGlass.init({
+PostbirdImgGlass.init({ // 图像放大
     domSelector:".post-content img:not([unzoomable])",
     animation:true
 });
@@ -62,6 +53,16 @@ if (bodyhtml){
     $("#rctrly").html(bodyhtml);
 }
 
+// 插入表情完毕之后再计算高度，防止插入表情后高度变化
+
+if ($(window).width() > 800) {
+    var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height());
+    $(".atcs").css("min-height", sb_height);
+}
+
+if ($(window).width() < 500){
+    $('#comments').parent('.post').css('padding', 0);
+}
 
 $(".backtotop").click(function () {
         var speed = 200;
@@ -80,10 +81,34 @@ function insertText(obj,str){
 	obj.value += str;
 }
 
-
+// 红色
+var HL_KW = ['and', 'as', 'assert', 'break', 'case', 'catch', 'classdef', 'continue', 'die', 'del',
+'do', 'else', 'elseif', 'endfor', 'endforeach', 'endif', 'elif', 'endswitch',
+'except', 'endwhile', 'eval', 'exit', 'finally', 'False',
+'for', 'from', 'foreach', 'global', 'goto', 'if', 'in', 'is', 'import', 'include', 'lambda',
+'not', 'None', 'new', 'namespace', 'or', 'private', 'pass', 'public', 'protected', 'require', 'static',
+'return', 'raise', 'switch', 'throw', 'try', 'True', 'var', 'with', 'while', 'xor', 'yield'];
+HL_KW = new RegExp('\\b('+HL_KW.join('|')+')\\b', 'ig');
+// 蓝色 有括号调用的已经默认自动变蓝了
+var HL_KF = [
+// js
+'function',
+// python
+'def', 'print',
+// ternimal - linux
+'echo', 'exec', 'vim', 'vi', 'screen', 'ls', 'cd', 'pwd', 'mkdir', 'cp', 'mv', 'rm', 'df', 'du', 'cat', 'clear', 'grep',
+'reboot', 'shutdown', 'basename', 'dirname', 'export', 'read', 'test', 'who', 'tee', 'unset', 'chmod',
+'find', 'tar', 'gzip', 'rmdir', 'kill', 'crontab', 'service', 'free', 'top', 'chown', 'sudo', 'passwd',
+'tail', 'diff', 'scp', 'telnet', 'wget', 'ifconfig', 'whereis', 'locate', 'date', 'route', 'iptables', 
+'pip', 'pip2', 'pip3', 'python', 'python2', 'python3', 'apt', 'apt-get', 'pkg', 'yum', 'pacman', 'git', 'cmake',
+'make',
+// matlab
+'axis', 'hold', 'grid'
+];
+HL_KF = new RegExp('\\b('+HL_KF.join('|')+')\\b', 'ig');
 
 $("pre code").each(function(){
-    this.innerHTML = this.innerHTML.replace(/((["'])(?:\\.|[^\\\n])*?\2)/ig,"<span class='hl-str'>$1</span>").replace(/(\\[\s\S])/ig,"<span class='hl-warn'>$1</span>").replace(/(\/\*[\s\S]+\*\/)/g,"<span class='hl-note'>$1</span>").replace(/(~\/| -{1,2}[a-z&;]{1,}[ :\n\r]|!|\^|\+|\*|%|\||&amp;|===|==|-&gt;|=&gt;|=&lt;|&lt;=|&gt;=|&gt;|&lt;)/ig,"<span class='hl-fh'>$1</span>").replace(/([^a-z0-9]|^)([\d\.]+)([^a-z0-9]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(/([^a-z0-9]|^)([\d\.]+)([^a-z0-9]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(/\b(RegExp|return|if|fi|then|else|break|continue|for|endif|in|not|die|exit|switch|case|throw|void|typeof|endwhile|elseif|import|array|while|foreach|important|new|and|or|xor|with|desc|limit|order|try|as|catch)\b/ig, "<span class='hl-kw'>$1</span>").replace(/((?=^|\n|\r| )\s*(\/\/|#).*(?=\r|\n|$))/g,"<span class='hl-note'>$1</span>").replace(/\b(echo|print|substr|replace|query|include|default|final|eval|exec|shell|list|function|static|const|var|let|unset|unlink|undefined|null|true|bind|false|empty|del|is|def|this|clear|screen|max|min|rgba|rgb|box|inherit|left|right|top|bottom|wrap|wget|ls|chmod|grep|cat|test|match|yum|apt|mv|cp|rm|sudo|sh|source|bash|find|more|touch|awk|curl|tee|tree|read|vim|diff|unzip|public|static|tar|ftp|cd|mount|stat|rmdir|git|dd|df|du|restart|stop|start|sfdisk|fdisk|kill|top|free|who|clear|reset|alias|gzip|rpm|pacman|dump|bzip2|dpkg|count|goto|document|window|Date|Math|install|remove|floor|make|isNaN|NaN)\b/ig,"<span class='hl-kf'>$1</span>").replace(/\b((?![0-9])[\w0-9]+(?=\())/ig,"<span class='hl-kf'>$1</span>").replace(/(\$(?![0-9])[\w0-9]+\b)/ig, "<span class='hl-var'>$1</span>");
+    this.innerHTML = this.innerHTML.replace(/((["'])(?:\\.|[^\\\n])*?\2)/ig,"<span class='hl-str'>$1</span>").replace(/(\\[\s\S])/ig,"<span class='hl-warn'>$1</span>").replace(/(\/\*[\s\S]+\*\/)/g,"<span class='hl-note'>$1</span>").replace(/(~\/| -{1,2}[a-z&;]{1,}[ :\n\r]|!|\^|\+|\*|%|\||&amp;|===|==|-&gt;|=&gt;|=&lt;|&lt;=|&gt;=|&gt;|&lt;)/ig,"<span class='hl-fh'>$1</span>").replace(/([^a-z0-9_]|^)([\d\.]+)([^a-z0-9_]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(/([^a-z0-9_]|^)([\d\.]+)([^a-z0-9_]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(HL_KW, "<span class='hl-kw'>$1</span>").replace(/((?=^|\n|\r| )\s*(\/\/|#).*(?=\r|\n|$))/g,"<span class='hl-note'>$1</span>").replace(HL_KF,"<span class='hl-kf'>$1</span>").replace(/\b((?![0-9])[\w0-9]+(?=\())/ig,"<span class='hl-kf'>$1</span>").replace(/(\$(?![0-9])[\w0-9]+\b)/ig, "<span class='hl-var'>$1</span>");
 });
 
 if ($(".post-meta")){

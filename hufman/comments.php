@@ -2,7 +2,7 @@
 <div id="comments">
     <?php $this->comments()->to($comments); ?>
     <?php if ($comments->have()): ?>
-	<h3 class="thin ct"><?php $this->commentsNum(_t('暂无评论'), _t('一条评论'), _t('%d 条评论')); ?></h3>
+	<p class="thin ct">评论区 - <?php $this->commentsNum(_t('暂无评论'), _t('一条评论'), _t('%d 条评论')); ?></p>
     <?php $comments->listComments(); ?>
     <?php $comments->pageNav('&laquo;', '&raquo;'); ?>
     <?php endif; ?>
@@ -10,23 +10,22 @@
     <?php if($this->allow('comment')): ?>
     <div id="<?php $this->respondId(); ?>" class="respond">
     	<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
-    	    <p>
-                <label for="textarea" class="required"><i class="icon icon-comment-empty"></i> 评论内容</label>
+    	    <div>
+                <label for="textarea" class="required"><i class="icon icon-comment-empty"></i> 评论</label>
                 <?php if($this->user->hasLogin()): ?>
-    		        <p>🆔 登录身份: <a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>.
-                    <span class='btn'><a href="<?php $this->options->logoutUrl(); ?>" title="Logout">退出 &raquo;</span></a></p>
+    		        <div class='muted'>登录身份: <a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>.</div>
                 <?php endif; ?>
-                <textarea rows="4" name="text" class="textarea" required ><?php $this->remember('text'); ?></textarea>
-            </p>
+                <textarea rows="4" name="text" class="textarea" required placeholder='总想说点什么...'><?php $this->remember('text'); ?></textarea>
+            </div>
 
             <?php if(!$this->user->hasLogin()): ?>
     		<p class="half w">
-                <label for="author" class="required"><i class="icon icon-child"></i> 称呼 <b class="warning-blue">*</b></label>
+                <label for="author" class="required"><i class="icon icon-child"></i> 昵称 <b class="warning-blue">*</b></label>
     			<input type="text" name="author" class="text" value="<?php $this->remember('author'); ?>" required />
     		</p>
     		<p class="half w">
-                <label for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>><i class="icon icon-mail"></i> Email <?php if ($this->options->commentsRequireMail): ?> <b class="warning-blue">*</b><?php endif; ?></label>
-    			<input type="email" name="mail" class="text" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
+                <label for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>><i class="icon icon-mail"></i> 邮箱 <?php if ($this->options->commentsRequireMail): ?> <b class="warning-blue">*</b><?php endif; ?></label>
+    			<input type="email" name="mail" class="text" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> placeholder='可QQ邮箱' />
     		</p>
     		<div class="clear"></div>
     		<p>
@@ -77,12 +76,16 @@ $comments->alt(' comment-odd', ' comment-even');
 echo $commentClass;
 ?>">
     <div id="<?php $comments->theId(); ?>">
-        <?php $comments->gravatar('55', ''); ?>
+        <img class="avatar" src="<?php 
+        // $comments->gravatar('55', '');
+        _e(get_gravatar($comments->mail));
+        ?>" alt="Gravatar" width="55" height="55">
+
         <div class="comment-right">
-            <span class="a-color bold"><?php $comments->author(); ?></span>
-            <span><?php $comments->dateWord(); ?></span>
-            <button class="comment-reply"><?php $comments->reply("回复"); ?></button>
+            <p class="bold"><?php $comments->author(); ?></p>
+            <p class='muted'><?php $comments->date('Y-m-d H:i'); ?></p>
             <div class="comment-content"><?php $comments->content(); ?></div>
+            <?php $comments->reply("<button class=\"comment-reply\">回复</button>"); ?>
         </div>
     </div>
 <?php if ($comments->children) { ?>

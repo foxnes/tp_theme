@@ -8,7 +8,7 @@ function themeConfig($form) {
     ),
     array('content'), _t('配置'));
     $form->addInput($ThemeOptions->multiMode());
-    $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL, _t('右栏HTML'), _t('在右侧栏的"其它"下面再添加新的内容.如：<br />&lt;ul class="sb-widget"&gt;&lt;p class=&quot;tinytext&quot;&gt;友链&lt;/p&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老李&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老黄&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;<br />再或者是：<br />&lt;ul class="sb-widget"&gt;<br />&lt;p class=&quot;tinytext&quot;&gt;诗词&lt;/p&gt;<br />&lt;li id=&quot;jinrishici-sentence&quot;&gt;正在加载....&lt;/li&gt;<br />&lt;script src=&quot;//sdk.jinrishici.com/v2/browser/jinrishici.js&quot; charset=&quot;UTF-8&quot; defer&gt;&lt;/script&gt;<br />&lt;/ul&gt;')));
+    $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL, _t('右栏HTML'), _t('在右侧栏的"其它"下面再添加新的内容.如：<br />&lt;ul class="sb-widget"&gt;&lt;p class=&quot;cleartext&quot;&gt;友链&lt;/p&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老李&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老黄&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;<br />再或者是：<br />&lt;ul class="sb-widget"&gt;<br />&lt;p class=&quot;cleartext&quot;&gt;诗词&lt;/p&gt;<br />&lt;li id=&quot;jinrishici-sentence&quot;&gt;正在加载....&lt;/li&gt;<br />&lt;script src=&quot;//sdk.jinrishici.com/v2/browser/jinrishici.js&quot; charset=&quot;UTF-8&quot; defer&gt;&lt;/script&gt;<br />&lt;/ul&gt;')));
 }
 
 function showThumb($obj, $randgiven){
@@ -17,8 +17,8 @@ function showThumb($obj, $randgiven){
 	$pattern='<div class="post-thumb">
 	            <a href="' . $obj->permalink . '">
 	            <img alt="{title}" unzoomable src="'.Helper::options()->themeUrl.'/s/img/loading.gif" data-original="{thumb}" />
-	            <div class="view inner"><i class="icon icon-eye"></i> ' . getViewsStr($obj) .'</div>
-	            <div class="cmmt inner"><i class="icon icon-comment-empty"></i> ' . $obj->commentsNum . '</div>
+	            <div class="view inner"><i class="icon icon-eye"></i>&nbsp;' . getViewsStr($obj) .'</div>
+	            <div class="cmmt inner"><i class="icon icon-comment-empty"></i>&nbsp;' . $obj->commentsNum . '</div>
 	            </a>
 	        </div>';
         $fields = unserialize($obj->fields);
@@ -77,12 +77,36 @@ function getViewsStr($widget) {
             $widget->setField('views', 'str', strval($views), $widget->cid);
             $vieweds[] = $widget->cid;
             $vieweds = implode(',', $vieweds);
-            Typecho_Cookie::set("contents_viewed",$vieweds);
+            Typecho_Cookie::set("contents_viewed", $vieweds);
         }
     }
     return $views;
 }
+
 function img_lazy_load($ct){
     $imgplaceholder = Helper::options()->themeUrl."/s/img/loadingi.gif";
     return preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i","<img src='".$imgplaceholder."'$1data-original='$2'$3>",$ct);
+}
+
+function get_gravatar($mail, $size=55, $rating='X', $default='', $isSecure = true)
+{
+    $reg = "/^\d{5,11}@[qQ][Qq]\.(com)$/";
+    if (preg_match($reg, $mail)) {
+        $img    = explode("@", $mail);
+        $url = "//q2.qlogo.cn/headimg_dl?dst_uin={$img[0]}&spec=100";
+    } else {
+        if (defined('__TYPECHO_GRAVATAR_PREFIX__')) {
+            $url = __TYPECHO_GRAVATAR_PREFIX__;
+        } else {
+            $url = $isSecure ? 'https://secure.gravatar.com' : 'http://www.gravatar.com';
+            $url .= '/avatar/';
+        }
+        if (!empty($mail)) {
+            $url .= md5(strtolower(trim($mail)));
+        }
+        $url .= '?s=' . $size;
+        $url .= '&amp;r=' . $rating;
+        $url .= '&amp;d=' . $default;
+    }
+    return $url;
 }

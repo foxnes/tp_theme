@@ -34,7 +34,7 @@
             <div class="sb-holder">
                 <a href="<?php $this->options->siteUrl(); ?>">Home</a> &raquo;
                 <?php if ($this->is('index')): ?>
-                Latest Post
+                Latest Posts
                 <?php elseif ($this->is('post')): ?>
                 <?php $this->category(); ?> &raquo; Article
                 <?php else: ?>

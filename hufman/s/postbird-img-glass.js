@@ -19,13 +19,13 @@ var PostbirdImgGlass = {
     initImageClassContainer: function () {
         var _this = this,
             img = document.createElement('img');
-        img.style.width = _this.width;
-        img.style.height = _this.height;
+        $(img).css('max-width', 'auto');
+        img.draggable = false;
         var box = document.createElement("div");
         box.style = _this.boxStyle;
         box.className = _this.boxClassName;
         box.appendChild(img);
-        box.onclick = function () {
+        box.onclick = function(){
             _this.hideImageGlass();
         };
         document.body.insertBefore(box, document.body.childNodes[0]);
