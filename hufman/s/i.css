@@ -77,16 +77,34 @@ img{
 .head{
     background-color: #333639;
     color: rgba(255,255,255,.5);
-    padding: 40px 25px 100px 25px;
+    padding: 40px 25px 120px 25px;
     text-shadow: 4px 3px 0 #2b2b2b, 9px 8px 0 rgba(0,0,0,0.15);
 }
 .head .ct{
     width: 80%;
     margin: 0 auto;
 }
+.top-nav{
+    user-select: none;
+    background-color: #3e4043;
+    min-height: 50px;
+    line-height: 50px;
+    font-size: 1rem;
+    font-weight: 100;
+    color: #bdbdbd;
+    padding: 0 2em;
+}
+.top-nav li{
+    list-style: none;
+    display: inline-block;
+    padding: 0 1em;
+}
+.top-nav li a:hover{
+    color: white;
+}
 .body{
     position: relative;
-    top: -60px;
+    top: -110px;
     max-width: 1441px;
     margin: 0 auto;
     width: 97%;
@@ -389,21 +407,92 @@ hr{
     font-style: normal;
     word-break: break-all;
 }
+.post-content .title_level{
+    position: absolute;
+    display: block;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    top: -0.8em;
+    left: 1.6em;
+}
 .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6{
     color: #444;
     line-height: 1;
     margin: 1.2rem 0 1rem 0;
+    position: relative;
+    transition: all 0.3s;
+    cursor: default;
 }
-.post-content h1, .post-content h2, .post-content h3{
+.post-content h1:hover, .post-content h2:hover, .post-content h3:hover,
+.post-content h4:hover, .post-content h5:hover, .post-content h6:hover{
+    border-left-width: 0.5em;
+    background-color: #f0f0f0;
+}
+.post-content h1, .post-content h3, .post-content h5{
     border-left: 4px solid #398CBD;
-    padding: 4px 2px 4px 0.5em;
+    padding: 4px 2px 4px 0.5rem;
+}
+.post-content h2, .post-content h4, .post-content h6{
+    border-left: 4px solid #83BC63;
+    padding: 4px 2px 4px 0.5rem;
+}
+#level-nav{
+    position: fixed;
+    background-color: white;
+    bottom: -15rem;
+    right: 2vw;
+    padding: 0.9rem;
+    width: 18rem;
+    border: 2px solid #d9d9d9;
+    transition: all 0.3s;
+    border-radius: 2px 2px 0 0;
+    opacity: 0.85;
+}
+#level-nav .ctn{
+    height: 14rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+#level-nav .outer{
+    position: absolute;
+    height: 1.7rem;
+    top: -1.7rem; right: 2rem;
+    font-size: 1rem; font-weight: bold;
+    padding: 0 0.5rem;
+    text-align: center;
+    line-height: 1.7rem;
+    border: 2px solid #d9d9d9;
+    border-width: 2px 2px 0 2px;
+    border-radius: 2px 2px 0 0;
+    background-color: white;
+    color: #434343;
+}
+#level-nav:hover{
+    opacity: 1;
+    bottom: 0;
+}
+#level-nav li{
+    list-style: none;
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#level-nav li + li{
+    padding-top: 0.4rem;
+}
+#level-nav li b{
+    display: block;
+    margin-bottom: 0.6rem;
+    text-align: center;
 }
 .post-content blockquote{
     color: #686868;
-    margin: 1.5em 0 1em 2em;
+    margin: 1.5rem 0 1rem 2rem;
     font-style: italic;
     position: relative;
-    padding-top: 1em;
+    padding-top: 1rem;
 }
 .post-content blockquote:before{
     font-size: 2em;
@@ -688,6 +777,12 @@ i.tbbq.tiny{
     }
     .post-content, html{
         font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .post-thumb{
+        display: none;
     }
 }
 

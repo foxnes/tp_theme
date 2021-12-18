@@ -25,11 +25,10 @@
 		        <input type="text" class="search" name="s" onblur="if(this.value=='')this.value='在此输入并搜索';" onfocus="if(this.value=='在此输入并搜索')this.value='';" value="在此输入并搜索">
             </form>
             <ul class="sb-widget">
-                <p class="cleartext">页面</p>
-                <li><a href="<?php $this->options->siteUrl() ?>" title="<?php $this->options->title(); ?>">首页</a></li>
-                <?php $this->widget('Widget_Contents_Page_List')->to($pages);while($pages->next()): ?>
-                <li><a href="<?php $pages->permalink(); ?>" title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a></li>
-                <?php endwhile; ?>
+                <p class="cleartext">热门</p>
+                <?php
+                theme_random_posts(10);
+                ?>
             </ul>
             <ul class="sb-widget">
                 <p class="cleartext">其它</p>

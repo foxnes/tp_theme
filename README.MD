@@ -1,14 +1,20 @@
-Typecho 主题
+## Typecho 主题
 
-(国内)下载：
-国内仓库：[gitee.com](https://gitee.com/foxnes/tp_theme)
+仓库地址：[gitee.com](https://gitee.com/foxnes/tp_theme)
 
-最新：[hufman 0.3.6](https://gitee.com/foxnes/tp_theme/releases/hufman_0.3.6)
+查看各个版本：[releases](https://gitee.com/foxnes/tp_theme/releases/)
+
+主题Hufman
+![HUFMAN](hufman/screenshot.png)
+
+主题Vblog
+![VBLOG](vblog/screenshot.png)
+
+其他注意事项请查阅模板内部的`README.MD`文件。
+
+**请勿删除模版底部链接，谢谢合作。**
 
 (Github)下载：
-(下面的太旧了，最好别下了...)
 1. [hufman 0.3.5 小图](https://github.com/foxnes/tp_theme/releases/tag/hufman0.3.5)
 2. [hufman 0.3 大图](https://github.com/foxnes/tp_theme/releases/tag/hufman0.3)
 3. [vblog 0.1.1](https://github.com/foxnes/tp_theme/releases/tag/vblog0.1.1)
-
-**请勿删除模版底部链接，谢谢合作。**

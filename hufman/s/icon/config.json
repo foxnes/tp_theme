@@ -83,6 +83,12 @@
       "css": "spin6",
       "code": 59449,
       "src": "fontelico"
+    },
+    {
+      "uid": "cc6a79edb1e82ee90129147ba089c323",
+      "css": "fire",
+      "code": 62757,
+      "src": "mfglabs"
     }
   ]
 }

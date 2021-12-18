@@ -4,9 +4,10 @@ define('__TYPECHO_GRAVATAR_PREFIX__', 'https://gravatar.loli.net/avatar/');
 
 function themeConfig($form) {
     $ThemeOptions = new Typecho_Widget_Helper_Form_Element_Checkbox('ThemeOptions', 
-        array('content' => _t('主页文章全文输出')
-    ),
-    array('content'), _t('配置'));
+        array('content' => _t('主页文章全文输出'), 'no_rand_thumb' => _t('无图时<b>不输出</b>随机缩略图')),
+        array('content', 'no_rand_thumb'),
+        _t('配置')
+    );
     $form->addInput($ThemeOptions->multiMode());
     $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL, _t('右栏HTML'), _t('在右侧栏的"其它"下面再添加新的内容.如：<br />&lt;ul class="sb-widget"&gt;&lt;p class=&quot;cleartext&quot;&gt;友链&lt;/p&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老李&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老黄&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;<br />再或者是：<br />&lt;ul class="sb-widget"&gt;<br />&lt;p class=&quot;cleartext&quot;&gt;诗词&lt;/p&gt;<br />&lt;li id=&quot;jinrishici-sentence&quot;&gt;正在加载....&lt;/li&gt;<br />&lt;script src=&quot;//sdk.jinrishici.com/v2/browser/jinrishici.js&quot; charset=&quot;UTF-8&quot; defer&gt;&lt;/script&gt;<br />&lt;/ul&gt;')));
 }
@@ -21,30 +22,30 @@ function showThumb($obj, $randgiven){
 	            <div class="cmmt inner"><i class="icon icon-comment-empty"></i>&nbsp;' . $obj->commentsNum . '</div>
 	            </a>
 	        </div>';
-        $fields = unserialize($obj->fields);
-        if (array_key_exists('thumb', $fields)):
-          $thumb = (!empty($fields['thumb'])) ? $fields['thumb'] : 0;
-        else:
-    preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches);
-    $thumb = '';
-    $options = Typecho_Widget::widget('Widget_Options');
-    if(isset($matches[1][0])){
-        $thumb = $matches[1][0];;
-        if(!empty($options->src_add) && !empty($options->cdn_add)){
-            $thumb = str_ireplace($options->src_add,$options->cdn_add,$thumb);
-        }
-        if($size!='full'){
-            $thumb_width = $options->thumb_width;
-            $thumb_height = $options->thumb_height;
-            if($size!=null){
-                $size = explode('x', $size);
-                if(!empty($size[0]) && !empty($size[1])){
-                    list($thumb_width,$thumb_height) = $size;
+    $fields = unserialize($obj->fields);
+    if (array_key_exists('thumb', $fields)):
+        $thumb = (!empty($fields['thumb'])) ? $fields['thumb'] : 0;
+    else:
+        preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches);
+        $thumb = '';
+        $options = Typecho_Widget::widget('Widget_Options');
+        if(isset($matches[1][0])){
+            $thumb = $matches[1][0];;
+            if(!empty($options->src_add) && !empty($options->cdn_add)){
+                $thumb = str_ireplace($options->src_add,$options->cdn_add,$thumb);
+            }
+            if($size!='full'){
+                $thumb_width = $options->thumb_width;
+                $thumb_height = $options->thumb_height;
+                if($size!=null){
+                    $size = explode('x', $size);
+                    if(!empty($size[0]) && !empty($size[1])){
+                        list($thumb_width,$thumb_height) = $size;
+                    }
                 }
             }
         }
-    }
-        endif;
+    endif;
     if(empty($thumb)){ // 修改下面的代码可以修改随机图像的生成规律
         if ($randgiven){
             $img_id = $obj->cid % (14+1); // 根据cid取余生成 0~14 之间的数
@@ -55,7 +56,8 @@ function showThumb($obj, $randgiven){
     }
     echo str_replace(
         array('{title}','{thumb}','{permalink}'),
-        array($obj->title,$thumb,$obj->permalink), $pattern);
+        array($obj->title, $thumb, $obj->permalink), $pattern);
+    return true;
 }
 
 function getViewsStr($widget) {
@@ -74,7 +76,7 @@ function getViewsStr($widget) {
             $vieweds = explode(',', $vieweds);
         if (!in_array($widget->cid, $vieweds)) {
             $views = $views + 1;
-            $widget->setField('views', 'str', strval($views), $widget->cid);
+            $widget->setField('views', 'int', $views, $widget->cid);
             $vieweds[] = $widget->cid;
             $vieweds = implode(',', $vieweds);
             Typecho_Cookie::set("contents_viewed", $vieweds);
@@ -88,8 +90,7 @@ function img_lazy_load($ct){
     return preg_replace("/<img(.*?)src=[\"|'](.*?)[\"|'](.*?)>/i","<img src='".$imgplaceholder."'$1data-original='$2'$3>",$ct);
 }
 
-function get_gravatar($mail, $size=55, $rating='X', $default='', $isSecure = true)
-{
+function get_gravatar($mail, $size=55, $rating='X', $default='', $isSecure = true){
     $reg = "/^\d{5,11}@[qQ][Qq]\.(com)$/";
     if (preg_match($reg, $mail)) {
         $img    = explode("@", $mail);
@@ -109,4 +110,31 @@ function get_gravatar($mail, $size=55, $rating='X', $default='', $isSecure = tru
         $url .= '&amp;d=' . $default;
     }
     return $url;
+}
+
+function theme_random_posts($limit = 10){
+    $format = '<li><a href="{permalink}" title="{title}"><i class="icon icon-fire"></i> <i>{views}</i> {title}</a></li>';
+    $db = Typecho_Db::get();
+    $prefix = $db->getPrefix();
+    $sql = 'SELECT `cid`, `int_value` from `'.$prefix.'fields` ORDER BY `int_value` DESC LIMIT '.$limit;
+    $cids = $db->fetchAll($sql);
+    $post_count = count($cids);
+    $cid_list = [];
+    $view_list = [];
+    for ($i = 0; $i < $post_count; $i++) { 
+        $cid_list[$i] = $cids[$i]['cid'];
+        $view_list[$cids[$i]['cid']] = $cids[$i]['int_value'];
+        // 有BUG会导致field没有被删除，所以按照cid来作为索引。
+    }
+    $cids = implode(',', $cid_list);
+    $sql = 'SELECT * from `'.$prefix.'contents` WHERE cid in ('.$cids.') AND (`status` = "publish") ORDER BY FIELD(`cid`, '.$cids.')';
+    $result = $db->fetchAll($sql);
+    for ($i = 0; $i < $post_count; $i++) {
+        if (is_null($result[$i])){
+            continue;
+        }
+        $post = Typecho_Widget::widget('Widget_Abstract_Contents')->filter($result[$i]);
+        echo str_replace(array('{permalink}', '{title}', '{views}'),
+        array($post['permalink'], $post['title'], $view_list[$post['cid']]), $format);
+    }
 }

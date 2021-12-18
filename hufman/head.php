@@ -30,6 +30,12 @@
         </div>
     </div>
     <div class="body">
+        <ul class="top-nav">
+            <li><a href="<?php $this->options->siteUrl() ?>" title="<?php $this->options->title(); ?>">首页</a></li>
+            <?php $this->widget('Widget_Contents_Page_List')->to($pages);while($pages->next()): ?>
+            <li><a href="<?php $pages->permalink(); ?>" title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a></li>
+            <?php endwhile; ?>
+        </ul>
         <div class="atcs">
             <div class="sb-holder">
                 <a href="<?php $this->options->siteUrl(); ?>">Home</a> &raquo;
