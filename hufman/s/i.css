@@ -667,7 +667,7 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 .avatar{float:left;margin:0 5px 5px 0;padding:2px;border-radius: 50%;width: 55px;height: 55px;box-shadow: 0 0 14px #e5e5e5}
 .comment-body{padding:15px;list-style:none}
 .comment-body p.half{clear: none !important}
-.comment-body+.comment-body{margin-top:15px}
+/* .comment-body+.comment-body{margin-top:15px} */
 .comment-reply{
     color: #2c2c2c;
     font-size: 12px;
@@ -742,7 +742,7 @@ i.tbbq.tiny{
     text-shadow: none;
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 920px){
     .sb-left, .sb-right, .atcs, .body{
         width: 100%;
     }
@@ -777,6 +777,12 @@ i.tbbq.tiny{
     }
     .post-content, html{
         font-size: 15px;
+    }
+    .says-block{
+        width: 98% !important;
+    }
+    .says-float-time{
+        left: 0 !important;
     }
 }
 
@@ -932,3 +938,40 @@ table tr{
 table tr:hover{
     background: #f8f8f8;
 }
+
+/*说说部分*/
+#says-area{
+    font-size: 0.9rem;
+}
+.says-block{
+    width: 45%;
+    margin: 2%;
+    float: left;
+}
+.says-float-time{
+    z-index: 3;
+    display: block;
+    position: absolute;
+    width: 3rem;
+    height: 1.7rem;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    font-style: italic;
+    text-align: center;
+    padding: 0.45rem 0;
+    border-radius: 1.5rem 0 1.5rem 0;
+    background-color: #83bc63;
+    color: white;
+    left: -1rem;
+    top: -0.8rem;
+    transform: rotateY(20deg) rotateZ(-15deg);
+    border-bottom: 2px solid #5a8e3d;
+    user-select: none;
+}
+#says-area .comment-body{
+    border-left: 1px solid #83bc63;
+}
+.says-block.comment-body{
+    border-radius: 1rem 0 0 2rem;
+}
+textarea{width: 100%;}

@@ -4,6 +4,11 @@ try{jQuery()}catch(e){
     document.body.append(s);
 }
 
+$(function(){
+    $("#pagecover").fadeOut();
+});
+
+
 PostbirdImgGlass.init({ // 图像放大
     domSelector:".post-content img:not([unzoomable])",
     animation:true
@@ -12,27 +17,28 @@ PostbirdImgGlass.init({ // 图像放大
 $(".post-thumb img").lazyload();
 $(".post-content img").lazyload();
 
+function safe_do(fn){
+    try{fn()}catch{console.error('Error when executing: '+fn.toString())};
+}
 
 facenamereplace = ["：滑稽：","：喷：","：彩虹：","：阴险：","：怒：","：笑眼：",
 "：黑线：","：玫瑰：","：乖：","：汗：","：惊哭：","：酷：","：狂汗：","：冷：",
 "：真棒：","：不高兴：","：大哭：","：咖啡：","：yeah：","：ojbk："];
-/*
-facereplace = [];
-for (var i = 0; i < facenamereplace.length; i++) {
-	facereplace[i] = theme_path+"/s/img/"+facenamereplace[i].replace(/：/g,"")+".png";
-}
-*/
+
 facereplace = [];
 for (var i=0; i<facenamereplace.length;i++){
     facereplace[i] = "bg-face_"+i;
 }
-try{
-	if (showfacenamereplace) {
+
+
+safe_do(function(){
+    if ($('#showfacenamereplace').length > 0) {
 		for (var i = 0; i < facenamereplace.length; i++) {
 			showfacenamereplace.innerHTML += facenamereplace[i];
 		}
 	}
-}catch(e){}
+});
+
 var bodyhtml = $("#comments").html();
 if (bodyhtml){
     for (var i = 0; i < facereplace.length; i++) {
@@ -55,23 +61,31 @@ if (bodyhtml){
 
 function autoresize(){
     if ($(window).width() > 800) {
-        var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height());
-        $(".atcs").css("min-height", sb_height);
+        safe_do(function(){
+            var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height());
+            $(".atcs").css("min-height", sb_height);
+        });
     }
-    if ($('#comments').length > 0){
-        if ($(window).width() < 500){
-            $('#comments').parent('.post').css('padding', 0);
-        }else{
-            $('#comments').parent('.post')[0].style = '';
+    safe_do(function(){
+        if ($('#comments').length > 0){
+            if ($(window).width() < 500){
+                $('#comments').parent('.post').css('padding', 0);
+            }else{
+                $('#comments').parent('.post')[0].style = '';
+            }
         }
-    }
-    if ($(".post-meta").length > 0){
-        $(".post-meta").css("width", $(".atcs").width());
-    }
+    });
+    safe_do(function(){
+        if ($(".post-meta").length > 0){
+            $(".post-meta").css("width", $(".atcs").width());
+        }
+    });
     // 顶部导航栏
-    let gap = $('.top-nav').height() + 60;
-    $('.head').css('padding-bottom', gap + 'px');
-    $('.body').css('top', (-gap) + 'px')
+    safe_do(function(){
+        let gap = $('.top-nav').height() + 60;
+        $('.head').css('padding-bottom', gap + 'px');
+        $('.body').css('top', (-gap) + 'px');
+    });
 }
 autoresize();
 window.onresize = autoresize;
@@ -146,10 +160,6 @@ $('.click_to_show').each(function(){
     });
 });
 
-window.onload = function(){
-    $("#pagecover").fadeOut()
-}
-
 /* 阅读部分添加导航 */
 if ($('.post-content').length == 1){
     // 建创悬浮窗口
@@ -195,3 +205,5 @@ if ($('.post-content').length == 1){
         $('body').append(navdom);
     }
 }
+
+safe_do(console.clear);

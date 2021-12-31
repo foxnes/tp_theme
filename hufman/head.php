@@ -3,7 +3,7 @@
 <html class="no-js">
 <head>
     <meta charset="<?php $this->options->charset(); ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><?php $this->archiveTitle(array(
@@ -14,9 +14,6 @@
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
     <link rel="stylesheet" href="<?php $this->options->themeUrl('s/i.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('s/icon/css/animation.css'); ?>">
-    <!-- 已经弃用fontawesome 转用emoji
-    <link rel="stylesheet" href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.css">
-    -->
     <?php $this->header(); ?>
     <script src="<?php $this->options->themeUrl('s/jquery-1.8.3.min.js'); ?>"></script>
     <script>themeUrl = "<?php echo $this->options->themeUrl ?>";</script>

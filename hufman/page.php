@@ -11,7 +11,7 @@ $this->need('head.php');
 		<i class="icon icon-eye"></i> 热度 <?php echo getViewsStr($this); ?>
 		<?php if($this->user->hasLogin()): ?>
 		&nbsp;
-		<i class="icon icon-edit"></i> <a href="<?php $this->options->adminUrl("write-post.php?cid=".$this->cid); ?>">编辑</a>
+		<i class="icon icon-edit"></i> <a href="<?php $this->options->adminUrl("write-page.php?cid=".$this->cid); ?>">编辑</a>
 		<?php endif; ?>
 	</p>
 	<hr />

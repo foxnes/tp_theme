@@ -9,7 +9,28 @@ function themeConfig($form) {
         _t('配置')
     );
     $form->addInput($ThemeOptions->multiMode());
-    $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL, _t('右栏HTML'), _t('在右侧栏的"其它"下面再添加新的内容.如：<br />&lt;ul class="sb-widget"&gt;&lt;p class=&quot;cleartext&quot;&gt;友链&lt;/p&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老李&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老黄&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;<br />再或者是：<br />&lt;ul class="sb-widget"&gt;<br />&lt;p class=&quot;cleartext&quot;&gt;诗词&lt;/p&gt;<br />&lt;li id=&quot;jinrishici-sentence&quot;&gt;正在加载....&lt;/li&gt;<br />&lt;script src=&quot;//sdk.jinrishici.com/v2/browser/jinrishici.js&quot; charset=&quot;UTF-8&quot; defer&gt;&lt;/script&gt;<br />&lt;/ul&gt;')));
+    $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL,
+    _t('右栏HTML'),
+    _t(
+    str_replace(PHP_EOL, '<br />', '在右侧栏的&quot;其它&quot;下面再添加新的内容.如：
+&lt;ul class=&quot;sb-widget&quot;&gt;&lt;p class=&quot;cleartext&quot;&gt;友链&lt;/p&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老李&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老黄&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+或者是今日诗词：
+&lt;ul class=&quot;sb-widget&quot;&gt;
+&lt;p class=&quot;cleartext&quot;&gt;诗词&lt;/p&gt;
+&lt;div id=&quot;poem_sentence&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;poem_info&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+$.getScript(&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot;).done(function() {
+    jinrishici.load(function(result) {
+    var sentence = document.querySelector(&quot;#poem_sentence&quot;);
+    var info = document.querySelector(&quot;#poem_info&quot;);
+    sentence.innerHTML = result.data.content.replace(/，/g, &#x27;，&lt;br /&gt;&#x27;);
+    info.innerHTML = &#x27;&#x27; + result.data.origin.dynasty + &#x27;-&#x27; + result.data.origin.author + &#x27;《&#x27; + result.data.origin.title + &#x27;》&#x27;;
+    });
+});
+&lt;/script&gt;
+&lt;/ul&gt;')
+    )));
 }
 
 function showThumb($obj, $randgiven){
