@@ -53,15 +53,12 @@
 
 
 <?php function threadedComments($comments, $options) {
-    $commentClass = '';
+    $isAuthorClass = '';
     if ($comments->authorId) {
         if ($comments->authorId == $comments->ownerId) {
-            $commentClass .= ' comment-by-author';
-        } else {
-            $commentClass .= ' comment-by-user';
+            $isAuthorClass .= 'comment-by-author';
         }
     }
- 
     $commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent';
 ?>
  
@@ -73,17 +70,20 @@ if ($comments->levels > 0) {
     echo ' comment-parent';
 }
 $comments->alt(' comment-odd', ' comment-even');
-echo $commentClass;
 ?>">
-    <div id="<?php $comments->theId(); ?>">
+    <div id="<?php $comments->theId(); ?>" class="<?php echo $isAuthorClass; ?>">
         <img class="avatar" src="<?php 
         // $comments->gravatar('55', '');
         _e(get_gravatar($comments->mail));
         ?>" alt="Gravatar" width="55" height="55">
 
         <div class="comment-right">
-            <p class="bold"><?php $comments->author(); ?></p>
-            <p class='muted'><?php $comments->date('Y-m-d H:i'); ?></p>
+            <p><span class="bold" title="author">
+                <?php /* 前面的title='author'不可随意删除,用于显示`@` */ $comments->author(); ?>
+            </span>
+                <span class="muted"><?php getOs($comments->agent); ?>&nbsp;·&nbsp;<?php getBrowser($comments->agent); ?></span>
+            </p>
+            <p class='muted'><?php $comments->date('Y年m月d日 H:i'); ?></p>
             <div class="comment-content"><?php $comments->content(); ?></div>
             <?php $comments->reply("<button class=\"comment-reply\">回复</button>"); ?>
         </div>

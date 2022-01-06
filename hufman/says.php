@@ -71,15 +71,17 @@ $this->need('head.php');
     <?php endif; ?>
 
 <?php function threadedComments($comments, $options) {
-	$isSay = $comments->levels == 0;
+	$isSay = $comments->levels == 0; # 顶层是说说 子层是评论
 ?>
 <li id="li-<?php $comments->theId(); ?>" class="comment-body<?php
-if ($isSay) echo ' says-block';
+if ($isSay) echo ' says-block comment-parent';
 ?>">
     <div id="<?php $comments->theId(); ?>">
-		<span class="bold"><?php $comments->author(); ?></span>
+		<span class="bold" title="author">
+            <?php /* 前面的title='author'不可随意删除,用于显示`@` */ $comments->author(); ?>
+        </span>
 		<?php if (!$isSay){ ?>
-		<span class='muted'><?php $comments->date('Y-m-d H:i'); ?></span>
+		<span class='muted'><?php $comments->date('y年m月d日 H:i'); ?></span>
 		<?php }else{ ?>
 		<div class='says-float-time'><?php $comments->date('m-d'); ?></div>
 		<?php } ?>
@@ -109,10 +111,16 @@ $(function(){
 		isAnimated: true,
 	});
 	$('.comment-reply').click(function(){
-		$('#comment-form').css({'position':'absolute', 'z-index': 999})
+		var w = $('.atcs').width() / 1.5;
+		var sw = $('body').width();
+		$('#comment-form').css({'position':'fixed', 'z-index': 999,
+			'box-shadow': 'rgba(64, 64, 64, 0.34) 0px 0px 5px', 'border-radius': '10px',
+			'width': $('.atcs').width() / 1.5,
+			'left': (sw - w)/2,
+			'bottom': $('#comment-form').height() / 2});
 	});
 	$('#cancel-comment-reply-link').click(function(){
-		$('#comment-form').css({'position':'static'})
+		$('#comment-form').attr('style', '');
 	});
 });
 </script>

@@ -5,9 +5,11 @@
 查看各个版本：[releases](https://gitee.com/foxnes/tp_theme/releases/)
 
 主题Hufman
+
 ![HUFMAN](hufman/screenshot.png)
 
 主题Vblog
+
 ![VBLOG](vblog/screenshot.png)
 
 其他注意事项请查阅模板内部的`README.MD`文件。

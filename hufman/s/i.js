@@ -7,15 +7,13 @@ try{jQuery()}catch(e){
 $(function(){
     $("#pagecover").fadeOut();
 });
-
-
 PostbirdImgGlass.init({ // 图像放大
-    domSelector:".post-content img:not([unzoomable])",
-    animation:true
+    domSelector: ".post-content img:not([unzoomable])",
+    animation: true
 });
-
 $(".post-thumb img").lazyload();
 $(".post-content img").lazyload();
+
 
 function safe_do(fn){
     try{fn()}catch{console.error('Error when executing: '+fn.toString())};
@@ -24,13 +22,10 @@ function safe_do(fn){
 facenamereplace = ["：滑稽：","：喷：","：彩虹：","：阴险：","：怒：","：笑眼：",
 "：黑线：","：玫瑰：","：乖：","：汗：","：惊哭：","：酷：","：狂汗：","：冷：",
 "：真棒：","：不高兴：","：大哭：","：咖啡：","：yeah：","：ojbk："];
-
 facereplace = [];
 for (var i=0; i<facenamereplace.length;i++){
     facereplace[i] = "bg-face_"+i;
 }
-
-
 safe_do(function(){
     if ($('#showfacenamereplace').length > 0) {
 		for (var i = 0; i < facenamereplace.length; i++) {
@@ -38,7 +33,6 @@ safe_do(function(){
 		}
 	}
 });
-
 var bodyhtml = $("#comments").html();
 if (bodyhtml){
     for (var i = 0; i < facereplace.length; i++) {
@@ -58,9 +52,8 @@ if (bodyhtml){
 }
 
 // 插入表情完毕之后再计算高度，防止插入表情后高度变化
-
 function autoresize(){
-    if ($(window).width() > 800) {
+    if ($(window).width() > 920) {
         safe_do(function(){
             var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height());
             $(".atcs").css("min-height", sb_height);
@@ -96,8 +89,7 @@ $(".backtotop").click(function () {
         return false;
 });
 
-// 评论区添加标签
-
+// 评论区添加表情
 function insertText(obj,str){
 	var m = obj.value.match(/：.*?：/g);
 	if (m) {
@@ -110,7 +102,6 @@ function insertText(obj,str){
 }
 
 // 代码高亮简单实现
-
 // 红色
 var HL_KW = ['and', 'as', 'assert', 'break', 'case', 'catch', 'classdef', 'continue', 'die', 'del',
 'do', 'else', 'elseif', 'endfor', 'endforeach', 'endif', 'elif', 'endswitch',
@@ -160,6 +151,18 @@ $('.click_to_show').each(function(){
     });
 });
 
+// 评论区显示@
+$('.comment-children .comment-content').each(function(){
+    var id = $(this).parents('.comment-body').parents('.comment-children').parents('.comment-body').attr('id');
+    var id = $('#'+id+' span[title=author]').eq(0).text();
+    id = id.replace(/(^[\s ]+)|([\s ]+$)/g, '');
+    var num = $(this).parents('.comment-body').length - 1;
+    if (id){
+        $(this).html('['+num+'层]'+' 回复 <a>@'+id+'</a>: '+$(this).html());
+    }
+});
+
+
 /* 阅读部分添加导航 */
 if ($('.post-content').length == 1){
     // 建创悬浮窗口
@@ -205,5 +208,6 @@ if ($('.post-content').length == 1){
         $('body').append(navdom);
     }
 }
+
 
 safe_do(console.clear);

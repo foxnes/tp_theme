@@ -2,7 +2,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 define('__TYPECHO_GRAVATAR_PREFIX__', 'https://gravatar.loli.net/avatar/');
 
-function themeConfig($form) {
+function themeConfig($form){
     $ThemeOptions = new Typecho_Widget_Helper_Form_Element_Checkbox('ThemeOptions', 
         array('content' => _t('主页文章全文输出'), 'no_rand_thumb' => _t('无图时<b>不输出</b>随机缩略图')),
         array('content', 'no_rand_thumb'),
@@ -20,8 +20,8 @@ function themeConfig($form) {
 &lt;div id=&quot;poem_sentence&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;poem_info&quot;&gt;&lt;/div&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
-$.getScript(&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot;).done(function() {
-    jinrishici.load(function(result) {
+$.getScript(&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot;).done(function(){
+    jinrishici.load(function(result){
     var sentence = document.querySelector(&quot;#poem_sentence&quot;);
     var info = document.querySelector(&quot;#poem_info&quot;);
     sentence.innerHTML = result.data.content.replace(/，/g, &#x27;，&lt;br /&gt;&#x27;);
@@ -81,7 +81,7 @@ function showThumb($obj, $randgiven){
     return true;
 }
 
-function getViewsStr($widget) {
+function getViewsStr($widget){
     //来源不明
     $fields = unserialize($widget->fields);
     if (array_key_exists('views', $fields))
@@ -89,13 +89,13 @@ function getViewsStr($widget) {
     else
         $views = 0;
     //增加浏览次数
-    if ($widget->is('single')) {
+    if ($widget->is('single')){
         $vieweds = Typecho_Cookie::get('contents_viewed');
         if (empty($vieweds))
             $vieweds = array();
         else
             $vieweds = explode(',', $vieweds);
-        if (!in_array($widget->cid, $vieweds)) {
+        if (!in_array($widget->cid, $vieweds)){
             $views = $views + 1;
             $widget->setField('views', 'int', $views, $widget->cid);
             $vieweds[] = $widget->cid;
@@ -113,17 +113,17 @@ function img_lazy_load($ct){
 
 function get_gravatar($mail, $size=55, $rating='X', $default='', $isSecure = true){
     $reg = "/^\d{5,11}@[qQ][Qq]\.(com)$/";
-    if (preg_match($reg, $mail)) {
+    if (preg_match($reg, $mail)){
         $img    = explode("@", $mail);
         $url = "//q2.qlogo.cn/headimg_dl?dst_uin={$img[0]}&spec=100";
-    } else {
-        if (defined('__TYPECHO_GRAVATAR_PREFIX__')) {
+    }else{
+        if (defined('__TYPECHO_GRAVATAR_PREFIX__')){
             $url = __TYPECHO_GRAVATAR_PREFIX__;
-        } else {
+        }else{
             $url = $isSecure ? 'https://secure.gravatar.com' : 'http://www.gravatar.com';
             $url .= '/avatar/';
         }
-        if (!empty($mail)) {
+        if (!empty($mail)){
             $url .= md5(strtolower(trim($mail)));
         }
         $url .= '?s=' . $size;
@@ -142,7 +142,7 @@ function theme_random_posts($limit = 10){
     $post_count = count($cids);
     $cid_list = [];
     $view_list = [];
-    for ($i = 0; $i < $post_count; $i++) { 
+    for ($i = 0; $i < $post_count; $i++){ 
         $cid_list[$i] = $cids[$i]['cid'];
         $view_list[$cids[$i]['cid']] = $cids[$i]['int_value'];
         // 有BUG会导致field没有被删除，所以按照cid来作为索引。
@@ -150,7 +150,7 @@ function theme_random_posts($limit = 10){
     $cids = implode(',', $cid_list);
     $sql = 'SELECT * from `'.$prefix.'contents` WHERE cid in ('.$cids.') AND (`status` = "publish") ORDER BY FIELD(`cid`, '.$cids.')';
     $result = $db->fetchAll($sql);
-    for ($i = 0; $i < $post_count; $i++) {
+    for ($i = 0; $i < $post_count; $i++){
         if (is_null($result[$i])){
             continue;
         }
@@ -158,4 +158,93 @@ function theme_random_posts($limit = 10){
         echo str_replace(array('{permalink}', '{title}', '{views}'),
         array($post['permalink'], $post['title'], $view_list[$post['cid']]), $format);
     }
+}
+
+
+// 获取浏览器信息
+function getBrowser($agent) {
+	if (preg_match('/MSIE\s([^\s|;]+)/i', $agent, $regs)) {
+		$outputer = 'Internet Explore';
+	} else if (preg_match('/FireFox\/([^\s]+)/i', $agent, $regs)) {
+		$str1 = explode('Firefox/', $regs[0]);
+		$FireFox_vern = explode('.', $str1[1]);
+		$outputer = 'FireFox';
+	} else if (preg_match('/Maxthon([\d]*)\/([^\s]+)/i', $agent, $regs)) {
+		$str1 = explode('Maxthon/', $agent);
+		$Maxthon_vern = explode('.', $str1[1]);
+		$outputer = 'MicroSoft Edge';
+	} else if (preg_match('#360([a-zA-Z0-9.]+)#i', $agent, $regs)) {
+		$outputer = '360 Fast Browser';
+	} else if (preg_match('/Edge([\d]*)\/([^\s]+)/i', $agent, $regs)) {
+		$str1 = explode('Edge/', $regs[0]);
+		$Edge_vern = explode('.', $str1[1]);
+		$outputer = 'MicroSoft Edge';
+	} else if (preg_match('/UC/i', $agent)) {
+		$str1 = explode('rowser/',  $agent);
+		$UCBrowser_vern = explode('.', $str1[1]);
+		$outputer = 'UC Browser';
+	} else if (preg_match('/QQ/i', $agent, $regs)||preg_match('/QQ Browser\/([^\s]+)/i', $agent, $regs)) {
+		$str1 = explode('rowser/',  $agent);
+		$QQ_vern = explode('.', $str1[1]);
+		$outputer = 'QQ Browser';
+	} else if (preg_match('/UBrowser/i', $agent, $regs)) {
+		$str1 = explode('rowser/',  $agent);
+		$UCBrowser_vern = explode('.', $str1[1]);
+		$outputer = 'UC Browser';
+	} else if (preg_match('/Opera[\s|\/]([^\s]+)/i', $agent, $regs)) {
+		$outputer = 'Opera';
+	} else if (preg_match('/Chrome([\d]*)\/([^\s]+)/i', $agent, $regs)) {
+		$str1 = explode('Chrome/', $agent);
+		$chrome_vern = explode('.', $str1[1]);
+		$outputer = 'Google Chrome';
+	} else if (preg_match('/safari\/([^\s]+)/i', $agent, $regs)) {
+		$str1 = explode('Version/',  $agent);
+		$safari_vern = explode('.', $str1[1]);
+		$outputer = 'Safari';
+	} else {
+		$outputer = 'Google Chrome';
+	}
+	echo $outputer;
+}
+// 获取操作系统信息
+function getOs($agent) {
+	$os = false;
+	if (preg_match('/win/i', $agent)) {
+		if (preg_match('/nt 6.0/i', $agent)) {
+			$os = 'Windows Vista';
+		} else if (preg_match('/nt 6.1/i', $agent)) {
+			$os = 'Windows 7';
+		} else if (preg_match('/nt 6.2/i', $agent)) {
+			$os = 'Windows 8';
+		} else if(preg_match('/nt 6.3/i', $agent)) {
+			$os = 'Windows 8.1';
+		} else if(preg_match('/nt 5.1/i', $agent)) {
+			$os = 'Windows XP';
+		} else if (preg_match('/nt 10.0/i', $agent)) {
+			$os = 'Windows 10';
+		} else {
+			$os = 'Windows X64';
+		}
+	} else if (preg_match('/android/i', $agent)) {
+		if (preg_match('/android 9/i', $agent)) {
+			$os = 'Android Pie';
+		} else if (preg_match('/android 8/i', $agent)) {
+			$os = 'Android Oreo';
+		} else {
+			$os = 'Android';
+		}
+	} else if (preg_match('/ubuntu/i', $agent)) {
+		$os = 'Ubuntu';
+	} else if (preg_match('/linux/i', $agent)) {
+		$os = 'Linux';
+	} else if (preg_match('/iPhone/i', $agent)) {
+		$os = 'iPhone';
+	} else if (preg_match('/mac/i', $agent)) {
+		$os = 'MacOS';
+	} else if (preg_match('/fusion/i', $agent)) {
+		$os = 'Android';
+	} else {
+		$os = 'Linux';
+	}
+	echo $os;
 }
