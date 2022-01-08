@@ -27,7 +27,7 @@
             <ul class="sb-widget">
                 <p class="cleartext">热门</p>
                 <?php
-                theme_random_posts(10);
+                theme_hot_posts(10);
                 ?>
             </ul>
             <ul class="sb-widget">

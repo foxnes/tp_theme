@@ -85,8 +85,9 @@ if ($isSay) echo ' says-block comment-parent';
 		<?php }else{ ?>
 		<div class='says-float-time'><?php $comments->date('m-d'); ?></div>
 		<?php } ?>
-		<div class="comment-content"><?php $comments->content(); ?></div>
-		<p class="fr"><?php $comments->reply("<button class=\"comment-reply\">回复</button>"); ?></p>
+		<div class="comment-content"><?php $comments->content(); ?>
+		<?php $comments->reply("<button class=\"comment-reply\">回复</button>"); ?></div>
+		
 		<div class="clear"></div>
     </div>
 <?php if ($comments->children) {
@@ -111,16 +112,21 @@ $(function(){
 		isAnimated: true,
 	});
 	$('.comment-reply').click(function(){
-		var w = $('.atcs').width() / 1.5;
-		var sw = $('body').width();
-		$('#comment-form').css({'position':'fixed', 'z-index': 999,
-			'box-shadow': 'rgba(64, 64, 64, 0.34) 0px 0px 5px', 'border-radius': '10px',
-			'width': $('.atcs').width() / 1.5,
-			'left': (sw - w)/2,
-			'bottom': $('#comment-form').height() / 2});
+		$('#comment-form').css({'z-index': 999, 'border-radius': '10px', 'box-shadow': 'rgba(64, 64, 64, 0.34) 0px 0px 5px'});
+		if ($(window).width() < 920) {
+			var w = $('.atcs').width()*0.8;
+			var sw = $('body').width();
+			$('#comment-form').css({'position':'fixed', 'width': w,
+				'left': (sw - w)/2, 'bottom': $('#comment-form').height()/2});
+		}else{
+			$('#comment-form').css({
+				'position':'absolute', 'min-width': '28rem'
+			});
+		}
 	});
 	$('#cancel-comment-reply-link').click(function(){
-		$('#comment-form').attr('style', '');
+		$('#comment-form').css({'position':'static', 'box-shadow': 'none', 'left': 'auto', 'bottom': 'auto',
+			'border-radius': 0, 'width': 'auto'});
 	});
 });
 </script>

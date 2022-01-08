@@ -133,7 +133,7 @@ function get_gravatar($mail, $size=55, $rating='X', $default='', $isSecure = tru
     return $url;
 }
 
-function theme_random_posts($limit = 10){
+function theme_hot_posts($limit = 10){
     $format = '<li><a href="{permalink}" title="{title}"><i class="icon icon-fire"></i> <i>{views}</i> {title}</a></li>';
     $db = Typecho_Db::get();
     $prefix = $db->getPrefix();

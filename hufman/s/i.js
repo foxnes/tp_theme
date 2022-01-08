@@ -151,6 +151,13 @@ $('.click_to_show').each(function(){
     });
 });
 
+
+// 评论区头像旋转
+$('.avatar').each(function(){
+    var delay = Math.random()*5;  var speed = 600 + Math.random() * 100;
+    $(this).css({'animation': 'spin '+speed+'s infinite linear', 'animation-delay': delay+'s'});
+});
+
 // 评论区显示@
 $('.comment-children .comment-content').each(function(){
     var id = $(this).parents('.comment-body').parents('.comment-children').parents('.comment-body').attr('id');

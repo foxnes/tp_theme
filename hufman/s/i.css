@@ -36,7 +36,7 @@ img{
 .post-content a:hover{
     text-decoration: underline;
 }
-.post-meta-i, i.tbbq, .post-thumb, .sb-holder, .btn, .backtotop, .icon, .avatar, .post-meta{
+.post-meta-i, i.tbbq, .post-thumb, .sb-holder, .btn, .backtotop, .icon, .avatar, .post-meta, .page-navigator{
     -moz-user-select:none;
     -webkit-user-select:none;
     -ms-user-select:none;
@@ -100,13 +100,12 @@ img{
     padding: 0 0.7em;
 }
 .top-nav li a{
-    background-color: #505050;
     padding: 0.25em 0.35em;
     border-radius: 0.3em;
 }
 .top-nav li a:hover{
     color: inherit;
-    background-color: #5c5c5c;
+    background-color: #505050;
 }
 .body{
     position: relative;
@@ -537,8 +536,7 @@ code{
 
 .page-navigator{
     padding: 15px;
-    margin: auto;
-    margin-top: 15px;
+    margin: 15px auto 5rem auto;
     text-align: center;
     width: 80%;
     border-top: 1px solid #f1f1f1;
@@ -557,9 +555,7 @@ code{
     display: inline-block;
     vertical-align: top;
     text-align: center;
-}
-.page-navigator li+li{
-    margin-left: 10px;
+    margin: 0.2rem 0.7rem;
 }
 .page-navigator a{
     font-size: 15px;
@@ -637,9 +633,10 @@ input[type="submit"] a:hover, button a:hover{
     color: inherit;
 }
 #comment-form{
-    background: #f1f1f1;
+    background: #f6f6f6;
     margin: 15px 0;
     padding: 10px 15px 15px 15px;
+    border-radius: 3px;
 }
 #comment-form input, #comment-form button, #comment-form textarea{
     width: 100%;
@@ -663,8 +660,11 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     width: 49%;
 }
 .comment-right{
-    margin-left: 4.5em;
+    margin-left: 4.2em;
     font-family: "微软雅黑";
+    padding: 0.8rem 1rem;
+    border-radius: 0.2rem;
+    box-shadow: 2px 2px 5px #f4f4f4bd;
 }
 .comment-right:after{
     content: "";
@@ -685,36 +685,36 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 }
 
 .comment-list .comment-list{position:relative;word-break:break-all;word-wrap:break-word;white-space:normal;margin-top:20px}
-.avatar{float:left;margin:0 5px 5px 0;padding:2px;border-radius: 50%;width: 55px;height: 55px;
+.avatar{float:left;margin: 0.6rem 5px 5px 0;padding:2px;border-radius: 50%;width: 55px;height: 55px;
     box-shadow: 0 0 14px #e5e5e5;transition: all 0.3s;}
-.comment-body{padding:15px;list-style:none}
+.comment-body{padding: 1rem 0 1rem 1rem;list-style:none}
 .comment-body p.half{clear: none !important}
 /* .comment-body+.comment-body{margin-top:15px} */
-.comment-body:hover .avatar{
-    transform: rotate(45deg);
-}
-.comment-body:hover .tbbq{
+.comment-content:hover .tbbq{
     transform: scale(0.8) rotate(25deg);
 }
 
 
 .comment-reply{
-    color: #2c2c2c;
+    color: white;
     font-size: 12px;
     font-weight: 300;
-    background-color: #f3f3f3;
+    background-color: #5f5f5f;
     border-radius: 3px;
     padding: 4px 7px;
+    float: right;
     user-select: none;
+    opacity: 0;
+    font-weight: bold;
+    transition: all 0.5s;
+}
+.comment-content:hover .comment-reply, .comment-right:hover .comment-reply{
+    opacity: 1;
 }
 .comment-content{
     line-height: 2em;
-    color: #686868;
+    color: #3e3e3e;
     padding: 0.5em 0;
-}
-.comment-children{
-    border-radius: 5px;
-    box-shadow: 0 0 10px #f3f3f3;
 }
 
 .post-meta{
@@ -772,7 +772,16 @@ i.tbbq.tiny{
     text-shadow: none;
 }
 
+@media screen and (max-width: 1024px){
+    html{
+        font-size: 13px;
+    }
+}
+
 @media screen and (max-width: 920px){
+    html{
+        font-size: 14px;
+    }
     .sb-left, .sb-right, .atcs, .body{
         width: 100%;
     }
@@ -1005,6 +1014,12 @@ table tr:hover{
 .says-block.comment-body{
     border-radius: 1rem 0 0 2rem;
 }
+#says-area .comment-children .comment-body{
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+    box-shadow: none;
+}
 #comment-form textarea{width: 100%; max-width: 100%; min-width: 100%;}
 
 .comment-by-author span[title=author]{
@@ -1012,11 +1027,6 @@ table tr:hover{
     line-height: 1em;
     display: inline-block;
 }
-
-/* .comment-children{
-    border-left: 1px dashed gray;
-    padding-left: 2px
-} */
 
 
 ::-webkit-scrollbar {
