@@ -34,10 +34,16 @@
     		</p>
             <?php endif; ?>
             <div class="click_to_show fl">
-                <span class="click_board" for="showfacenamereplace">
-                    <i class="tbbq bg-face_0" draggable="false" alt="😀"></i>
+                <span class="click_board" for="showfacenamereplace_tbbq">
+                    <i class="emojis tbbq tbbq-face_0" draggable="false" alt="😀"></i>
                 </span>
-                <div id="showfacenamereplace" class="hidden"></div>
+                <div id="showfacenamereplace_tbbq" class="hidden"></div>
+            </div>
+            <div class="click_to_show fl">
+                <span class="click_board" for="showfacenamereplace_wpbq">
+                    <i class="emojis wpbq wpbq-face_15" draggable="false" alt="😀"></i>
+                </span>
+                <div id="showfacenamereplace_wpbq" class="hidden"></div>
             </div>
     		<p class='fr'>
                 <?php $comments->cancelReply("取消回复"); ?>

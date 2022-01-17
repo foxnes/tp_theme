@@ -3,16 +3,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 define('__TYPECHO_GRAVATAR_PREFIX__', 'https://gravatar.loli.net/avatar/');
 
 function themeConfig($form){
-    $ThemeOptions = new Typecho_Widget_Helper_Form_Element_Checkbox('ThemeOptions', 
-        array('content' => _t('主页文章全文输出'), 'no_rand_thumb' => _t('无图时<b>不输出</b>随机缩略图')),
-        array('content', 'no_rand_thumb'),
-        _t('配置')
-    );
-    $form->addInput($ThemeOptions->multiMode());
-    $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL,
-    _t('右栏HTML'),
-    _t(
-    str_replace(PHP_EOL, '<br />', '在右侧栏的&quot;其它&quot;下面再添加新的内容.如：
+    $text = ['在右侧栏的&quot;其它&quot;下面再添加新的内容.如：
 &lt;ul class=&quot;sb-widget&quot;&gt;&lt;p class=&quot;cleartext&quot;&gt;友链&lt;/p&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老李&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老黄&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 或者是今日诗词：
 &lt;ul class=&quot;sb-widget&quot;&gt;
@@ -29,7 +20,20 @@ $.getScript(&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot;).don
     });
 });
 &lt;/script&gt;
-&lt;/ul&gt;')
+&lt;/ul&gt;'];
+    $ThemeOptions = new Typecho_Widget_Helper_Form_Element_Checkbox('ThemeOptions', 
+        array('content' => _t('主页文章全文输出'), 'no_rand_thumb' => _t('无图时<b>不输出</b>随机缩略图')),
+        array('content', 'no_rand_thumb'),
+        _t('配置')
+    );
+    $form->addInput($ThemeOptions->multiMode());
+    $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('post_meta_text', NULL, NULL,
+    _t('文章底部说明信息'),
+    _t('默认替换关键字：%author% (作者(链接)), %time% (发布时间)')));
+    $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL,
+    _t('右栏HTML'),
+    _t(
+    str_replace(PHP_EOL, '<br />', $text[0])
     )));
 }
 

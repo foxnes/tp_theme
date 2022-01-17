@@ -18,13 +18,22 @@ $this->need('head.php');
     <div class="post-content">
 		<?php echo img_lazy_load($this->content) ?>
 		<div class="post-meta">
-		    <p>该本文由 <a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a> 创作或转载
-			<br />采用 <a href="//creativecommons.org/licenses/by/3.0/cn" rel="nofollow">知识共享署名 3.0</a>，可自由转载、引用，但需署名作者且注明文章出处。</p>
+			<?php if ($this->options->post_meta_text): ?>
+            <?php
+				$author_link = '<a href="'.$this->author->permalink.'">'.$this->author->name.'</a>';
+				$meta = $this->options->post_meta_text;
+				$meta = str_replace('%author%', $author_link, $meta);
+				$meta = str_replace('%time%', date('Y年m月d日' , $this->created), $meta);
+				$meta = str_replace('%modify%', date('Y年m月d日' , $this->modified), $meta);
+				echo $meta;
+			else: ?>
+			<p>该本文由<a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a>创作或转载<br />采用<a href="//creativecommons.org/licenses/by/3.0/cn" rel="nofollow" target="_blank">知识共享署名 3.0</a>，可自由转载、引用，但需署名作者且注明文章出处。</p>
+            <?php endif; ?>
 		</div>
     </div>
     <ul class="post-nav">
         <div class="tags fr">
-            标签: <?php $this->tags('', true, '无'); ?>
+            标签: <?php $this->tags('', true, '<a href="javascript:void 0">无标签</a>'); ?>
         </div>
         <li>上一篇: <?php $this->thePrev('%s','没有了'); ?></li>
         <li>下一篇: <?php $this->theNext('%s','没有了'); ?></li>

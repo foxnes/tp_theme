@@ -56,11 +56,18 @@ $this->need('head.php');
     		</p>
             <?php endif; ?>
             <div class="click_to_show fl">
-                <span class="click_board" for="showfacenamereplace">
-                    <i class="tbbq bg-face_0" draggable="false" alt="😀"></i>
+                <span class="click_board" for="showfacenamereplace_tbbq">
+                    <i class="emojis tbbq tbbq-face_0" draggable="false" alt="😀"></i>
                 </span>
-                <div id="showfacenamereplace" class="hidden"></div>
+                <div id="showfacenamereplace_tbbq" class="hidden"></div>
             </div>
+            <div class="click_to_show fl">
+                <span class="click_board" for="showfacenamereplace_wpbq">
+                    <i class="emojis wpbq wpbq-face_15" draggable="false" alt="😀"></i>
+                </span>
+                <div id="showfacenamereplace_wpbq" class="hidden"></div>
+            </div>
+			
     		<p class='fr'>
                 <?php $comments->cancelReply("取消回复"); ?>
                 <button type="submit">提交</button>
@@ -81,7 +88,7 @@ if ($isSay) echo ' says-block comment-parent';
             <?php /* 前面的title='author'不可随意删除,用于显示`@` */ $comments->author(); ?>
         </span>
 		<?php if (!$isSay){ ?>
-		<span class='muted'><?php $comments->date('y年m月d日 H:i'); ?></span>
+		<span class='muted'><?php $comments->date('y-m-d H:i'); ?></span>
 		<?php }else{ ?>
 		<div class='says-float-time'><?php $comments->date('m-d'); ?></div>
 		<?php } ?>
@@ -106,11 +113,13 @@ if ($isSay) echo ' says-block comment-parent';
 <script src="<?php $this->options->themeUrl('s/masonry.pkgd.min.js'); ?>"></script>
 <script>
 $(function(){
-    var $container = $('#says-area');
-	$container.masonry({
+	var says_msnry = new Masonry($('#says-area')[0], {
 		itemSelector: '.says-block',
 		isAnimated: true,
-	});
+	}); // msnry.layout();
+	$('.comment-content img').on('load', function(){
+		says_msnry.layout();
+	})
 	$('.comment-reply').click(function(){
 		$('#comment-form').css({'z-index': 999, 'border-radius': '10px', 'box-shadow': 'rgba(64, 64, 64, 0.34) 0px 0px 5px'});
 		if ($(window).width() < 920) {

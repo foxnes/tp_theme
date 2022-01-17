@@ -65,7 +65,7 @@ var PostbirdImgGlass = {
     initCssClass: function () {
         var style = document.createElement('style');
         var styleContent = '.' + this.boxClassName + '{position:fixed;top:0;left:0;width:100%;height:100%;text-align:center;cursor:zoom-out;background-color:' + this.boxBgColor + ';display:none;text-align:center;overflow:hidden;z-index:9999;}';
-        styleContent += '.' + this.boxClassName + ' img {position:relative;top:50%;transform:translateY(-50%);max-width:90%;}';
+        styleContent += '.' + this.boxClassName + ' img {position:relative;top:50%;transform:translateY(-50%);max-width:95%;max-height: 100vh;}';
         styleContent += '.postbird-img-glass-box-move{animation:postbird-img-glass .5s;-webkit-animation:postbird-img-glass .5s;-moz-animation:postbird-img-glass .5s;-o-animation:postbird-img-glass .5s;animation-fill-mode:forwards;-o-animation-fill-mode:forwards;-moz-animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards}@-moz-keyframes postbird-img-glass{from{opacity:0;width:100%;height:100%;transform:translateY(-200px)}to{opacity:1;width:100%;height:100%;transform:translateY(0)}}@-webkit-keyframes postbird-img-glass{from{opacity:0;width:100%;height:100%;transform:translateY(-200px)}to{opacity:1;width:100%;height:100%;transform:translateY(0)}}@-o-keyframes postbird-img-glass{from{opacity:0;width:100%;height:100%;transform:translateY(-200px)}to{opacity:1;width:100%;height:100%;transform:translateY(0)}}@keyframes postbird-img-glass{from{opacity:0;width:100%;height:100%;transform:translateY(-200px)}to{opacity:1;width:100%;height:100%;transform:translateY(0)}}';
         style.innerHTML = styleContent;
         document.head.appendChild(style);
