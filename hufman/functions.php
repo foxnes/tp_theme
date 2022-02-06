@@ -22,14 +22,17 @@ $.getScript(&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot;).don
 &lt;/script&gt;
 &lt;/ul&gt;'];
     $ThemeOptions = new Typecho_Widget_Helper_Form_Element_Checkbox('ThemeOptions', 
-        array('content' => _t('主页文章全文输出'), 'no_rand_thumb' => _t('无图时<b>不输出</b>随机缩略图')),
-        array('content', 'no_rand_thumb'),
+        array('content' => _t('主页文章全文输出'),
+            'no_rand_thumb' => _t('主页文章无图时隐藏随机展示的缩略图'),
+            'comments_recent_hide_author' => _t('左侧栏近期评论隐藏作者回复')
+        ),
+        array('content', 'no_rand_thumb', 'comments_recent_hide_author'),
         _t('配置')
     );
     $form->addInput($ThemeOptions->multiMode());
     $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('post_meta_text', NULL, NULL,
     _t('文章底部说明信息'),
-    _t('默认替换关键字：%author% (作者(链接)), %time% (发布时间)')));
+    _t('默认替换关键字：%author% (作者(超链接)), %time% (发布时间), %modify% (修改时间)')));
     $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL,
     _t('右栏HTML'),
     _t(
@@ -252,3 +255,37 @@ function getOs($agent) {
 	}
 	echo $os;
 }
+
+/* 扩展Typecho的类 */
+
+class Widget_Comments_Recent_theme extends Widget_Abstract_Comments
+{
+    public function __construct($request, $response, $params = NULL)
+    {
+        parent::__construct($request, $response, $params);
+        $this->parameter->setDefault(array('pageSize' => $this->options->commentsListSize, 'parentId' => 0, 'ignoreAuthor' => false));
+    }
+    public function execute()
+    {
+        $select  = $this->select()->limit($this->parameter->pageSize)
+        ->where('table.comments.status = ?', 'approved')
+        ->order('table.comments.coid', Typecho_Db::SORT_DESC);
+
+        if ($this->parameter->parentId) {
+            $select->where('cid = ?', $this->parameter->parentId);
+        }
+
+        if ($this->options->commentsShowCommentOnly) {
+            $select->where('type = ?', 'comment');
+        }
+        
+        /** 忽略作者评论 */
+        if ( ( !empty($this->options->ThemeOptions) && in_array('comments_recent_hide_author', $this->options->ThemeOptions) )
+             || $this->parameter->ignoreAuthor) {
+            $select->where('ownerId <> authorId');
+        }
+
+        $this->db->fetchAll($select, array($this, 'push'));
+    }
+}
+

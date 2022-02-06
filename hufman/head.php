@@ -20,13 +20,13 @@
 </head>
 <body>
     <div id="pagecover" onclick="try{$(this).fadeOut()}catch(e){this.style.display='none';}"></div>
-    <div class="head">
+    <header class="head">
         <div class="ct">
             <h1><a href='<?php $this->options->siteUrl() ?>'><?php $this->options->title() ?></a></h1>
             <i><small><?php $this->options->description() ?></small></i>
         </div>
-    </div>
-    <div class="body">
+    </header>
+    <main class="body">
         <ul class="top-nav">
             <li><a href="<?php $this->options->siteUrl() ?>" title="<?php $this->options->title(); ?>">首页</a></li>
             <?php $this->widget('Widget_Contents_Page_List')->to($pages);while($pages->next()): ?>

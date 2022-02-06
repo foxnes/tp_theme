@@ -11,8 +11,8 @@ html{
     background-color: #eaeaea;
     color: #333;
     word-break: break-all;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif,"微软雅黑";
-    -webkit-font-smoothing:antialiased;
+    font-family: sans-serif, "微软雅黑";
+    -webkit-font-smoothing: antialiased;
 }
 a{
     color: inherit;
@@ -80,6 +80,8 @@ img{
     color: rgba(255,255,255,.5);
     padding: 3rem 2rem 8rem 2rem;
     text-shadow: 4px 3px 0 #2b2b2b, 9px 8px 0 rgba(0,0,0,0.15);
+    font-size: 1.15rem;
+    font-weight: 100;
 }
 .head .ct{
     width: 80%;
@@ -303,31 +305,6 @@ ul.sb-widget li{
 .post-thumb .inner:hover{
     padding-right: 10px;
 }
-.foot{
-    color: rgba(255,255,255,0.5);
-    padding: 0 40px 30px 40px;
-    font-size: 14px;
-    background-color: #33363b;
-    position: relative;
-}
-.foot .backtotop{
-    background: #eaeaea;
-    color: #777;
-    overflow: hidden;
-    text-align: center;
-    font-size: 1.6rem;
-    line-height: 2rem;
-    height: 2rem;
-    width: 5rem;
-    display: block;
-    margin: 0 auto;
-    -webkit-border-radius: 0 0 3px 3px;
-    border-radius: 0 0 3px 3px;
-    -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.05);
-    box-shadow: inset 0 1px 0 rgba(0,0,0,.05);
-    margin-bottom: 15px;
-    cursor: pointer;
-}
 .a-color a, .post-content a{
     color: #398cbd;
     font-weight: inherit;
@@ -396,24 +373,44 @@ hr{
 .post-content img{
     margin: 0.67em 0;
 }
-.post-content pre{
+
+code{
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+    margin: 2px;
+    font-family: Consolas, monospace, Monaco, 'Andale Mono', 'Ubuntu Mono';
+    word-break: break-word;
+    line-height: 1.2;
+}
+
+pre{
     background-color: #fcfcfc;
     padding: 1em;
-    white-space: pre;
+    white-space: pre-wrap;
     border-radius: 2px;
     max-width: 100%;
-    max-height: 500px;
     margin: 1em 0;
+    max-height: 80vh;
     overflow: auto;
+    scrollbar-width: thin;
 }
-.post-content pre code{
-    display: block;
+/* 禁止pre内部未标注语言时，pre被修改padding */
+pre:not([class*="language-"]){
+    padding: 1em !important;
+}
+pre code{
+    display: inline-block;
     padding: 0;
     margin: 0;
     background-color: transparent;
     color: inherit;
     font-style: normal;
     word-break: break-all;
+    line-height: 1.5;
 }
 .post-content .title_level{
     position: absolute;
@@ -526,16 +523,6 @@ hr{
 }
 .post-content ol, .post-content ul{
     margin: 1em 0 1em 0;
-}
-code{
-    padding: 2px 4px;
-    font-size: 90%;
-    color: #c7254e;
-    background-color: #f9f2f4;
-    border-radius: 4px;
-    margin: 2px;
-    font-family: Consolas, monospace, Monaco, 'Andale Mono', 'Ubuntu Mono';
-    word-break: break-word;
 }
 
 .page-navigator{
@@ -666,9 +653,9 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 .comment-right{
     margin-left: 4.2em;
     font-family: "微软雅黑";
-    padding: 0.8rem 1rem;
+    padding: 0.2rem 1rem 0 0.7rem;
     border-radius: 0.2rem;
-    box-shadow: 2px 2px 5px #f4f4f4bd;
+    /* box-shadow: 2px 2px 5px #f4f4f4bd; */
 }
 .comment-right:after{
     content: "";
@@ -702,17 +689,16 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     box-shadow: 0 0 14px #e5e5e5;
     transition: all 0.3s;
 }
-.comment-body{padding: 1rem 0 1rem 1rem;list-style:none}
+.comment-body{padding: 0.5rem 0 0.5rem 1rem;list-style:none}
 .comment-body p.half{clear: none !important}
 /* .comment-body+.comment-body{margin-top:15px} */
 
 .comment-reply{
     color: white;
     font-size: 12px;
-    font-weight: 300;
     background-color: #5f5f5f;
     border-radius: 3px;
-    padding: 4px 7px;
+    padding: 3px 4px;
     float: right;
     user-select: none;
     opacity: 0;
@@ -726,6 +712,9 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     line-height: 2em;
     color: #3e3e3e;
     padding: 0.5em 0.5em 0.5em 0;
+}
+.comment-content img{
+    border-radius: 2%;
 }
 
 .post-meta{
@@ -742,7 +731,7 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 .post-meta a{
     display: inline-block;
     color: #f4f4f4;
-    background: #00000026;
+    background: #00000017;
     border-radius: 0.3em;
     padding: 0 0.3em;
     line-height: 1.4;
@@ -753,8 +742,7 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 .post-meta a:hover{
     text-decoration: none;
     transform: scale(0.95);
-    color: #5a5a5a;
-    background: #f3f3f3;
+    color: inherit;
 }
 .post-meta .author{
     float: left;
@@ -848,6 +836,9 @@ i.emojis.tiny{
     .says-float-time{
         left: 0 !important;
     }
+    .says-block.comment-body{
+        border-left: none !important;
+    }
 }
 
 @media screen and (max-width: 400px){
@@ -877,34 +868,6 @@ i.emojis.tiny{
   color: gray
 }
 
-/* Hight light */
-.hl-fh{
-    color: #c63372;
-}
-.hl-kw{
-    color: #c52727;
-}
-.hl-str,.hl-num{
-    color: rgb(103, 149, 7);
-}
-.hl-str *{
-    color: inherit !important;
-}
-.hl-note{
-    color: gray;
-}
-.hl-note *{
-    color: inherit !important;
-}
-.hl-kf{
-    color: #398cbd;
-}
-.hl-warn{
-    color: #c63372;
-}
-.hl-var{
-    color: #ff9300;
-}
 /* 表情 */
 
 .click_to_show{
@@ -1064,7 +1027,7 @@ table tr:hover{
     border-left: 1px solid #83bc63;
 }
 .says-block.comment-body{
-    border-radius: 1rem 0 0 2rem;
+    border-bottom-left-radius: 1rem 2rem;
 }
 #says-area .comment-children .comment-body{
     padding: 0;
@@ -1080,17 +1043,83 @@ table tr:hover{
 }
 
 
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+::-webkit-scrollbar{
+    width: 0.6rem;
+    height: 0.6rem;
 }
 /* 滚动槽 */
-::-webkit-scrollbar-track {
-    border-radius: 4px;
+::-webkit-scrollbar-track{
     background: rgba(0, 0, 0, 0.1);
 }
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb{
-    border-radius: 4px;
-    background:rgb(62 64 67);
+    background: rgb(62 64 67);
+}
+#level-nav .ctn::-webkit-scrollbar-thumb{
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* foot */
+.foot{
+    color: rgb(209, 209, 209);
+    padding: 0 2rem 2rem 2rem;
+    font-size: 0.9rem;
+    background-color: #33363b;
+    position: relative;
+    user-select: none;
+}
+.foot .backtotop{
+    background: #eaeaea;
+    color: #777;
+    overflow: hidden;
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    height: 2rem;
+    width: 5rem;
+    display: block;
+    margin: 0 auto;
+    -webkit-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 0 rgba(0,0,0,.05);
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+.foot .title{
+    position: relative;
+    left: 1rem;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: #dedede;
+}
+.foot .title:before{
+    content: '';
+    display: inline-block;
+    width: 0.6rem;
+    height: 1rem;
+    background-color: #519ecc;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+.footscol3{
+    width: 33.333333%;
+}
+.footscol2{
+    width: 50%;
+}
+.footscol2, .footscol3{
+    margin-bottom: 2rem;
+    float: left;
+}
+@media screen and (max-width: 800px){
+    .footscol3{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 500px){
+    .footscol2{
+        width: 100%;
+    }
 }

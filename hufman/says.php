@@ -8,13 +8,9 @@ $this->need('head.php');
 ?>
 <div class="post">
 	<p class='muted'>
-		<i class="icon icon-comment-empty"></i> <?php echo $this->commentsNum; ?>
+		<i class="icon icon-comment-empty"></i> 现有说说<?php echo $this->commentsNum; ?>条
 		&nbsp;
-		<i class="icon icon-eye"></i> <?php echo getViewsStr($this); ?>
-		<?php if($this->user->hasLogin()): ?>
-		&nbsp;
-		<i class="icon icon-edit"></i> <a href="<?php $this->options->adminUrl("write-page.php?cid=".$this->cid); ?>">编辑</a>
-		<?php endif; ?>
+		<i class="icon icon-eye"></i> 围观<?php echo getViewsStr($this); ?>次
 	</p>
     <div class="post-content">
 		<?php echo img_lazy_load($this->content); ?>
@@ -121,7 +117,7 @@ $(function(){
 		says_msnry.layout();
 	})
 	$('.comment-reply').click(function(){
-		$('#comment-form').css({'z-index': 999, 'border-radius': '10px', 'box-shadow': 'rgba(64, 64, 64, 0.34) 0px 0px 5px'});
+		$('#comment-form').css({'z-index': 999, 'border-radius': '5px', 'box-shadow': 'rgba(64, 64, 64, 0.34) 0px 0px 5px'});
 		if ($(window).width() < 920) {
 			var w = $('.atcs').width()*0.8;
 			var sw = $('body').width();

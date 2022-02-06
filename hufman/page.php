@@ -1,8 +1,10 @@
 <?php
 $this->need('head.php');
 ?>
-<div class="post">
-	<h1 class="post-title"><?php $this->title() ?></h1>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="post-title" itemprop="name headline">
+		<a itemprop="url" href="<?php $this->permalink() ?>"><?php $this->title() ?></a>
+	</h1>
 	<p class='muted'>
 		<i class="icon icon-clock"></i> <time datetime="<?php $this->date('Y-m-d'); ?>"><?php $this->date('Y-m-d'); ?></time>
 		&nbsp;
@@ -15,10 +17,10 @@ $this->need('head.php');
 		<?php endif; ?>
 	</p>
 	<hr />
-    <div class="post-content">
+    <div class="post-content" itemprop="articleBody">
 		<?php echo img_lazy_load($this->content); ?>
     </div>
-</div>
+</article>
 
 <div class="post">
     <?php $this->need('comments.php'); ?>

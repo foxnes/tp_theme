@@ -1,10 +1,12 @@
 <?php
 $this->need('head.php');
 ?>
-<div class="post">
-	<h1 class="post-title"><?php $this->title() ?></h1>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="post-title" itemprop="name headline">
+		<a itemprop="url" href="<?php $this->permalink() ?>"><?php $this->title() ?></a>
+	</h1>
 	<p class='muted'>
-		<i class="icon icon-clock"></i> <time datetime="<?php $this->date('Y-m-d'); ?>"><?php $this->date('Y-m-d'); ?></time>
+		<i class="icon icon-clock"></i> <time datetime="<?php $this->date('Y-m-d'); ?>" itemprop="datePublished"><?php $this->date('Y-m-d'); ?></time>
 		&nbsp;
 		<i class="icon icon-comment-empty"></i> 评论 <?php echo $this->commentsNum; ?>
 		&nbsp;
@@ -15,7 +17,7 @@ $this->need('head.php');
 		<?php endif; ?>
 	</p>
 	<hr />
-    <div class="post-content">
+    <div class="post-content" itemprop="articleBody">
 		<?php echo img_lazy_load($this->content) ?>
 		<div class="post-meta">
 			<?php if ($this->options->post_meta_text): ?>
@@ -27,18 +29,18 @@ $this->need('head.php');
 				$meta = str_replace('%modify%', date('Y年m月d日' , $this->modified), $meta);
 				echo $meta;
 			else: ?>
-			<p>该本文由<a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a>创作或转载<br />采用<a href="//creativecommons.org/licenses/by/3.0/cn" rel="nofollow" target="_blank">知识共享署名 3.0</a>，可自由转载、引用，但需署名作者且注明文章出处。</p>
+			<p>若无特别标注，本文由<a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a>创作<br />采用<a href="//creativecommons.org/licenses/by/3.0/cn" rel="nofollow" target="_blank">知识共享署名 3.0</a>，可自由转载、引用，但需署名作者且注明文章出处。</p>
             <?php endif; ?>
 		</div>
     </div>
     <ul class="post-nav">
-        <div class="tags fr">
+        <div class="tags fr" itemprop="keywords">
             标签: <?php $this->tags('', true, '<a href="javascript:void 0">无标签</a>'); ?>
         </div>
         <li>上一篇: <?php $this->thePrev('%s','没有了'); ?></li>
         <li>下一篇: <?php $this->theNext('%s','没有了'); ?></li>
     </ul>
-</div>
+</article>
 
 <div class="post">
     <?php $this->need('comments.php'); ?>

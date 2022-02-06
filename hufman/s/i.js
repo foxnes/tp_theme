@@ -125,36 +125,9 @@ function insertText(obj, str){
 	obj.value += str;
 }
 
-// 代码高亮简单实现
-// 红色
-var HL_KW = ['and', 'as', 'assert', 'break', 'case', 'catch', 'classdef', 'continue', 'die', 'del',
-'do', 'else', 'elseif', 'endfor', 'endforeach', 'endif', 'elif', 'endswitch',
-'except', 'endwhile', 'eval', 'exit', 'finally', 'False',
-'for', 'from', 'foreach', 'global', 'goto', 'if', 'in', 'is', 'import', 'include', 'lambda',
-'not', 'None', 'new', 'namespace', 'or', 'private', 'pass', 'public', 'protected', 'require', 'static',
-'return', 'raise', 'switch', 'throw', 'try', 'True', 'var', 'with', 'while', 'xor', 'yield'];
-HL_KW = new RegExp('\\b('+HL_KW.join('|')+')\\b', 'ig');
-// 蓝色 有括号调用的已经默认自动变蓝了
-var HL_KF = [
-// js
-'function',
-// python
-'def', 'print',
-// ternimal - linux
-'echo', 'exec', 'vim', 'vi', 'screen', 'ls', 'cd', 'pwd', 'mkdir', 'cp', 'mv', 'rm', 'df', 'du', 'cat', 'clear', 'grep',
-'reboot', 'shutdown', 'basename', 'dirname', 'export', 'read', 'test', 'who', 'tee', 'unset', 'chmod',
-'find', 'tar', 'gzip', 'rmdir', 'kill', 'crontab', 'service', 'free', 'top', 'chown', 'sudo', 'passwd',
-'tail', 'diff', 'scp', 'telnet', 'wget', 'ifconfig', 'whereis', 'locate', 'date', 'route', 'iptables', 
-'pip', 'pip2', 'pip3', 'python', 'python2', 'python3', 'apt', 'apt-get', 'pkg', 'yum', 'pacman', 'git', 'cmake',
-'make',
-// matlab
-'meshgrid', 'axis', 'hold', 'grid', 'plot', 'surf', 'mesh', 'gca', 'gcf', 'gco', 'set'
-];
-HL_KF = new RegExp('\\b('+HL_KF.join('|')+')\\b', 'ig');
+// 代码高亮
 
-$("pre code").each(function(){
-    this.innerHTML = this.innerHTML.replace(/((["'])(?:\\.|[^\\\n])*?\2)/ig,"<span class='hl-str'>$1</span>").replace(/(\\[\s\S])/ig,"<span class='hl-warn'>$1</span>").replace(/(\/\*[\s\S]+\*\/)/g,"<span class='hl-note'>$1</span>").replace(/(~\/| -{1,2}[a-z&;]{1,}[ :\n\r]|!|\^|\+|\*|%|\||&amp;|===|==|-&gt;|=&gt;)/ig,"<span class='hl-fh'>$1</span>").replace(/([^a-z0-9_]|^)([\d\.]+)([^a-z0-9_]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(/([^a-z0-9_]|^)([\d\.]+)([^a-z0-9_]|$)/ig,"$1<span class='hl-num'>$2</span>$3").replace(HL_KW, "<span class='hl-kw'>$1</span>").replace(/((?=^|\n|\r| )\s*(\/\/|#).*(?=\r|\n|$))/g,"<span class='hl-note'>$1</span>").replace(HL_KF,"<span class='hl-kf'>$1</span>").replace(/\b((?![0-9])[\w0-9]+(?=\())/ig,"<span class='hl-kf'>$1</span>").replace(/(\$(?![0-9])[\w0-9]+\b)/ig, "<span class='hl-var'>$1</span>");
-});
+
 
 $('.post-thumb img').each(function(){
     this.onerror = function(){
@@ -166,7 +139,7 @@ $('.post-thumb img').each(function(){
 
 // 评论区头像旋转
 $('.avatar').each(function(){
-    var delay = Math.random()*50;  var speed = 600 + Math.random() * 100;
+    var delay = 30 + Math.random()*120;  var speed = 600 + Math.random() * 100;
     $(this).css({'animation': 'spin '+speed+'s infinite linear', 'animation-delay': delay+'s'});
 });
 
