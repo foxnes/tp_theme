@@ -5,7 +5,7 @@
  * @package Hufman
  * @author Luuljh
  * @version 0.3.9
- * @link https://gitee.com/foxnes
+ * @link https://github.com/foxnes
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;

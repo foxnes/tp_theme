@@ -3,24 +3,6 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 define('__TYPECHO_GRAVATAR_PREFIX__', 'https://gravatar.loli.net/avatar/');
 
 function themeConfig($form){
-    $text = ['在右侧栏的&quot;其它&quot;下面再添加新的内容.如：
-&lt;ul class=&quot;sb-widget&quot;&gt;&lt;p class=&quot;cleartext&quot;&gt;友链&lt;/p&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老李&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#x27;#&#x27;&gt;老黄&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
-或者是今日诗词：
-&lt;ul class=&quot;sb-widget&quot;&gt;
-&lt;p class=&quot;cleartext&quot;&gt;诗词&lt;/p&gt;
-&lt;div id=&quot;poem_sentence&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;poem_info&quot;&gt;&lt;/div&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-$.getScript(&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot;).done(function(){
-    jinrishici.load(function(result){
-    var sentence = document.querySelector(&quot;#poem_sentence&quot;);
-    var info = document.querySelector(&quot;#poem_info&quot;);
-    sentence.innerHTML = result.data.content.replace(/，/g, &#x27;，&lt;br /&gt;&#x27;);
-    info.innerHTML = &#x27;&#x27; + result.data.origin.dynasty + &#x27;-&#x27; + result.data.origin.author + &#x27;《&#x27; + result.data.origin.title + &#x27;》&#x27;;
-    });
-});
-&lt;/script&gt;
-&lt;/ul&gt;'];
     $ThemeOptions = new Typecho_Widget_Helper_Form_Element_Checkbox('ThemeOptions', 
         array('content' => _t('主页文章全文输出'),
             'no_rand_thumb' => _t('主页文章无图时隐藏随机展示的缩略图'),
@@ -32,12 +14,10 @@ $.getScript(&quot;https://sdk.jinrishici.com/v2/browser/jinrishici.js&quot;).don
     $form->addInput($ThemeOptions->multiMode());
     $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('post_meta_text', NULL, NULL,
     _t('文章底部说明信息'),
-    _t('默认替换关键字：%author% (作者(超链接)), %time% (发布时间), %modify% (修改时间)')));
+    _t('默认替换关键字：%author% 作者(超链接形式), %time% 发布时间, %modify% 修改时间')));
     $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL,
     _t('右栏HTML'),
-    _t(
-    str_replace(PHP_EOL, '<br />', $text[0])
-    )));
+    _t('建议参考README.MD')));
 }
 
 function showThumb($obj, $randgiven){
@@ -54,7 +34,7 @@ function showThumb($obj, $randgiven){
     if (array_key_exists('thumb', $fields)):
         $thumb = (!empty($fields['thumb'])) ? $fields['thumb'] : 0;
     else:
-        preg_match_all( "/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches);
+        preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?)[\'|\"].*?[\/]?>/", $obj->content, $matches);
         $thumb = '';
         $options = Typecho_Widget::widget('Widget_Options');
         if(isset($matches[1][0])){

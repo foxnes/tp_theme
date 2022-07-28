@@ -1,22 +1,6 @@
 var full_size_width = 920;
-
-// try{$()}catch(e){ // 这是什么NT代码！！焯！！！
-//     let s = document.createElement('script');
-//     s.src = '//libs.baidu.com/jquery/1.8.3/jquery.min.js';
-//     document.body.append(s);
-//     s.onload = function(){
-//         $("script").each(function(){
-//             $.getScript($(this).attr('src'));
-//         });
-//     }
-// }
-
 $(function(){
     $("#pagecover").fadeOut();
-});
-PostbirdImgGlass.init({ // 图像放大
-    domSelector: ".post-content img:not([unzoomable])",
-    animation: true
 });
 $(".post-thumb img").lazyload();
 $(".post-content img").lazyload();
@@ -24,7 +8,6 @@ $(".post-content img").lazyload();
 function safe_do(fn){
     try{fn()}catch{console.error('Error when executing: '+fn.toString())};
 }
-
 
 function emoji_add(selector, facenamereplace, facecls, prefix = "tbbq-face"){ // 表情管理 评论区插入+自动替换
     facereplace = [];
@@ -63,6 +46,7 @@ emoji_add('#showfacenamereplace_wpbq', ['→', '开心', '疑惑', '很酷', '�
 '惊讶', '恶魔坏笑', 'wink'], "wpbq", "wpbq-face");
 
 // 点击打开表情
+GLOBAL_FLAG_HAS_POPUP = 0;
 $('.click_to_show').each(function(){
     $(this).children('.click_board').each(function(){
         var dom = $('#'+$(this).attr('for'));
@@ -71,6 +55,7 @@ $('.click_to_show').each(function(){
         });
         $(this).click(function(){
             dom.fadeIn(100);
+            window.GLOBAL_FLAG_HAS_POPUP = 1;
         });
     });
 });
@@ -80,7 +65,7 @@ function autoresize(){
     if ($(window).width() > full_size_width) {
         safe_do(function(){
             var sb_height = Math.max($(".sb-left").height(), $(".sb-right").height());
-            $(".atcs").css("min-height", sb_height);
+            $(".atcs").css("min-height", sb_height+61);
         });
     }
     safe_do(function(){
@@ -115,9 +100,9 @@ $(".backtotop").click(function () {
 
 // 评论区添加表情
 function insertText(obj, str){
-	var m = obj.value.match(/(‹|：)[\S]{2,5}?(›|：)/g);
+	var m = obj.value.match(/(‹|：)[\S]{1,5}?(›|：)/g);
 	if (m) {
-		if (m.length > 8) {
+		if (m.length >= 8) {
 			alert("最多添加8个表情！");
 			return false;
 		}
@@ -125,17 +110,12 @@ function insertText(obj, str){
 	obj.value += str;
 }
 
-// 代码高亮
-
-
-
+// 图像加载失败事件
 $('.post-thumb img').each(function(){
     this.onerror = function(){
         $(this).attr("src", themeUrl+"/s/img/error.jpg");
     }
 });
-
-
 
 // 评论区头像旋转
 $('.avatar').each(function(){
@@ -148,9 +128,10 @@ $('.comment-children .comment-content').each(function(){
     var id = $(this).parents('.comment-body').parents('.comment-children').parents('.comment-body').attr('id');
     var id = $('#'+id+' span[title=author]').eq(0).text();
     id = id.replace(/(^[\s ]+)|([\s ]+$)/g, '');
-    var num = $(this).parents('.comment-body').length - 1;
+    // var num = $(this).parents('.comment-body').length - 1;
     if (id){
-        $(this).html('['+num+'层]'+' 回复 <a>@'+id+'</a>: '+$(this).html());
+        var thedom = $(this).children("p");
+        thedom.html('<a>@'+id+'</a> '+thedom.html());
     }
 });
 
@@ -196,13 +177,15 @@ if ($('.post-content').length == 1){
         $(titles[i]).append('<a name="title-'+ranks_text+'" class="title_level">#'+ranks_text+'</a>');
     }
     navdom.append(contentDom);
-    if (titles.length > 5){
+    if (titles.length > 5 || (
+        $('.atcs').height() > 3*$(window).height() && titles.length > 2
+    )){
         $('body').append(navdom);
     }
 }
 
 
-// 滚动侧栏跟随
+// 滚动跟随 两边栏必须要长于屏高才生效
 window.onscroll = function(){
     var pos = document.documentElement.scrollTop;
     var baseTop = $('.atcs').offset().top;
@@ -214,6 +197,7 @@ window.onscroll = function(){
         $('.sb-right').removeAttr('style');
         return;
     }
+    // 判断侧栏
     var reach_left = baseTop + left_height - screenH;
     var reach_right = baseTop + right_height - screenH;
     var end = $('.body').height() + $('.body').offset().top - screenH;
@@ -242,5 +226,22 @@ window.onscroll = function(){
     }
 }
 
+// 全局按键监控
+$("html").on("click", function(e){
+    var e = e || window.event
+    var elem = e.target;
+    // 点击区域外部关闭弹窗
+    if (window.GLOBAL_FLAG_HAS_POPUP == 2){
+        var popups = $(".click_to_show div");
+        for (var i = 0; i < popups.length; i++){
+            if (!popups[i].contains(elem)){
+                $(".click_to_show div.hidden").css("display", "none");
+                window.GLOBAL_FLAG_HAS_POPUP = 0;
+            }
+        }
+    }else if(window.GLOBAL_FLAG_HAS_POPUP == 1){
+        window.GLOBAL_FLAG_HAS_POPUP++;
+    }
+});
 
 // safe_do(console.clear);

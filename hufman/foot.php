@@ -30,6 +30,13 @@
                 theme_hot_posts(10);
                 ?>
             </ul>
+
+            <ul class="sb-widget">
+            <p class="cleartext">归档</p>
+                <?php \Widget\Contents\Post\Date::alloc('type=month&format=F Y')->parse('<li><a href="{permalink}">{date}</a></li>'); ?>
+            </ul>
+
+
             <ul class="sb-widget">
                 <p class="cleartext">其它</p>
                 <?php if($this->user->hasLogin()): ?>
@@ -51,9 +58,12 @@
         <?php $this->options->title(); ?></a> 版权所有<br />
         <a href="https://www.typecho.org">Typecho驱动</a> &amp; <a href="https://gitee.com/foxnes/tp_theme/releases">Hufman主题 <i class="icon icon-spin6 animate-spin"></i></a>
     </footer>
-    <script src="<?php $this->options->themeUrl('s/postbird-img-glass.js'); ?>"></script>
+    <!-- <script src="<?php $this->options->themeUrl('s/postbird-img-glass.js'); ?>"></script> -->
     <script src="<?php $this->options->themeUrl('s/lazyload.js'); ?>"></script>
     <script src="<?php $this->options->themeUrl('s/i.js'); ?>"></script>
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('s/katex.min.css'); ?>">
+    <script src="<?php $this->options->themeUrl('s/katex.min.js'); ?>"></script>
+    <script src="<?php $this->options->themeUrl('s/auto-render.min.js'); ?>" onload="safe_do(function(){ renderMathInElement($('.atcs')[0], {delimiters: [{left: '$', right: '$', display: false}]}); });"></script>
 <?php $this->footer(); ?>
 </body>
 </html>

@@ -28,10 +28,10 @@ img{
 .post-content{
     word-wrap: break-word;
     word-break: break-all;
-    text-align: justify;
     text-justify: inter-character;
+    text-align: left;
     font-size: 1rem;
-    line-height: 1.8;
+    line-height: 2;
     font-weight: normal;
 }
 .post-content a:hover{
@@ -248,27 +248,24 @@ ul.sb-widget li{
     white-space: nowrap;
 }
 .post-thumb{
-    max-width: 180px;
-    max-height: 128px;
-    overflow: hidden;
+    max-width: 12rem;
+    max-height: 8rem;
     border-radius: 2px;
-    margin-left: 15px;
+    margin-left: 1rem;
     position: relative;
     transition: all 0.8s;
     float: right;
-    background: #33363b;
-    box-shadow: 0 0 14px #e6e6e6
 }
 .post-thumb img{
-    width: 100%;
     border-radius: 2px;
-    min-height: 100px;
+    min-height: 6rem;
     transition: all 0.8s;
     display: block;
     cursor: pointer;
     margin: 0 !important;
+    box-shadow: 0 0 14px #e6e6e6
 }
-.post-thumb:hover{
+.post-thumb img:hover{
     box-shadow: 0 0 14px #8b8b8b;
 }
 .post-thumb img:hover{
@@ -332,6 +329,7 @@ hr{
 }
 .post-content p{
     margin: 1em 0;
+    letter-spacing: 0.7px;
 }
 .post:after{
     content: "";
@@ -377,7 +375,6 @@ hr{
 code{
     display: inline-block;
     padding: 2px 4px;
-    font-size: 90%;
     color: #c7254e;
     background-color: #f9f2f4;
     border-radius: 4px;
@@ -394,7 +391,7 @@ pre{
     border-radius: 2px;
     max-width: 100%;
     margin: 1em 0;
-    max-height: 80vh;
+    /* max-height: 80vh; */
     overflow: auto;
     scrollbar-width: thin;
 }
@@ -412,18 +409,21 @@ pre code{
     word-break: break-all;
     line-height: 1.5;
 }
+pre code[class*="language-"]{
+    padding-right: 1em;
+}
 .post-content .title_level{
     position: absolute;
     display: block;
     font-size: 0.8rem;
     line-height: 0.8rem;
     top: -0.8em;
-    left: 2.5em;
+    right: 1em;
 }
 .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6{
     color: #444;
-    line-height: 1;
-    margin: 1.2rem 0 1rem 0;
+    line-height: 1.5;
+    margin: 1em 0 1.2em 0;
     position: relative;
     transition: all 0.3s;
     cursor: default;
@@ -433,7 +433,7 @@ pre code{
     content: '';
     display: inline-block;
     height: 0.8em;
-    width: 0.3em;
+    width: 0.35rem;
     border-radius: 0.2em;
     margin-right: 0.2em;
     vertical-align: -0.1em;
@@ -444,7 +444,7 @@ pre code{
     content: '';
     display: inline-block;
     height: 0.8em;
-    width: 0.3em;
+    width: 0.35rem;
     border-radius: 0.2em;
     margin-right: 0.2em;
     vertical-align: -0.1em;
@@ -460,7 +460,7 @@ pre code{
     width: 18rem;
     border: 2px solid #d9d9d9;
     transition: all 0.3s;
-    border-radius: 2px 2px 0 0;
+    border-radius: 0.5rem 0.5rem 0 0;
     opacity: 0.85;
 }
 #level-nav .ctn{
@@ -590,7 +590,7 @@ pre code{
 input[type=text], input[type=password], input[type=email], input[type=url], select, textarea{
     background: #fff;
     border: 2px solid #ddd;
-    border-radius: 0px; /* 表单输入框全部圆角哦 */
+    border-radius: 0px;
     color: #777;
     display: block;
     max-width: 100%;
@@ -598,10 +598,8 @@ input[type=text], input[type=password], input[type=email], input[type=url], sele
     padding: 7px 8px 6px 8px;
 }
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=url]:focus, select:focus, textarea:focus{
-    border-color: #ccc;
+    border-color: #acacac;
     color: #444;
-    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.1);
-    box-shadow: 0 0 3px rgba(0,0,0,.1);
 }
 input[type="submit"], button, #cancel-comment-reply-link{
     background-color: #398cbd;
@@ -624,16 +622,20 @@ input[type="submit"] a:hover, button a:hover{
     color: inherit;
 }
 #comment-form{
-    background: #f6f6f6;
-    margin: 15px 0;
-    padding: 10px 15px 15px 15px;
-    border-radius: 3px;
+    margin-top: 1rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    border-radius: 0.3rem;
+    background: #f0f0f0;
+    font-weight: normal;
 }
-#comment-form input, #comment-form button, #comment-form textarea{
+#comment-form input, #comment-form textarea{
     width: 100%;
     margin: 5px 0;
+    background: white;
+    border-radius: 0.3rem;
 }
-#comment-form button{width: auto;}
+
+#comment-form button{width: auto; margin: 3px 0;}
 button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     transform: scale(0.9);
 }
@@ -647,8 +649,19 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     float: left;
     width: 50%;
 }
+.trip{
+    float: left;
+    width: 33.3333333%;
+}
 #comment-form p.half.w{
     width: 49%;
+}
+#comment-form p.trip{
+    width: 33.3%;
+    padding-right: 1rem;
+}
+#comment-form p.trip:last-child{
+    padding-right: 0;
 }
 .comment-right{
     margin-left: 4.2em;
@@ -671,8 +684,7 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 }
 #comment-form label{
     color: #444;
-    font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 .comment-list .comment-list{
@@ -682,11 +694,11 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     margin-top: 1rem
 }
 .avatar{
-    float:left;margin: 0.6rem 5px 5px 0;
+    float:left;
     padding: 2px;
     border-radius: 50%;
-    width: 55px; height: 55px;
-    box-shadow: 0 0 14px #e5e5e5;
+    border: 1px solid #d9d9d9;
+    width: 50px; height: 50px;
     transition: all 0.3s;
 }
 .comment-body{padding: 0.5rem 0 0.5rem 1rem;list-style:none}
@@ -731,17 +743,29 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 .post-meta a{
     display: inline-block;
     color: #f4f4f4;
-    background: #00000017;
     border-radius: 0.3em;
     padding: 0 0.3em;
     line-height: 1.4;
     height: 1.4em;
     transition: all 0.3s;
-    margin: 0 0.25em;
+    margin: 0 0.15em;
+    position: relative;
+    padding: 0;
+}
+.post-meta a::before{
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 0.3em;
+    background-color: #ffffff36;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0.2rem;
 }
 .post-meta a:hover{
     text-decoration: none;
-    transform: scale(0.95);
+    transform: scale(1.05);
     color: inherit;
 }
 .post-meta .author{
@@ -826,6 +850,7 @@ i.emojis.tiny{
     .avatar{
         max-width: 35px;
         max-height: 35px;
+        margin-top: 0.6rem;
     }
     html{
         font-size: 15px;
@@ -1050,10 +1075,12 @@ table tr:hover{
 /* 滚动槽 */
 ::-webkit-scrollbar-track{
     background: rgba(0, 0, 0, 0.1);
+    border-radius: 0.3rem;
 }
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb{
     background: rgb(62 64 67);
+    border-radius: 0.3rem;
 }
 #level-nav .ctn::-webkit-scrollbar-thumb{
     background: rgba(0, 0, 0, 0.2);
