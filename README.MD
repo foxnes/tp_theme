@@ -1,8 +1,4 @@
-## Typecho 主题
-
-仓库地址：[gitee.com](https://gitee.com/foxnes/tp_theme)
-
-查看各个版本：[releases](https://gitee.com/foxnes/tp_theme/releases/)
+# Typecho 主题
 
 ## 主题Hufman
 ![HUFMAN](hufman/screenshot.png)
@@ -11,11 +7,11 @@
 **永不更新，不建议下载。**
 ![VBLOG](vblog/screenshot.png)
 
+## 默认主题
+微调自用，改动见`./default/extraPower.js`，目前有自动生成目录、双击编辑文章以及颜文字表情包。
+
+Plugins内部还有一个代码高亮。
+
 其他注意事项请查阅模板内部的`README.MD`文件。
 
 **请勿删除模版底部链接，谢谢合作。**
-
-(Github)下载：
-1. ~[hufman 0.3.5 小图](https://github.com/foxnes/tp_theme/releases/tag/hufman0.3.5)~
-2. ~[hufman 0.3 大图](https://github.com/foxnes/tp_theme/releases/tag/hufman0.3)~
-3. [vblog 0.1.1](https://github.com/foxnes/tp_theme/releases/tag/vblog0.1.1)
