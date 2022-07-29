@@ -228,3 +228,81 @@ var GLOBAL_VARS_EMO_JS = {};
     }
 })();
 
+
+/**
+ * 加载文件
+ * 以下文件会按照顺序在页面加载完毕 或者 2s后强制加载
+ */
+function loadSource(url, onloadfunc = function(){}){
+    var fileType = url.split("."); fileType = fileType[fileType.length-1].toLowerCase();
+    var newDom;
+    if (fileType == "css") {
+        newDom = document.createElement("link");
+        newDom.setAttribute("href", url);
+        newDom.setAttribute("rel", "stylesheet");
+    }else if (fileType == "js") {
+        newDom = document.createElement("script");
+        newDom.setAttribute("src", url);
+    }else{
+        console.error("This source will not be loaded: ", url);
+    }
+    newDom.onload = onloadfunc;
+    document.body.appendChild(newDom);
+}
+
+/**
+ * Latex公式渲染
+ */
+(function(){
+    window.addEventListener("load", function(){
+        loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.css");
+        loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.js");
+        loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/contrib/auto-render.min.js", function(){
+            renderMathInElement(
+                document.getElementsByClassName("post-content")[0],
+                {
+                    delimiters: [{left: '$', right: '$', display: false},
+                                {left: '$$', right: '$$', display: false}]
+                }
+            ); 
+        });
+    });
+})();
+
+
+/**
+ * 图片查看器 （自动旋转）
+ */
+(function(){
+    function EP_showImg(imgdom){
+        var showDom = document.createElement("div");
+        var showDomStyle = "background-image: url("+imgdom.src+"); background-position: center; \
+        background-repeat: no-repeat; background-color: rgba(0, 0, 0, 0.6); \
+        background-size: contain; width: 100vw; height: 100vh;\
+        position: fixed; left: 0; top: 0; z-index: 9999999999; transform-origin: top left;";
+        let rate1 = imgdom.width / imgdom.height;
+        let rate2 = window.innerWidth / window.innerHeight;
+        if (rate1 > 1 && rate2 < 1){
+            showDomStyle += "width: 100vmax; height: 100vmin;\
+            transform: rotate(90deg); translate(0,-100vmin);\
+            left: 100vmin;";
+        }else if(rate1 < 1 && rate2 > 1){
+            showDomStyle += "width: 100vmin; height: 100vmax;\
+            transform: rotate(90deg); translate(0,-100vmin);\
+            left: 100vmax;";
+        }
+        showDom.style = showDomStyle;
+        showDom.onclick = function(){
+            document.body.removeChild(this);
+        };
+        document.body.appendChild(showDom);
+    }
+    
+    var imgs = document.querySelectorAll(".post-content img");
+    for (let i = 0; i < imgs.length; i++){
+        imgs[i].addEventListener('click', function(){
+            EP_showImg(this);
+        });
+    }
+})();
+
