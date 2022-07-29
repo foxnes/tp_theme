@@ -6,6 +6,7 @@
         <h1 class="post-title" itemprop="name headline">
             <a itemprop="url"
                href="<?php $this->permalink() ?>"><?php $this->title() ?></a>
+            <sub><i><small><?php echo getViewsStr($this); ?>ω</small></i></sub>
         </h1>
         <div class="post-content" itemprop="articleBody">
             <?php $this->content(); ?>

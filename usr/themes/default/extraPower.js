@@ -1,45 +1,35 @@
-/*
-
-评论框颜文字表情：在评论框附件加上`<div id="EmoticonsinsertDom"></div>`即可。
-
-双击编辑文章：双击与文章标题等高两侧的空白即可编辑，404需手动修改变量basepath。
-
-目录导航：标题数目需要大于5才显示。
-
+/**
+ * ##############################
+ * ##############################
+ * ## 请初略浏览代码块外部的注释 ##
+ * ##############################
+ * ##############################
 */
 
 
-// 评论框颜文字表情
+/**
+ * 评论框处显示颜表情
+ * 
+ * 使用：在评论框合适位置添加`<div id="EmoticonsinsertDom"></div>`
+ * 需要新增颜表情，修改数组extraPowerEmoticons
+ * 注意表情里面有：` 会被错误解析，建议关闭评论Markdown解析
+ */
+var extraPowerEmoticons = ["w(ﾟДﾟ)w", "(๑•̀ㅂ•́)و✧", "o(￣▽￣)d", "(//▽//)", "(￣∀￣)", "(ง ˙o˙)ว",
+"(｡･∀･)ﾉﾞ", "(*￣3￣)╭", "(:3[▓▓]", "_(:з」∠)_", "(●´∀｀●)", "(¯﹃¯)",
+"(๑•́ ₃ •̀๑)", "♪(^∇^*)", "(`･ω･´)", "(*´∀｀)ノ", "(つд⊂)", "(°ー°〃)",
+"(`ε´ )", "<(｀^′)>", "(｀д′)", "╰（‵□′）╯", "(。皿。メ)", "(╯￣Д￣)╯╘═╛", "σ`∀´)",
+"( ´ー`)", "( ﾟ 3ﾟ)", "ﾟ∀ﾟ)σ", "( ˇωˇ)", "[]~(￣▽￣)~",
+"|д` )", "(`ヮ´ )", "(｡◕∀◕｡)", "ᕕ( ᐛ )ᕗ", "( ›´ω`‹ )", "( ﾟ∀。)", "ฅ(^ω^ฅ)",
+"(  д ) ﾟ ﾟ", "Σ(っ °Д °;)っ", "(|||ﾟДﾟ)", "(＃°Д°)", "(๑•́ ₃•̀๑)",
+"( ;´д`)", "( TロT)σ", "(TДT)", "(;´༎ຶД༎ຶ`)", "(´; ω ;`)"];
 (function(){
-    var emoticons = ["w(ﾟДﾟ)w", "(๑•̀ㅂ•́)و✧", "o(￣▽￣)d", "(//▽//)", "(￣∀￣)", "(ง ˙o˙)ว",
-    "(｡･∀･)ﾉﾞ", "(*￣3￣)╭", "(:3[▓▓]", "_(:з」∠)_", "(●´∀｀●)", "(¯﹃¯)",
-    "(๑•́ ₃ •̀๑)", "♪(^∇^*)", "(`･ω･´)", "(*´∀｀)ノ", "(つд⊂)",
-    "(`ε´ )", "<(｀^′)>", "(｀д′)", "╰（‵□′）╯", "(。皿。メ)", "(╯￣Д￣)╯╘═╛", "σ`∀´)",
-    "( ´ー`)", "( ﾟ 3ﾟ)", "ﾟ∀ﾟ)σ", "( ˇωˇ)", "[]~(￣▽￣)~",
-    "|д` )", "(`ヮ´ )", "(｡◕∀◕｡)", "ᕕ( ᐛ )ᕗ", "( ›´ω`‹ )", "( ﾟ∀。)", "ฅ(^ω^ฅ)",
-    "(  д ) ﾟ ﾟ", "Σ(っ °Д °;)っ", "(|||ﾟДﾟ)", "(๑•́ ₃•̀๑)",
-    "( ;´д`)", "( TロT)σ", "(TДT)", "(;´༎ຶД༎ຶ`)", "(´; ω ;`)"];
+
+    var emoticons = extraPowerEmoticons;
 
     var EmoticonsinsertDom = document.getElementById("EmoticonsinsertDom");
     if (!EmoticonsinsertDom) return;
 
     EmoticonsinsertDom.style = "position: relative;";
-
-    var EmoDoor = document.createElement("p");
-    var EmoDoorButton = document.createElement("span");
-    EmoDoorButton.innerText = "[颜]";
-    EmoDoorButton.style = "cursor: pointer; user-select: none;";
-    EmoDoorButton.setAttribute("attrHidTime", "0");
-    EmoDoorButton.onclick = function(){
-        var that = this;
-        this.innerText = emoticons[Math.floor(Math.random()*emoticons.length)];
-        this.attrHidTime = String(new Date().getTime() + 1500);
-        setTimeout(function(){
-            if (new Date().getTime() > Number(that.attrHidTime)){
-                that.innerText = "[颜]";
-            }
-        }, 2000);
-    }
 
     var hidDom = document.createElement("div");
     var hidDomCont = document.createElement("div")
@@ -55,7 +45,6 @@
         emodom.innerText = emoticons[i];
         emodom.onclick = function(){
             document.getElementById("textarea").value += this.innerText;
-            hidDom.style.display = "none";
         }
         hidDomCont.appendChild(emodom);
     }
@@ -66,13 +55,26 @@
     .emo-single:hover{background: #f1f1f1; border-radius: 5px;}";
     document.body.append(emostyle);
 
+    document.body.addEventListener("click", function(){
+        hidDom.style.display = "none";
+    });
+
+    var EmoDoor = document.createElement("p");
+    var EmoDoorButton = document.createElement("span");
+    EmoDoorButton.innerText = "(OwO)";
+    EmoDoorButton.style = "cursor: pointer; user-select: none;";
+    EmoDoorButton.setAttribute("attrHidTime", "0");
     EmoDoorButton.addEventListener("click", function(event){
         event.stopPropagation();
         hidDom.style.display = "block";
-    });
-
-    document.body.addEventListener("click", function(){
-        hidDom.style.display = "none";
+        var that = this;
+        this.innerText = emoticons[Math.floor(Math.random()*emoticons.length)];
+        this.attrHidTime = String(new Date().getTime() + 1500);
+        setTimeout(function(){
+            if (new Date().getTime() > Number(that.attrHidTime)){
+                that.innerText = "(OωO)";
+            }
+        }, 2000);
     });
 
     EmoDoor.appendChild(EmoDoorButton);
@@ -81,13 +83,19 @@
     EmoticonsinsertDom.appendChild(EmoDoor);
 })();
 
-// 文章目录导航
+
+
+/**
+ * 文章目录导航
+ * 
+ * 注意主题配合 正文class需要为post-content
+ */
 (function(){
     if (document.querySelectorAll(".post-content").length != 1) return;
     // 建创悬浮窗口
     var navdom = document.createElement("div");
     navdom.setAttribute("id", "level-nav")
-    navdom.innerHTML += ('<div class="outer">目录导航</div>');
+    navdom.innerHTML += ('<div class="level-nav-outer">目录导航</div>');
     var contentDom = document.createElement("ul");
     contentDom.setAttribute("class", "ctn");
 
@@ -140,7 +148,7 @@
         height: 11.5rem; overflow-y: auto; scrollbar-width: thin;\
         padding: 0; margin: 0\
     }\
-    #level-nav .outer{\
+    #level-nav .level-nav-outer{\
         position: absolute; height: 1.7rem;top: -1.7rem; right: 2rem;\
         font-size: 0.9rem; font-weight: bold;\
         padding: 0 0.5rem; text-align: center;line-height: 1.7rem;\
@@ -167,10 +175,17 @@
 var basepath = "/"; // 其他地方可能会用到 所以放外边了
 var GLOBAL_VARS_EMO_JS = {};
 
-// 快速编辑文章
+
+/**
+ * 快速编辑文章
+ * 
+ * 注意标题class需要为post-title
+ * PC端用鼠标选中待编辑文章的标题即可
+ * 移动端选中后，需要点击一下标题两旁等高的空白
+ */
 (function(){
     // 首先得到base url目的是得到基础路径
-    // 原理：link标签href内容是否含有当前域名以及/usr/路径，截取域名和/usr/路径之间字符作为base url
+    // link标签href内容是否含有当前域名以及/usr/路径，截取域名和/usr/路径之间字符作为base url
     basepath = "/";
     var abAdminPath = "admin/write-post.php?cid=";
     var outterlink = document.getElementsByTagName("link");
@@ -197,7 +212,7 @@ var GLOBAL_VARS_EMO_JS = {};
         if (!refdom) continue;
         refcid = refdom.href.match(/(\d+)/g);
         if (!refcid) continue;
-        titleList[i].addEventListener("dblclick", function(){
+        let doEvent = function(){
             try{
                 if (!window.getSelection) return;
                 var sel = window.getSelection();
@@ -207,6 +222,9 @@ var GLOBAL_VARS_EMO_JS = {};
                     document.location.href = basepath + abAdminPath + refcid[refcid.length-1];
                 }
             }catch(e){}
-        });
+        }
+        titleList[i].addEventListener("mousemove", doEvent);
+        titleList[i].addEventListener("touchend", doEvent);
     }
 })();
+

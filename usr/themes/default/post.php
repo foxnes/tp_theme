@@ -17,6 +17,7 @@
                 <time datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date(); ?></time>
             </li>
             <li><?php _e('分类: '); ?><?php $this->category(','); ?></li>
+            <li><?php echo getViewsStr($this); ?>ω</li>
         </ul>
         <div class="post-content" itemprop="articleBody">
             <?php $this->content(); ?>
