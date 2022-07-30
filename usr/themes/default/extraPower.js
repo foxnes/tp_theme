@@ -1,7 +1,18 @@
+// 功能启用如下 可自定义启用或者关闭功能
+const EP_EN_CONFIG = {
+    'emo-text': true,     // 颜文字表情
+    'title-nav': true,    // 文章内部大小标题导航
+    'quick-edit': true,   // 快速编辑文章
+    'latex-rule': true,   // latex公式渲染
+    'img-viewer': true,   // 图片查看器
+    'back-to-top': true   // 返回顶部
+}
+
+
 /**
  * ##############################
  * ##############################
- * ## 请初略浏览代码块外部的注释 ##
+ * ## 可初略浏览代码块外部的注释 ##
  * ##############################
  * ##############################
 */
@@ -23,9 +34,8 @@ var extraPowerEmoticons = ["w(ﾟДﾟ)w", "(๑•̀ㅂ•́)و✧", "o(￣▽�
 "(  д ) ﾟ ﾟ", "Σ(っ °Д °;)っ", "(|||ﾟДﾟ)", "(＃°Д°)", "(๑•́ ₃•̀๑)",
 "( ;´д`)", "( TロT)σ", "(TДT)", "(;´༎ຶД༎ຶ`)", "(´; ω ;`)"];
 (function(){
-
+    if (!EP_EN_CONFIG['emo-text']) return;
     var emoticons = extraPowerEmoticons;
-
     var EmoticonsinsertDom = document.getElementById("EmoticonsinsertDom");
     if (!EmoticonsinsertDom) return;
 
@@ -91,6 +101,7 @@ var extraPowerEmoticons = ["w(ﾟДﾟ)w", "(๑•̀ㅂ•́)و✧", "o(￣▽�
  * 注意主题配合 正文class需要为post-content
  */
 (function(){
+    if (!EP_EN_CONFIG['title-nav']) return;
     if (document.querySelectorAll(".post-content").length != 1) return;
     // 建创悬浮窗口
     var navdom = document.createElement("div");
@@ -140,7 +151,7 @@ var extraPowerEmoticons = ["w(ﾟДﾟ)w", "(๑•̀ㅂ•́)و✧", "o(￣▽�
 
     var levelstyle = document.createElement("style");
     levelstyle.innerHTML = "#level-nav{\
-        position: fixed; background-color: white; bottom: -13rem;\
+        position: fixed; background-color: white; bottom: -13.35rem;\
         right: 2vw; padding: 0.9rem; width: 18rem; border: 2px solid #d9d9d9;\
         transition: all 0.3s; border-radius: 2px 2px 0 0;opacity: 0.85; font-size: 0.9em;\
     }\
@@ -184,6 +195,7 @@ var GLOBAL_VARS_EMO_JS = {};
  * 移动端选中后，需要点击一下标题两旁等高的空白
  */
 (function(){
+    if (!EP_EN_CONFIG['quick-edit']) return;
     // 首先得到base url目的是得到基础路径
     // link标签href内容是否含有当前域名以及/usr/路径，截取域名和/usr/路径之间字符作为base url
     basepath = "/";
@@ -230,10 +242,11 @@ var GLOBAL_VARS_EMO_JS = {};
 
 
 /**
- * 加载文件
- * 以下文件会按照顺序在页面加载完毕 或者 2s后强制加载
+ * 加载资源(css/js)
+ * @param {string} url (*)
+ * @param {function} onloadfunc 添加onload函数 (optional)
  */
-function loadSource(url, onloadfunc = function(){}){
+function EP_loadSource(url, onloadfunc = function(){}){
     var fileType = url.split("."); fileType = fileType[fileType.length-1].toLowerCase();
     var newDom;
     if (fileType == "css") {
@@ -249,24 +262,43 @@ function loadSource(url, onloadfunc = function(){}){
     newDom.onload = onloadfunc;
     document.body.appendChild(newDom);
 }
+/**
+ * 页面加载完成后或者{delay}毫秒后执行{func} （只执行一次）
+ * @param {function} func (*) 
+ * @param {int} delay (ms)
+ */
+function EP_mustDo(func, delay){
+    var done_flag = 0;
+    var upperFunc = function(){
+        if (done_flag) return;
+        func();
+        done_flag = 1;
+    }
+    window.addEventListener("load", upperFunc);
+    setTimeout(upperFunc, delay);
+}
+
 
 /**
  * Latex公式渲染
  */
 (function(){
-    window.addEventListener("load", function(){
-        loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.css");
-        loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.js");
-        loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/contrib/auto-render.min.js", function(){
-            renderMathInElement(
-                document.getElementsByClassName("post-content")[0],
-                {
-                    delimiters: [{left: '$', right: '$', display: false},
-                                {left: '$$', right: '$$', display: false}]
-                }
-            ); 
+    if (!EP_EN_CONFIG['latex-rule']) return;
+    EP_mustDo(function(){
+        EP_loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.css");
+        EP_loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.js");
+        EP_loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/contrib/auto-render.min.js", function(){
+            setTimeout(function(){
+                renderMathInElement(
+                    document.getElementsByClassName("post-content")[0],
+                    {
+                        delimiters: [{left: '$', right: '$', display: false},
+                                    {left: '$$', right: '$$', display: false}]
+                    }
+                );
+            }, 2000);
         });
-    });
+    }, 2000);
 })();
 
 
@@ -274,6 +306,7 @@ function loadSource(url, onloadfunc = function(){}){
  * 图片查看器 （自动旋转）
  */
 (function(){
+    if (!EP_EN_CONFIG['img-viewer']) return;
     function EP_showImg(imgdom){
         var showDom = document.createElement("div");
         var showDomStyle = "background-image: url("+imgdom.src+"); background-position: center; \
@@ -306,3 +339,54 @@ function loadSource(url, onloadfunc = function(){}){
     }
 })();
 
+
+/**
+ * 返回顶部
+ */
+(function(){
+    if (!EP_EN_CONFIG['back-to-top']) return;
+    var backDom = document.createElement("div");
+    if (window.innerWidth > 800){
+        backDom.style = "width: 0px; height: 0px; position: fixed; left: 5.5vw; \
+        bottom: 0px; display: none; z-index: 2; \
+        border-left: 2.5vw solid transparent; border-right: 2.5vw solid transparent; \
+        border-bottom: 2vw solid rgba(0,0,0,.2);";
+    }else{
+        backDom.style = "width: 0; height: 0; position: fixed; \
+        left: 1.5rem; bottom: 0; display: none; z-index: 2;\
+        border-left: 1.5rem solid transparent;\
+        border-right: 1.5rem solid transparent;\
+        border-bottom: 1.2rem solid rgba(0,0,0,.2);";
+    }
+    window.addEventListener("scroll", function(){
+        var sctop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (sctop > window.innerHeight*1.2){
+            backDom.style.display = "block";
+        }else{
+            backDom.style.display = "none";
+        }
+    });
+    backDom.addEventListener("click", function(){
+        /* 
+        速度曲线：v(t) = k/exp(3t)   int(v(t), t, 0, 1.5) == s  ->  k = 3sexp(9/2)/(exp(9/2)-1)
+         */
+        var sctop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var t = 0;
+        var k = sctop*3.0337; // k = sctop*3*Math.exp(9/2) / (Math.exp(9/2) - 1);
+        var dt = 0.01;
+        var TOfunc = function(){
+            sctop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            if (sctop > 2){
+                let v = k/Math.pow(Math.E, 3*t);  t += dt;
+                let ds = v*dt;
+                if (ds < 3) ds = 3;
+                let newY = sctop - ds;
+                if (newY < 0) newY = 0;
+                window.scrollTo(0, newY);
+                setTimeout(TOfunc, dt*1000);
+            }
+        }
+        TOfunc();
+    });
+    document.body.appendChild(backDom);
+})();
