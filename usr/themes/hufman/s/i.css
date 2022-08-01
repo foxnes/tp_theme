@@ -527,7 +527,7 @@ pre code[class*="language-"]{
 
 .page-navigator{
     padding: 15px;
-    margin: 15px auto 5rem auto;
+    margin: 15px auto 3rem auto;
     text-align: center;
     width: 80%;
     border-top: 1px solid #f1f1f1;
@@ -546,7 +546,7 @@ pre code[class*="language-"]{
     display: inline-block;
     vertical-align: top;
     text-align: center;
-    margin: 0.2rem 0.7rem;
+    margin: 0.2rem;
 }
 .page-navigator a{
     font-size: 15px;
@@ -625,7 +625,7 @@ input[type="submit"] a:hover, button a:hover{
     margin-top: 1rem;
     padding: 1rem 1.5rem 1rem 1.5rem;
     border-radius: 0.3rem;
-    background: #f0f0f0;
+    background: #f7f7f7;
     font-weight: normal;
 }
 #comment-form input, #comment-form textarea{
@@ -700,6 +700,9 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     border: 1px solid #d9d9d9;
     width: 50px; height: 50px;
     transition: all 0.3s;
+    overflow: hidden;
+    white-space: nowrap;
+
 }
 .comment-body{padding: 0.5rem 0 0.5rem 1rem;list-style:none}
 .comment-body p.half{clear: none !important}

@@ -4,11 +4,11 @@ define('__TYPECHO_GRAVATAR_PREFIX__', 'https://gravatar.loli.net/avatar/');
 
 function themeConfig($form){
     $ThemeOptions = new Typecho_Widget_Helper_Form_Element_Checkbox('ThemeOptions', 
-        array('content' => _t('主页文章全文输出'),
+        array(
             'no_rand_thumb' => _t('主页文章无图时隐藏随机展示的缩略图'),
             'comments_recent_hide_author' => _t('左侧栏近期评论隐藏作者回复')
         ),
-        array('content', 'no_rand_thumb', 'comments_recent_hide_author'),
+        array('no_rand_thumb', 'comments_recent_hide_author'),
         _t('配置')
     );
     $form->addInput($ThemeOptions->multiMode());

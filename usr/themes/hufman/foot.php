@@ -26,9 +26,7 @@
             </form>
             <ul class="sb-widget">
                 <p class="cleartext">热门</p>
-                <?php
-                theme_hot_posts(10);
-                ?>
+                <?php theme_hot_posts(10); ?>
             </ul>
 
             <ul class="sb-widget">
@@ -61,9 +59,6 @@
     <!-- <script src="<?php $this->options->themeUrl('s/postbird-img-glass.js'); ?>"></script> -->
     <script src="<?php $this->options->themeUrl('s/lazyload.js'); ?>"></script>
     <script src="<?php $this->options->themeUrl('s/i.js'); ?>"></script>
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('s/katex.min.css'); ?>">
-    <script src="<?php $this->options->themeUrl('s/katex.min.js'); ?>"></script>
-    <script src="<?php $this->options->themeUrl('s/auto-render.min.js'); ?>" onload="safe_do(function(){ renderMathInElement($('.atcs')[0], {delimiters: [{left: '$', right: '$', display: false}]}); });"></script>
 <?php $this->footer(); ?>
 </body>
 </html>

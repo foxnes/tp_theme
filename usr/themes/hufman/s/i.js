@@ -45,11 +45,81 @@ emoji_add('#showfacenamereplace_wpbq', ['→', '开心', '疑惑', '很酷', '�
 'idea', '哄堂大笑', '生气', '绿笑脸', '面无表情', '问号', '吐舌头', '脸红', '白眼', '伤心', '微笑', 
 '惊讶', '恶魔坏笑', 'wink'], "wpbq", "wpbq-face");
 
+
+var extraPowerEmoticons = ["w(ﾟДﾟ)w", "(๑•̀ㅂ•́)و✧", "o(￣▽￣)d", "(//▽//)", "(￣∀￣)", "(ง ˙o˙)ว",
+ "(｡･∀･)ﾉﾞ", "(*￣3￣)╭", "(:3[▓▓]", "_(:з」∠)_", "(●´∀｀●)", "(¯﹃¯)",
+ "(๑•́ ₃ •̀๑)", "♪(^∇^*)", "(`･ω･´)", "(*´∀｀)ノ", "(つд⊂)", "(°ー°〃)",
+ "(`ε´ )", "<(｀^′)>", "(｀д′)", "╰（‵□′）╯", "(。皿。メ)", "(╯￣Д￣)╯╘═╛", "σ`∀´)",
+ "( ´ー`)", "( ﾟ 3ﾟ)", "ﾟ∀ﾟ)σ", "( ˇωˇ)", "[]~(￣▽￣)~",
+ "|д` )", "(`ヮ´ )", "(｡◕∀◕｡)", "ᕕ( ᐛ )ᕗ", "( ›´ω`‹ )", "( ﾟ∀。)", "ฅ(^ω^ฅ)",
+ "(  д ) ﾟ ﾟ", "Σ(っ °Д °;)っ", "(|||ﾟДﾟ)", "(＃°Д°)", "(๑•́ ₃•̀๑)",
+ "( ;´д`)", "( TロT)σ", "(TДT)", "(;´༎ຶД༎ຶ`)", "(´; ω ;`)"];
+(function(){
+    var emoticons = extraPowerEmoticons;
+    var EmoticonsinsertDom = document.getElementById("EmoticonsinsertDom");
+    if (!EmoticonsinsertDom) return;
+
+    EmoticonsinsertDom.style = "position: relative; float: left; line-height: "+
+    $(".emojis").height()+"px; margin-left: 0.2rem;";
+
+    var hidDom = document.createElement("div");
+    var hidDomCont = document.createElement("div")
+    hidDom.style = "z-index: 9; position: absolute; bottom: 2rem; left: -60px;\
+    max-width: 88vw; width: 380px;\
+    border: 1px solid #cdcdcd; border-radius: 5px;\
+    background: white; display: none; padding: 0.5rem;\
+    box-shadow: 0 0 50px #636363;";
+    hidDomCont.style = "max-height: 150px; overflow-y: auto; scrollbar-width: thin;"
+
+    for (let i = 0; i < emoticons.length; i++) {
+        let emodom = document.createElement("span");
+        emodom.setAttribute("class", "emo-single");
+        emodom.innerText = emoticons[i];
+        emodom.onclick = function(){
+            document.getElementById("textarea").value += this.innerText;
+        }
+        hidDomCont.appendChild(emodom);
+    }
+
+    var emostyle = document.createElement("style");
+    emostyle.innerHTML = ".emo-single{display: inline-block; white-space: nowrap;\
+        padding: 0.3em 0.8em; user-select: none; }\
+    .emo-single:hover{background: #f1f1f1; border-radius: 5px;}";
+    document.body.append(emostyle);
+
+    document.body.addEventListener("click", function(){
+        hidDom.style.display = "none";
+    });
+
+    var EmoDoor = document.createElement("p");
+    var EmoDoorButton = document.createElement("span");
+    EmoDoorButton.innerText = "(OωO)";
+    EmoDoorButton.style = "cursor: pointer; user-select: none;";
+    EmoDoorButton.setAttribute("attrHidTime", "0");
+    EmoDoorButton.addEventListener("click", function(event){
+        event.stopPropagation();
+        hidDom.style.display = "block";
+        var that = this;
+        this.innerText = emoticons[Math.floor(Math.random()*emoticons.length)];
+        this.attrHidTime = String(new Date().getTime() + 1500);
+        setTimeout(function(){
+            if (new Date().getTime() > Number(that.attrHidTime)){
+                that.innerText = "(OωO)";
+            }
+        }, 2000);
+    });
+
+    EmoDoor.appendChild(EmoDoorButton);
+    hidDom.appendChild(hidDomCont);
+    EmoticonsinsertDom.appendChild(hidDom);
+    EmoticonsinsertDom.appendChild(EmoDoor);
+})();
+
 // 点击打开表情
 GLOBAL_FLAG_HAS_POPUP = 0;
 $('.click_to_show').each(function(){
     $(this).children('.click_board').each(function(){
-        var dom = $('#'+$(this).attr('for'));
+        let dom = $('#'+$(this).attr('for'));
         dom.click(function(){
             $(this).fadeOut(100);
         });
@@ -93,20 +163,36 @@ autoresize();
 window.onresize = autoresize;
 
 $(".backtotop").click(function () {
-    var speed = 200;
-    $('body,html').animate({ scrollTop: 0 }, speed);
+    // 速度曲线：v(t) = k/exp(3t)   int(v(t), t, 0, 1.5) == s  ->  k = 3sexp(9/2)/(exp(9/2)-1)
+    var sctop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var t = 0;
+    var k = sctop*3.0337; // k = sctop*3*Math.exp(9/2) / (Math.exp(9/2) - 1);
+    var dt = 0.01;
+    var TOfunc = function(){
+        sctop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (sctop > 2){
+            let v = k/Math.pow(Math.E, 3*t);  t += dt;
+            let ds = v*dt;
+            if (ds < 3) ds = 3;
+            let newY = sctop - ds;
+            if (newY < 0) newY = 0;
+            window.scrollTo(0, newY);
+            setTimeout(TOfunc, dt*1000);
+        }
+    }
+    TOfunc();
     return false;
 });
 
 // 评论区添加表情
 function insertText(obj, str){
 	var m = obj.value.match(/(‹|：)[\S]{1,5}?(›|：)/g);
-	if (m) {
-		if (m.length >= 8) {
-			alert("最多添加8个表情！");
-			return false;
-		}
-	}
+	if (m){
+        if (m.length >= 8) {
+            alert("最多添加8个表情！");
+            return false;
+        }
+    }
 	obj.value += str;
 }
 
@@ -244,4 +330,122 @@ $("html").on("click", function(e){
     }
 });
 
-// safe_do(console.clear);
+
+/**
+ * 按照队列加载资源
+ * @param {Array} queue 加载队列 形式：[[url, onloadfunc, onerrfunc], [url, onloadfunc, onerrfunc], ...]
+ * queue是一个二维数组
+ * queue[i] = [url, onloadfunc, onerrfunc]
+ * 其中
+ *  - url为字符串 为资源地址
+ *  - onloadfunc 为资源加载成功后执行的函数
+ *  - onerrfunc 为资源加载失败后执行的函数
+ */
+function EP_loadSource(queue){
+    var domList = [];
+    var touchnext = function(){
+        let theDom = domList.shift();
+        if (!theDom) return;
+        document.body.append(theDom);
+    }
+    for (let index = 0; index < queue.length; index++){
+        let url = queue[index][0];
+        let onloadfunc = queue[index].length > 1 ? queue[index][1] : function(){};
+        let onerrfunc = queue[index].length > 2 ? queue[index][2] : function(){};
+        let fileType = url.split("."); fileType = fileType[fileType.length-1].toLowerCase();
+        let newDom;
+        if (fileType == "css") {
+            newDom = document.createElement("link");
+            newDom.setAttribute("href", url);
+            newDom.setAttribute("rel", "stylesheet");
+        }else if (fileType == "js") {
+            newDom = document.createElement("script");
+            newDom.setAttribute("src", url);
+        }else{
+            console.error("This source will not be loaded: ", url);
+        }
+        newDom.onload = function(){onloadfunc();touchnext();};
+        newDom.onerror = function(){onerrfunc();touchnext();};
+        domList.push(newDom);
+    }
+    touchnext();
+}
+/**
+ * 页面加载完成后或者{delay}毫秒后执行{func} （只执行一次）
+ * @param {function} func (*) 
+ * @param {int} delay (ms)
+ */
+function EP_mustDo(func, delay){
+    var done_flag = 0;
+    var upperFunc = function(){
+        if (done_flag) return;
+        func();
+        done_flag = 1;
+    }
+    window.addEventListener("load", upperFunc);
+    setTimeout(upperFunc, delay);
+}
+
+/**
+ * latex公式渲染
+ */
+(function(){
+    var renderfunc = function(){
+        renderMathInElement(
+            document.getElementsByClassName("post-content")[0],
+            {delimiters: [{left: '$', right: '$', display: false}, {left: '$$', right: '$$', display: false}]}
+        );
+    }
+    var loadLocalFunc = function(){
+        EP_loadSource([
+            [themeUrl+"/s/katex.min.css"],
+            [themeUrl+"/s/katex.min.js"],
+            [themeUrl+"/s/auto-render.min.js", renderfunc]
+        ]);
+    }
+    EP_mustDo(function(){
+        EP_loadSource([
+            ["https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.css"],
+            ["https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.js"],
+            ["https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/contrib/auto-render.js", renderfunc, loadLocalFunc]
+        ]);
+    }, 2000);
+})();
+
+
+/**
+ * 图片查看器
+ */
+ (function(){
+    function EP_showImg(imgdom){
+        var showDom = document.createElement("div");
+        var showDomStyle = "background-image: url("+imgdom.src+"); background-position: center; \
+        background-repeat: no-repeat; background-color: rgba(0, 0, 0, 0.6); \
+        background-size: contain; width: 100vw; height: 100vh;\
+        position: fixed; left: 0; top: 0; z-index: 9999999999; transform-origin: top left;";
+        let rate1 = imgdom.width / imgdom.height;
+        let rate2 = window.innerWidth / window.innerHeight;
+        if (rate1 > 1 && rate2 < 1){
+            showDomStyle += "width: 100vmax; height: 100vmin;\
+            transform: rotate(90deg); translate(0,-100vmin);\
+            left: 100vmin;";
+        }else if(rate1 < 1 && rate2 > 1){
+            showDomStyle += "width: 100vmin; height: 100vmax;\
+            transform: rotate(90deg); translate(0,-100vmin);\
+            left: 100vmax;";
+        }
+        showDom.style = showDomStyle;
+        showDom.onclick = function(){
+            document.body.removeChild(this);
+        };
+        document.body.appendChild(showDom);
+    }
+
+    var imgs = document.querySelectorAll(".post-content img");
+    for (let i = 0; i < imgs.length; i++){
+        imgs[i].addEventListener('click', function(){
+            EP_showImg(this);
+        });
+    }
+})();
+

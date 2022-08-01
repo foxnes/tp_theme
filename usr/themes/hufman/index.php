@@ -11,29 +11,17 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('head.php');
 
-$temp_show_content = false;
 $temp_no_rand_thumb = false;
-if (!empty($this->options->ThemeOptions) && in_array('content', $this->options->ThemeOptions))
-    $temp_show_content = true;
 if (!empty($this->options->ThemeOptions) && in_array('no_rand_thumb', $this->options->ThemeOptions))
     $temp_no_rand_thumb = true;
 ?>
 <?php while($this->next()): ?>
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-        <?php if ($temp_show_content): ?>
-        <h3 itemprop="name headline">
-            <a class="post-title piece" href="<?php $this->permalink() ?>" itemprop="url"><?php $this->title() ?></a>
-        </h3>
-        <?php else: ?>
 		<h3 class="post-title i" itemprop="name headline">
             <a href="<?php $this->permalink() ?>" itemprop="url"><?php $this->title() ?></a>
         </h3>
-		<?php endif; ?>
-        <div class="post-content<?php if (!$temp_show_content) echo " i" ?>" itemprop="articleBody">
+        <div class="post-content i" itemprop="articleBody">
             <?php
-    		if ($temp_show_content):
-    		    $this->content("继续阅读 / Read_more");
-    		else:
     		    $hasThumb = showThumb($this, (!$temp_no_rand_thumb));
                 if ($hasThumb){
                     $excerpt_limit = 210;
@@ -41,7 +29,6 @@ if (!empty($this->options->ThemeOptions) && in_array('no_rand_thumb', $this->opt
                     $excerpt_limit = 300;
                 }
     		    $this->excerpt($excerpt_limit, " ...");
-    		endif;
     		?>
         </div>
         <div class="post-meta-i">

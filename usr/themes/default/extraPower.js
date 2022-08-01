@@ -242,25 +242,43 @@ var GLOBAL_VARS_EMO_JS = {};
 
 
 /**
- * 加载资源(css/js)
- * @param {string} url (*)
- * @param {function} onloadfunc 添加onload函数 (optional)
+ * 按照队列加载资源
+ * @param {Array} queue 加载队列 形式：[[url, onloadfunc, onerrfunc], [url, onloadfunc, onerrfunc], ...]
+ * queue是一个二维数组
+ * queue[i] = [url, onloadfunc, onerrfunc]
+ * 其中
+ *  - url为字符串 为资源地址
+ *  - onloadfunc 为资源加载成功后执行的函数
+ *  - onerrfunc 为资源加载失败后执行的函数
  */
-function EP_loadSource(url, onloadfunc = function(){}){
-    var fileType = url.split("."); fileType = fileType[fileType.length-1].toLowerCase();
-    var newDom;
-    if (fileType == "css") {
-        newDom = document.createElement("link");
-        newDom.setAttribute("href", url);
-        newDom.setAttribute("rel", "stylesheet");
-    }else if (fileType == "js") {
-        newDom = document.createElement("script");
-        newDom.setAttribute("src", url);
-    }else{
-        console.error("This source will not be loaded: ", url);
+ function EP_loadSource(queue){
+    var domList = [];
+    var touchnext = function(){
+        let theDom = domList.shift();
+        if (!theDom) return;
+        document.body.append(theDom);
     }
-    newDom.onload = onloadfunc;
-    document.body.appendChild(newDom);
+    for (let index = 0; index < queue.length; index++){
+        let url = queue[index][0];
+        let onloadfunc = queue[index].length > 1 ? queue[index][1] : function(){};
+        let onerrfunc = queue[index].length > 2 ? queue[index][2] : function(){};
+        let fileType = url.split("."); fileType = fileType[fileType.length-1].toLowerCase();
+        let newDom;
+        if (fileType == "css") {
+            newDom = document.createElement("link");
+            newDom.setAttribute("href", url);
+            newDom.setAttribute("rel", "stylesheet");
+        }else if (fileType == "js") {
+            newDom = document.createElement("script");
+            newDom.setAttribute("src", url);
+        }else{
+            console.error("This source will not be loaded: ", url);
+        }
+        newDom.onload = function(){onloadfunc();touchnext();};
+        newDom.onerror = function(){onerrfunc();touchnext();};
+        domList.push(newDom);
+    }
+    touchnext();
 }
 /**
  * 页面加载完成后或者{delay}毫秒后执行{func} （只执行一次）
@@ -282,22 +300,27 @@ function EP_mustDo(func, delay){
 /**
  * Latex公式渲染
  */
-(function(){
-    if (!EP_EN_CONFIG['latex-rule']) return;
+ (function(){
+    var renderfunc = function(){
+        renderMathInElement(
+            document.getElementsByClassName("post-content")[0],
+            {delimiters: [{left: '$', right: '$', display: false}, {left: '$$', right: '$$', display: false}]}
+        );
+    }
+    var loadLocalFunc = function(){
+        // 加载本地资源 - 手动修改地址即可
+        // EP_loadSource([
+        //     [basepath+"/usr/theme/hufman/s/katex.min.css"],
+        //     [basepath+"/usr/theme/hufman/s/katex.min.js"],
+        //     [basepath+"/usr/theme/hufman/s/auto-render.min.js", renderfunc]
+        // ]);
+    }
     EP_mustDo(function(){
-        EP_loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.css");
-        EP_loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.js");
-        EP_loadSource("https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/contrib/auto-render.min.js", function(){
-            setTimeout(function(){
-                renderMathInElement(
-                    document.getElementsByClassName("post-content")[0],
-                    {
-                        delimiters: [{left: '$', right: '$', display: false},
-                                    {left: '$$', right: '$$', display: false}]
-                    }
-                );
-            }, 2000);
-        });
+        EP_loadSource([
+            ["https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.css"],
+            ["https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.js"],
+            ["https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/contrib/auto-render.js", renderfunc, loadLocalFunc]
+        ]);
     }, 2000);
 })();
 

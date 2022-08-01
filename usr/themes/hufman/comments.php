@@ -15,7 +15,7 @@
                 <?php if($this->user->hasLogin()): ?>
     		        <div class='muted'>登录身份: <a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>.</div>
                 <?php endif; ?>
-                <textarea rows="4" name="text" class="textarea" required placeholder='总想说点什么...'><?php $this->remember('text'); ?></textarea>
+                <textarea id="textarea" rows="4" name="text" class="textarea" required placeholder='总想说点什么...'><?php $this->remember('text'); ?></textarea>
             </div>
 
             <?php if(!$this->user->hasLogin()): ?>
@@ -47,6 +47,7 @@
                 </span>
                 <div id="showfacenamereplace_wpbq" class="hidden"></div>
             </div>
+            <div id="EmoticonsinsertDom"></div>
     		<p class='fr'>
                 <?php $comments->cancelReply("取消回复"); ?>
                 <button type="submit">提交评论</button>
@@ -83,7 +84,7 @@ $comments->alt(' comment-odd', ' comment-even');
         <img class="avatar" src="<?php 
         // $comments->gravatar('55', '');
         _e(get_gravatar($comments->mail));
-        ?>" alt="Gravatar" width="55" height="55">
+        ?>" alt="QAQ" width="55" height="55">
 
         <div class="comment-right">
             <p><span class="bold" title="author">

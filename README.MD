@@ -4,11 +4,15 @@
 
 ## 1. Hufman主题
 
+[点击进入](usr/themes/hufman/)
+
 ![HUFMAN](usr/themes/hufman/screenshot.png)
 
 ## 2. Vblog主题
 
 **永不更新，不建议下载。**
+
+[点击进入](usr/themes/vblog/)
 
 ![VBLOG](usr/themes/vblog/screenshot.png)
 
