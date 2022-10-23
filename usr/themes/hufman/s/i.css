@@ -207,6 +207,7 @@ ul.sb-widget li{
     padding: 20px;
     color: #444;
     position: relative;
+    font-family: Georgia, 'Times New Roman', "微软雅黑";
 }
 .post + .post{
     border-top: 1px solid #eee;
@@ -248,24 +249,27 @@ ul.sb-widget li{
     white-space: nowrap;
 }
 .post-thumb{
-    max-width: 12rem;
-    max-height: 8rem;
-    border-radius: 2px;
     margin-left: 1rem;
     position: relative;
     transition: all 0.8s;
     float: right;
+    box-shadow: 0 0 14px #e6e6e6;
+}
+.post-thumb a{
+    display: block;
+    max-width: 12rem;
+    max-height: 8rem;
+    overflow: clip;
+    border-radius: 2px;
 }
 .post-thumb img{
-    border-radius: 2px;
     min-height: 6rem;
     transition: all 0.8s;
     display: block;
     cursor: pointer;
     margin: 0 !important;
-    box-shadow: 0 0 14px #e6e6e6
 }
-.post-thumb img:hover{
+.post-thumb:hover{
     box-shadow: 0 0 14px #8b8b8b;
 }
 .post-thumb img:hover{

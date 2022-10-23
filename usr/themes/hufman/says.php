@@ -33,7 +33,7 @@ $this->need('head.php');
     	<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
     	    <div>
                 <label for="textarea" class="required"><i class="icon icon-comment-empty"></i> 说说</label>
-                <textarea rows="4" name="text" required><?php $this->remember('text'); ?></textarea>
+                <textarea rows="4" name="text" required id="textarea"><?php $this->remember('text'); ?></textarea>
             </div>
 
             <?php if(!$this->user->hasLogin()): ?>
@@ -63,7 +63,7 @@ $this->need('head.php');
                 </span>
                 <div id="showfacenamereplace_wpbq" class="hidden"></div>
             </div>
-			
+			<div id="EmoticonsinsertDom"></div>
     		<p class='fr'>
                 <?php $comments->cancelReply("取消回复"); ?>
                 <button type="submit">提交</button>
