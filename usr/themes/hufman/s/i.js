@@ -60,13 +60,14 @@ var extraPowerEmoticons = ["w(ﾟДﾟ)w", "(๑•̀ㅂ•́)و✧", "o(￣▽�
     if (!EmoticonsinsertDom) return;
 
     EmoticonsinsertDom.style = "position: relative; float: left; line-height: "+
-    $(".emojis").height()+"px; margin-left: 0.2rem;";
+    $(".emojis").height()+"px; margin-left: 0.2rem; background: white;border-radius: 1rem;\
+    line-height: 1rem; margin: 0.35rem 0.2rem; padding: 0.25rem; \
+    border-bottom: 2px solid #e4e4e4; border-right: 1px solid #f2f2f2;";
 
     var hidDom = document.createElement("div");
     var hidDomCont = document.createElement("div")
     hidDom.style = "z-index: 9; position: absolute; bottom: 2rem; left: -60px;\
-    max-width: 88vw; width: 380px;\
-    border: 1px solid #cdcdcd; border-radius: 5px;\
+    max-width: 88vw; width: 380px; border-radius: 5px;\
     background: white; display: none; padding: 0.5rem;\
     box-shadow: 0 0 50px #636363;";
     hidDomCont.style = "max-height: 150px; overflow-y: auto; scrollbar-width: thin;"

@@ -11,7 +11,7 @@ html{
     background-color: #eaeaea;
     color: #333;
     word-break: break-all;
-    font-family: sans-serif, "微软雅黑";
+    font-family: sans-serif, "微软雅黑", 'STHeiti';
     -webkit-font-smoothing: antialiased;
 }
 a{
@@ -221,7 +221,7 @@ ul.sb-widget li{
 .post-title{
     color: #1e1e1e;
     font-weight: 400;
-    letter-spacing: -1.2px;
+    letter-spacing: -0.6px;
     font-size: 2em;
     padding-bottom: 0.5em;
     line-height: 1.1em;
@@ -251,23 +251,23 @@ ul.sb-widget li{
 .post-thumb{
     margin-left: 1rem;
     position: relative;
-    transition: all 0.8s;
     float: right;
     box-shadow: 0 0 14px #e6e6e6;
-}
-.post-thumb a{
-    display: block;
-    max-width: 12rem;
-    max-height: 8rem;
-    overflow: clip;
-    border-radius: 2px;
+    font-family: sans-serif;
 }
 .post-thumb img{
+    margin: 0 !important;
+}
+.post-thumb, .post-thumb a, .post-thumb img{
+    max-width: 12rem;
+    max-height: 8rem;
     min-height: 6rem;
+    min-width: 9rem;
+    border-radius: 3px;
     transition: all 0.8s;
     display: block;
+    overflow: clip;
     cursor: pointer;
-    margin: 0 !important;
 }
 .post-thumb:hover{
     box-shadow: 0 0 14px #8b8b8b;
@@ -371,6 +371,7 @@ hr{
     /* margin-top: 15px; 设置成absolute margin无效了 在.post-content.i中加入padding-bottom */
     position: absolute;
     bottom: 1em;
+    font-family: Georgia, 'Times New Roman', 'STHeiti';
 }
 .post-content img{
     margin: 0.67em 0;
@@ -746,6 +747,7 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     margin-bottom: 1rem;
     font-size: 0.9rem;
     padding: 0.8rem 1rem;
+    font-family: Georgia, 'Times New Roman', 'STHeiti';
 }
 .post-meta a{
     display: inline-block;
