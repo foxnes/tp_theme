@@ -15,8 +15,13 @@ function themeConfig($form){
     $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('post_meta_text', NULL, NULL,
     _t('文章底部说明信息'),
     _t('默认替换关键字：%author% 作者(超链接形式), %time% 发布时间, %modify% 修改时间')));
+
     $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('sb_right_html', NULL, NULL,
     _t('右栏HTML'),
+    _t('建议参考README.MD')));
+
+    $form->addInput(new Typecho_Widget_Helper_Form_Element_Textarea('footer_html', NULL, NULL,
+    _t('页面底端HTML'),
     _t('建议参考README.MD')));
 }
 

@@ -30,6 +30,11 @@ UPDATE `typecho_fields` SET `int_value` = `str_value`+0 WHERE `name` = 'views' a
 
 
 ## 近期更新
+2022/12/6
+1. 增加插入底部HTML功能
+2. 接轨国际化 (...)
+
+
 2022/8/1
 1. Latex公式渲染改为优先使用外部资源
 2. 添加图片查看器

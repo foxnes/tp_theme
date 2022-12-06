@@ -35,10 +35,10 @@ $this->need('head.php');
     </div>
     <ul class="post-nav">
         <div class="tags fr" itemprop="keywords">
-            标签: <?php $this->tags('', true, '<a href="javascript:void 0">无标签</a>'); ?>
+            TAG: <?php $this->tags('', true, '<a href="javascript:void 0">无标签</a>'); ?>
         </div>
-        <li>上一篇: <?php $this->thePrev('%s','没有了'); ?></li>
-        <li>下一篇: <?php $this->theNext('%s','没有了'); ?></li>
+        <li>Last: <?php $this->thePrev('%s','none'); ?></li>
+        <li>Prev: <?php $this->theNext('%s','none'); ?></li>
     </ul>
 </article>
 

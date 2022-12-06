@@ -2,7 +2,7 @@
 <div id="comments">
     <?php $this->comments()->to($comments); ?>
     <?php if ($comments->have()): ?>
-	<p class="thin ct">评论区 - <?php $this->commentsNum(_t('暂无评论'), _t('一条评论'), _t('%d 条评论')); ?></p>
+	<p class="thin ct">Leave a comment - <?php $this->commentsNum(_t('no comment yet'), _t('only one'), _t('%d comments')); ?></p>
     <?php $comments->listComments(); ?>
     <?php $comments->pageNav('&laquo;', '&raquo;'); ?>
     <?php endif; ?>
@@ -11,25 +11,25 @@
     <div id="<?php $this->respondId(); ?>" class="respond">
     	<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
     	    <div>
-                <label for="textarea" class="required"><i class="icon icon-comment-empty"></i> 评论</label>
+                <label for="textarea" class="required"><i class="icon icon-comment-empty"></i> 评论 / Leave a comment</label>
                 <?php if($this->user->hasLogin()): ?>
-    		        <div class='muted'>登录身份: <a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>.</div>
+    		        <div class='muted'>登录身份/Logined as: <a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>.</div>
                 <?php endif; ?>
-                <textarea id="textarea" rows="4" name="text" class="textarea" required placeholder='总想说点什么...'><?php $this->remember('text'); ?></textarea>
+                <textarea id="textarea" rows="4" name="text" class="textarea" required placeholder='o(￣▽￣)d'><?php $this->remember('text'); ?></textarea>
             </div>
 
             <?php if(!$this->user->hasLogin()): ?>
             <div>
                 <p class="trip w">
-                    <label for="author" class="required"><i class="icon icon-child"></i> 昵称 <b class="warning-blue">*</b></label>
-                    <input type="text" name="author" class="text" value="<?php $this->remember('author'); ?>" required />
+                    <label for="author" class="required"><i class="icon icon-child"></i> 昵称/Name <b class="warning-blue">*</b></label>
+                    <input type="text" name="author" id="author" class="text" value="<?php $this->remember('author'); ?>" required />
                 </p>
                 <p class="trip w">
-                    <label for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>><i class="icon icon-mail"></i> 邮箱 <?php if ($this->options->commentsRequireMail): ?> <b class="warning-blue">*</b><?php endif; ?></label>
-                    <input type="email" name="mail" class="text" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> placeholder='可QQ邮箱' />
+                    <label for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>><i class="icon icon-mail"></i> 邮箱/Email <?php if ($this->options->commentsRequireMail): ?> <b class="warning-blue">*</b><?php endif; ?></label>
+                    <input type="email" name="mail" id="mail" class="text" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> placeholder='可QQ邮箱' />
                 </p>
                 <p class="trip w">
-                    <label for="url"<?php if ($this->options->commentsRequireURL): ?> class="required"<?php endif; ?>><i class="icon icon-link"></i> 网站<?php if ($this->options->commentsRequireURL): ?> <b class="warning-blue">*</b><?php endif; ?></label>
+                    <label for="url"<?php if ($this->options->commentsRequireURL): ?> class="required"<?php endif; ?>><i class="icon icon-link"></i> 网站/Website<?php if ($this->options->commentsRequireURL): ?> <b class="warning-blue">*</b><?php endif; ?></label>
                     <input type="url" name="url" id="url" class="text" placeholder="https://" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
                 </p>
             </div>
@@ -49,14 +49,14 @@
             </div>
             <div id="EmoticonsinsertDom"></div>
     		<p class='fr'>
-                <?php $comments->cancelReply("取消回复"); ?>
-                <button type="submit">提交评论</button>
+                <?php $comments->cancelReply("取消回复/Cancel"); ?>
+                <button type="submit">提交/Submit</button>
             </p>
             <div class='clear'></div>
     	</form>
     </div>
     <?php else: ?>
-    <h3>评论已关闭</h3>
+    <h3>评论已关闭/Comments closed</h3>
     <?php endif; ?>
 </div>
 
