@@ -191,7 +191,8 @@ ul.sb-widget li{
 }
 .cleartext{
     font-size: 1.3em;
-    font-family: Sans-Serif;
+    /* font-family: Sans-Serif; */
+    font-family: 'Times New Roman', Times;
     color: #444;
     font-weight: 400;
 }
@@ -1159,3 +1160,4 @@ table tr:hover{
         width: 100%;
     }
 }
+iframe{border: 0;}

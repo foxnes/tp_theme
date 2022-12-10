@@ -4,18 +4,18 @@
             <i class="icon icon-thumbs-up"></i> Life is fantastic
             </div>
 			<ul class="sb-widget">
-			    <p class="cleartext">近期文章</p>
+			    <p class="cleartext">近期文章 / Posts</p>
 			    <?php $this->widget('Widget_Contents_Post_Recent')->parse('<li><a href="{permalink}"><i class="icon icon-clock"></i> {title}</a></li>'); ?>
 			</ul>
 			<ul class="sb-widget" id="rctrly">
-			    <p class="cleartext">近期评论</p>
+			    <p class="cleartext">近期评论 / Comments</p>
 			    <?php $this->widget('Widget_Comments_Recent_theme')->to($comments); ?>
                 <?php while($comments->next()): ?>
                     <li><a href="<?php $comments->permalink(); ?>" rel="nofollow"><i class="icon icon-comment-empty"></i> <?php $comments->author(false); ?>: <?php $comments->excerpt(35, '...'); ?></a></li>
                 <?php endwhile; ?>
 			</ul>
 			<ul class="sb-widget">
-			    <p class="cleartext">分类目录</p>
+			    <p class="cleartext">分类目录 / Cate</p>
 			    <?php $this->widget('Widget_Metas_Category_List')->parse('<li><a href="{permalink}"><i class="icon icon-folder"></i> {name}</a></li>'); ?>
 			</ul>
         </div>
@@ -25,18 +25,18 @@
 		        <input type="text" class="search" name="s" onblur="if(this.value=='')this.value='在此输入并搜索';" onfocus="if(this.value=='在此输入并搜索')this.value='';" value="在此输入并搜索">
             </form>
             <ul class="sb-widget">
-                <p class="cleartext">热门</p>
+                <p class="cleartext">热门 / Hot</p>
                 <?php theme_hot_posts(10); ?>
             </ul>
 
             <ul class="sb-widget">
-            <p class="cleartext">归档</p>
+            <p class="cleartext">归档 / Arch</p>
                 <?php \Widget\Contents\Post\Date::alloc('type=month&format=F Y')->parse('<li><a href="{permalink}">{date}</a></li>'); ?>
             </ul>
 
 
             <ul class="sb-widget">
-                <p class="cleartext">其它</p>
+                <p class="cleartext">其它 / Other</p>
                 <?php if($this->user->hasLogin()): ?>
 			    	<li class="last"><a href="<?php $this->options->adminUrl(); ?>"><?php _e('后台'); ?></a></li>
                 <li><a href="<?php $this->options->logoutUrl(); ?>"><?php _e('退出'); ?></a></li>

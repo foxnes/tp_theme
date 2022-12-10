@@ -1,4 +1,13 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<?php
+
+$fields = unserialize($this->fields);
+if (array_key_exists('subtitle', $fields)){
+    $subtitle = (!empty($fields['subtitle'])) ? $fields['subtitle'].' / ' : '';
+}else{
+    $subtitle = '';
+}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -6,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title><?php $this->archiveTitle(array(
+    <title><?php echo $subtitle; $this->archiveTitle(array(
             'category'  =>  _t('分类 %s 下的文章'),
             'search'    =>  _t('包含关键字 %s 的文章'),
             'tag'       =>  _t('标签 %s 下的文章'),
