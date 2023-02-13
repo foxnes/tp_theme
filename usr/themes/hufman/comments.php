@@ -21,15 +21,15 @@
             <?php if(!$this->user->hasLogin()): ?>
             <div>
                 <p class="trip w">
-                    <label for="author" class="required"><i class="icon icon-child"></i> 昵称/Name <b class="warning-blue">*</b></label>
+                    <label for="author" class="required"><i class="icon icon-child"></i> 昵称<small>/Name</small> <b class="warning-blue">*</b></label>
                     <input type="text" name="author" id="author" class="text" value="<?php $this->remember('author'); ?>" required />
                 </p>
                 <p class="trip w">
-                    <label for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>><i class="icon icon-mail"></i> 邮箱/Email <?php if ($this->options->commentsRequireMail): ?> <b class="warning-blue">*</b><?php endif; ?></label>
+                    <label for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>><i class="icon icon-mail"></i> 邮箱<small>/Email</small> <?php if ($this->options->commentsRequireMail): ?> <b class="warning-blue">*</b><?php endif; ?></label>
                     <input type="email" name="mail" id="mail" class="text" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> placeholder='可QQ邮箱' />
                 </p>
                 <p class="trip w">
-                    <label for="url"<?php if ($this->options->commentsRequireURL): ?> class="required"<?php endif; ?>><i class="icon icon-link"></i> 网站/Website<?php if ($this->options->commentsRequireURL): ?> <b class="warning-blue">*</b><?php endif; ?></label>
+                    <label for="url"<?php if ($this->options->commentsRequireURL): ?> class="required"<?php endif; ?>><i class="icon icon-link"></i> 网站<small>/Website</small><?php if ($this->options->commentsRequireURL): ?> <b class="warning-blue">*</b><?php endif; ?></label>
                     <input type="url" name="url" id="url" class="text" placeholder="https://" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
                 </p>
             </div>
@@ -49,8 +49,8 @@
             </div>
             <div id="EmoticonsinsertDom"></div>
     		<p class='fr'>
-                <?php $comments->cancelReply("取消回复/Cancel"); ?>
-                <button type="submit">提交/Submit</button>
+                <?php $comments->cancelReply("取消<small>/Cancel</small>"); ?>
+                <button type="submit">提交<small>/Submit</small></button>
             </p>
             <div class='clear'></div>
     	</form>
