@@ -45,15 +45,15 @@ img{
     user-select:none;
 }
 .post-content h1{
-    font-size: 2.1em;
+    font-size: 1.8em;
     font-weight: bold;
 }
 .post-content h2{
-    font-size: 1.6em;
+    font-size: 1.5em;
     font-weight: bold;
 }
 .post-content h3{
-    font-size: 1.3em;
+    font-size: 1.125em;
     font-weight: bold;
 }
 .post-content h4{
@@ -82,6 +82,13 @@ img{
     text-shadow: 4px 3px 0 #2b2b2b, 9px 8px 0 rgba(0,0,0,0.15);
     font-size: 1.15rem;
     font-weight: 100;
+    font-family: "cambria", "times new roman";
+    font-style: italic;
+}
+.head h1{
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.1;
 }
 .head .ct{
     width: 80%;
@@ -203,7 +210,7 @@ ul.sb-widget li{
 }
 .muted{
     color: #7f7f7f;
-    font-size: 0.8em;
+    font-size: 0.85em;
 }
 .post{
     padding: 20px;
@@ -345,18 +352,18 @@ hr{
     clear: both;
 }
 .post-content li{
-    margin-left: 2em;
+    margin-left: 2.2em;
     position: relative;
 }
 .post-content ol li::before{
     content: '';
     position: absolute;
-    top: 0.65em;
-    left: -2em;
-    height: 8px;
-    width: 8px;
-    border-radius: 20px;
-    background-color: #327da9;
+    top: 0.85em;
+    left: -1.9em;
+    height: 0;
+    width: 0;
+    border: 0.3em solid transparent;
+    border-left: 0.5em solid #973dbf96;
 }
 .post-content .nav li{
     margin-left: 0;
@@ -431,7 +438,7 @@ pre code[class*="language-"]{
 .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6{
     color: #444;
     line-height: 1.5;
-    margin: 1em 0 1.2em 0;
+    margin: 1em 0 0.5em 0;
     position: relative;
     transition: all 0.3s;
     cursor: default;
@@ -635,6 +642,7 @@ input[type="submit"] a:hover, button a:hover{
     border-radius: 0.3rem;
     background: #f7f7f7;
     font-weight: normal;
+    border: 1px solid rgba(0,0,0,0.1);
 }
 #comment-form input, #comment-form textarea{
     width: 100%;
@@ -712,7 +720,13 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
     white-space: nowrap;
 
 }
-.comment-body{padding: 0.5rem 0 0.5rem 1rem;list-style:none}
+.comment-body{
+    padding: 0.5rem 0 0.5rem 1rem; list-style:none;
+    border-left: 0.2rem solid rgba(0, 0, 0, 0.08);
+}
+.comment-children{
+    background-color: rgba(0,0,0,0.02);
+}
 .comment-body p.half{clear: none !important}
 /* .comment-body+.comment-body{margin-top:15px} */
 
@@ -1061,7 +1075,9 @@ table tr:hover{
     box-shadow: 5px 5px 2px #79996661;
 }
 #says-area .comment-body{
-    border-left: 1px solid #83bc63;
+    border-left: 1px solid #83bc63 !important;
+    border: none;
+    background-color: transparent;
 }
 .says-block.comment-body{
     border-bottom-left-radius: 1rem 2rem;
@@ -1070,6 +1086,11 @@ table tr:hover{
     padding: 0;
     border: none;
     box-shadow: none;
+    border-left: none !important;
+    /* comment-body 默认左边有border */
+}
+#says-area .comment-children{
+    background-color: transparent;
 }
 #comment-form textarea{width: 100%; max-width: 100%; min-width: 100%;}
 

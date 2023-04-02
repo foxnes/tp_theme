@@ -13,7 +13,7 @@
     	    <div>
                 <label for="textarea" class="required"><i class="icon icon-comment-empty"></i> 评论 / Leave a comment</label>
                 <?php if($this->user->hasLogin()): ?>
-    		        <div class='muted'>登录身份/Logined as: <a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>.</div>
+    		        <div class='muted'>登录身份 / Logined as: <a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>.</div>
                 <?php endif; ?>
                 <textarea id="textarea" rows="4" name="text" class="textarea" required placeholder='o(￣▽￣)d'><?php $this->remember('text'); ?></textarea>
             </div>
@@ -56,7 +56,9 @@
     	</form>
     </div>
     <?php else: ?>
-    <h3>评论已关闭/Comments closed</h3>
+    <div id="comment-form" style="text-align:center">
+        <h3>评论已关闭/Comments closed</h3>
+    </div>
     <?php endif; ?>
 </div>
 

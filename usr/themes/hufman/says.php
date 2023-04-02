@@ -83,13 +83,18 @@ if ($isSay) echo ' says-block comment-parent';
 		<span class="bold" title="author">
             <?php /* 前面的title='author'不可随意删除,用于显示`@` */ $comments->author(); ?>
         </span>
-		<?php if (!$isSay){ ?>
-		<span class='muted'><?php $comments->date('y-m-d H:i'); ?></span>
+		<?php if ($isSay){ ?>
+			<div class='says-float-time'><?php $comments->date('m/d'); ?></div>
 		<?php }else{ ?>
-		<div class='says-float-time'><?php $comments->date('m-d'); ?></div>
+			<span class='muted'><?php $comments->date('y/m/d H:i'); ?></span>
 		<?php } ?>
-		<div class="comment-content"><?php $comments->content(); ?>
-		<?php $comments->reply("<button class=\"comment-reply\">回复</button>"); ?></div>
+		<div class="comment-content">
+			<?php $comments->content(); ?>
+			<?php $comments->reply("<button class=\"comment-reply\">回复</button>"); ?>
+			<?php if ($isSay){ ?>
+			<p class="muted"><?php $comments->date('Y/m/d H:i:s'); ?></p>
+			<?php } ?>
+		</div>
 		
 		<div class="clear"></div>
     </div>
@@ -117,7 +122,7 @@ $(function(){
 		says_msnry.layout();
 	})
 	$('.comment-reply').click(function(){
-		$('#comment-form').css({'z-index': 999, 'border-radius': '5px', 'box-shadow': 'rgba(64, 64, 64, 0.34) 0px 0px 5px'});
+		$('#comment-form').css({'z-index': 999, 'box-shadow': 'rgba(64, 64, 64, 0.34) 0px 0px 5px'});
 		if ($(window).width() < 920) {
 			var w = $('.atcs').width()*0.8;
 			var sw = $('body').width();
@@ -130,8 +135,7 @@ $(function(){
 		}
 	});
 	$('#cancel-comment-reply-link').click(function(){
-		$('#comment-form').css({'position':'static', 'box-shadow': 'none', 'left': 'auto', 'bottom': 'auto',
-			'border-radius': 0, 'width': 'auto'});
+		$('#comment-form').css({'position':'static', 'box-shadow': 'none', 'left': 'auto', 'bottom': 'auto', 'width': 'auto'});
 	});
 });
 </script>
