@@ -84,6 +84,7 @@ img{
     font-weight: 100;
     font-family: "cambria", "times new roman";
     font-style: italic;
+    word-break: break-word;
 }
 .head h1{
     font-size: 3rem;
@@ -700,7 +701,6 @@ button:hover, input[type="submit"]:hover, #cancel-comment-reply-link:hover{
 }
 #comment-form label{
     color: #444;
-    font-size: 1rem;
 }
 
 .comment-list .comment-list{
@@ -843,7 +843,7 @@ i.emojis.tiny{
 
 @media screen and (max-width: 920px){
     html{
-        font-size: 14px;
+        font-size: 16px;
     }
     .sb-left, .sb-right, .atcs, .body{
         width: 100%;
@@ -870,6 +870,7 @@ i.emojis.tiny{
 }
 
 @media screen and (max-width: 500px){
+    html{font-size: 15px;}
     .comment-right{
         margin-left: 40px;
     }
@@ -877,9 +878,6 @@ i.emojis.tiny{
         max-width: 35px;
         max-height: 35px;
         margin-top: 0.6rem;
-    }
-    html{
-        font-size: 15px;
     }
     .says-block{
         width: 98% !important;
@@ -890,11 +888,17 @@ i.emojis.tiny{
     .says-block.comment-body{
         border-left: none !important;
     }
+    #comment-form{
+        font-size: 0.95em;
+    }
 }
 
 @media screen and (max-width: 400px){
     .post-thumb{
         display: none;
+    }
+    #comment-form{
+        font-size: 0.85em;
     }
 }
 
@@ -1181,6 +1185,12 @@ table tr:hover{
 @media screen and (max-width: 500px){
     .footscol2{
         width: 100%;
+    }
+    .post-title.i{
+        overflow: unset;
+        text-overflow: unset;
+        max-width: 100%;
+        white-space: normal;
     }
 }
 iframe{border: 0;}
