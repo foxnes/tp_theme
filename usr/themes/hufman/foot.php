@@ -56,7 +56,7 @@
     <div class="backtotop"><a href="javascript:void 0"><i class="icon icon-angle-double-up"></i></a></div>
     &copy; <?php echo date('Y'); ?> <a href="<?php $this->options->siteUrl(); ?>">
     <?php $this->options->title(); ?></a> 版权所有<br />
-    <a href="https://www.typecho.org">Typecho驱动</a> &amp; <a href="https://gitee.com/foxnes/tp_theme/releases">Hufman主题 <i class="icon icon-spin6 animate-spin"></i></a>
+    <a href="https://www.typecho.org">Typecho驱动</a> &amp; <a href="https://github.com/foxnes/tp_theme/">Hufman主题 <i class="icon icon-spin6 animate-spin"></i></a>
 
     <script src="<?php $this->options->themeUrl('s/lazyload.js'); ?>"></script>
     <script src="<?php $this->options->themeUrl('s/i.js'); ?>"></script>
