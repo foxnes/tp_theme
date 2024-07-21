@@ -394,7 +394,8 @@ function EP_mustDo(func, delay){
     var renderfunc = function(){
         renderMathInElement(
             document.getElementsByClassName("post-content")[0],
-            {delimiters: [{left: '$', right: '$', display: false}, {left: '$$', right: '$$', display: false}]}
+            // {delimiters: [{left: '$', right: '$', display: false}, {left: '$$', right: '$$', display: false}]} // bug!
+            {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]}
         );
     }
     var loadLocalFunc = function(){
